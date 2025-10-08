@@ -1,0 +1,53 @@
+# Configuración de GitHub Pages
+title: "Psicometría Aplicada II - Plataforma Educativa"
+description: "Plataforma interactiva para el aprendizaje de Psicometría Aplicada II"
+url: "https://tu-usuario.github.io"
+baseurl: "/psicometria-platform"
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+theme: minima
+
+# GitHub Pages specific
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Exclude from processing
+exclude:
+  - .sass-cache/
+  - .jekyll-cache/
+  - gemfiles/
+  - Gemfile
+  - Gemfile.lock
+  - node_modules/
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - README.md
+
+# Include
+include:
+  - resources/
+
+# Optimization
+compress_html:
+  clippings: all
+  comments: all
+  endings: all
+  startings: all
+
+# SEO
+author: "Tu Nombre"
+lang: "es"
+twitter:
+  username: tu_usuario
+  card: summary
+social:
+  name: Tu Nombre
+  links:
+    - https://github.com/tu-usuario
+    - https://twitter.com/tu_usuario
