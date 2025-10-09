@@ -1,0 +1,82 @@
+[
+  {
+    "front": "¿Qué es la baremación?",
+    "back": "Proceso que convierte puntajes brutos en puntajes normados, comparando al individuo con una muestra normativa relevante y representativa.",
+    "difficulty": "easy",
+    "icon": "📊",
+    "topic": "Baremación",
+    "points": 10
+  },
+  {
+    "front": "Tipificación vs. Estandarización",
+    "back": "Tipificación: crear una norma o estándar. Baremación: comparación relativa con un grupo. Estandarización: puntos de corte absolutos por juicio experto.",
+    "difficulty": "easy",
+    "icon": "🧭",
+    "topic": "Conceptos Básicos",
+    "points": 10
+  },
+  {
+    "front": "¿Qué es una muestra normativa?",
+    "back": "Conjunto de puntajes de un grupo representativo usado como referencia para interpretar el desempeño individual en una prueba.",
+    "difficulty": "easy",
+    "icon": "👥",
+    "topic": "Muestra Normativa",
+    "points": 10
+  },
+  {
+    "front": "Puntuación Z: definición y fórmula",
+    "back": "Indica cuántas DE está un puntaje sobre o bajo la media del grupo normativo. Fórmula: Z = (Puntaje bruto − Media) / Desviación estándar.",
+    "difficulty": "medium",
+    "icon": "🧮",
+    "topic": "Puntuaciones Z",
+    "points": 20
+  },
+  {
+    "front": "Estaninos: conversión rápida desde Z",
+    "back": "Escala de 1 a 9 que resume la posición relativa. Conversión aproximada: Estanino = 5 + 2 × Z (con redondeo a 1–9).",
+    "difficulty": "medium",
+    "icon": "📈",
+    "topic": "Estaninos",
+    "points": 20
+  },
+  {
+    "front": "Tipos de normas: genéricas, específicas y personalizadas",
+    "back": "Genéricas: amplias; específicas: por sector/rol; personalizadas: a medida para un proyecto u organización.",
+    "difficulty": "medium",
+    "icon": "🗂️",
+    "topic": "Tipos de Normas",
+    "points": 20
+  },
+  {
+    "front": "Restricción de rango: riesgo en selección",
+    "back": "Prefiltrar candidatos eleva medias y reduce variabilidad. Normas sesgadas pueden subestimar a candidatos adecuados.",
+    "difficulty": "medium",
+    "icon": "🚧",
+    "topic": "Restricción de Rango",
+    "points": 20
+  },
+  {
+    "front": "Estandarización: naturaleza judicativa",
+    "back": "Establece niveles y puntos de corte por juicio de expertos entrenados (p. ej., Angoff, Bookmark). No hay \"cortes verdaderos\".",
+    "difficulty": "medium",
+    "icon": "⚖️",
+    "topic": "Estandarización",
+    "points": 20
+  },
+  {
+    "front": "Método Bookmark y TRI",
+    "back": "Ordena ítems por dificultad (TRI) y coloca un marcador donde cambia el nivel de desempeño; la posición define el punto de corte.",
+    "difficulty": "hard",
+    "icon": "🔖",
+    "topic": "Métodos de Estandarización",
+    "points": 30
+  },
+  {
+    "front": "Curvas ROC: elegir el punto de corte",
+    "back": "Youden J maximiza Sens+Esp−1; el criterio del punto más cercano a (0,1) minimiza la distancia a la clasificación perfecta. Pueden diferir.",
+    "difficulty": "hard",
+    "icon": "📉",
+    "topic": "Curvas ROC",
+    "points": 30
+  }
+]
