@@ -3,1145 +3,1879 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Psicometría Aplicada II - Plataforma Educativa</title>
-    
-    <!-- Fuentes premium -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Iconos -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    
-    <!-- Bibliotecas para efectos visuales -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.24/vanta.net.min.js"></script>
-    
-    <!-- YouTube API -->
-    <script src="https://www.youtube.com/iframe_api"></script>
-    
-    <!-- Estilos mejorados -->
+    <title>Centro de Estudio de Psicometría</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* ---------- VARIABLES DE DISEÑO EDITORIAL ---------- */
         :root {
-            /* Colores principales - palette sofisticada */
-            --primary-color: #2c3e50;
-            --secondary-color: #34495e;
-            --accent-color: #e74c3c;
-            --success-color: #27ae60;
-            --warning-color: #f39c12;
-            --info-color: #3498db;
-            --danger-color: #e74c3c;
-            
-            /* Colores de fondo */
-            --bg-primary: #fafafa;
-            --bg-secondary: #f8f9fa;
-            --bg-card: #ffffff;
-            --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            
-            /* Colores de texto */
-            --text-primary: #2c3e50;
-            --text-secondary: #7f8c8d;
-            --text-muted: #95a5a6;
-            
-            /* Fuentes */
-            --font-display: 'Playfair Display', serif;
-            --font-body: 'Inter', sans-serif;
-            
-            /* Espaciado */
-            --spacing-xs: 0.5rem;
-            --spacing-sm: 1rem;
-            --spacing-md: 1.5rem;
-            --spacing-lg: 2rem;
-            --spacing-xl: 3rem;
-            --spacing-xxl: 4rem;
-            
-            /* Sombras y efectos */
-            --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.1);
-            --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.12);
-            --shadow-lg: 0 15px 35px rgba(0, 0, 0, 0.15);
-            
-            /* Transiciones */
-            --transition-fast: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-            --transition-normal: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            --transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            
-            /* Bordes */
-            --border-radius: 16px;
-            --border-radius-sm: 8px;
-            --border-radius-lg: 24px;
+            --primary: #2c3e50;
+            --secondary: #34495e;
+            --accent: #27ae60;
+            --background: #ecf0f1;
+            --text: #2c3e50;
+            --white: #ffffff;
         }
-
-        /* Modo oscuro */
-        [data-theme="dark"] {
-            --bg-primary: #1a1a1a;
-            --bg-secondary: #2d2d2d;
-            --bg-card: #252525;
-            --text-primary: #ffffff;
-            --text-secondary: #b3b3b3;
-            --text-muted: #808080;
-            --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.3);
-            --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.4);
-            --shadow-lg: 0 15px 35px rgba(0, 0, 0, 0.5);
-        }
-
-        /* ---------- RESET Y ESTILOS BASE ---------- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
+        
         body {
-            font-family: var(--font-body);
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            line-height: 1.6;
-            overflow-x: hidden;
-            transition: var(--transition-normal);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background);
+            color: var(--text);
         }
-
-        /* ---------- FONDO ANIMADO ---------- */
-        #vanta-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            opacity: 0.05;
+        
+        .navbar {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            box-shadow: 0 4px 20px rgba(44, 62, 80, 0.15);
         }
-
-        /* ---------- NAVEGACIÓN PRINCIPAL ---------- */
-        .main-nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: var(--bg-card);
-            box-shadow: var(--shadow-sm);
-            z-index: 1000;
-            padding: var(--spacing-md) 0;
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        
+        .nav-item {
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
         }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 var(--spacing-lg);
+        
+        .nav-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
         }
-
-        .logo {
-            font-family: var(--font-display);
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-sm);
+        
+        .nav-item.active {
+            background-color: var(--accent);
+            color: white;
         }
-
-        .nav-links {
-            display: flex;
-            gap: var(--spacing-lg);
-            align-items: center;
+        
+        .card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(44, 62, 80, 0.1);
+            transition: all 0.3s ease;
         }
-
-        .nav-link {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            transition: var(--transition-normal);
-            padding: var(--spacing-sm) var(--spacing-md);
-            border-radius: var(--border-radius-sm);
+        
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(44, 62, 80, 0.15);
         }
-
-        .nav-link:hover {
-            color: var(--accent-color);
-            background: var(--bg-secondary);
-        }
-
-        .nav-link.active {
-            color: var(--accent-color);
-            background: var(--bg-secondary);
-        }
-
-        /* ---------- CONTENEDOR PRINCIPAL ---------- */
-        .main-container {
-            margin-top: 80px;
-            min-height: calc(100vh - 80px);
-            padding: var(--spacing-xl);
-        }
-
-        .content-wrapper {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        /* ---------- PANTALLA DE BIENVENIDA ---------- */
-        .welcome-screen {
-            text-align: center;
-            padding: var(--spacing-xxl) 0;
-        }
-
-        .hero-section {
-            margin-bottom: var(--spacing-xxl);
-        }
-
-        .hero-title {
-            font-family: var(--font-display);
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 800;
-            margin-bottom: var(--spacing-lg);
-            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero-subtitle {
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto var(--spacing-xl);
-            line-height: 1.8;
-        }
-
-        /* ---------- TARJETAS DE UNIDADES ---------- */
-        .units-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: var(--spacing-xl);
-            margin-top: var(--spacing-xxl);
-        }
-
-        .unit-card {
-            background: var(--bg-card);
-            border-radius: var(--border-radius);
-            padding: var(--spacing-xl);
-            box-shadow: var(--shadow-md);
-            transition: var(--transition-normal);
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            border: 2px solid transparent;
-        }
-
-        .unit-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transition: var(--transition-slow);
-        }
-
-        .unit-card:hover::before {
-            left: 100%;
-        }
-
-        .unit-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-lg);
-            border-color: var(--accent-color);
-        }
-
-        .unit-icon {
-            font-size: 3rem;
-            margin-bottom: var(--spacing-lg);
-            display: block;
-            color: var(--accent-color);
-        }
-
-        .unit-title {
-            font-family: var(--font-display);
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: var(--spacing-md);
-            color: var(--primary-color);
-        }
-
-        .unit-description {
-            color: var(--text-secondary);
-            margin-bottom: var(--spacing-lg);
-            line-height: 1.6;
-        }
-
-        .unit-progress {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: var(--spacing-lg);
-        }
-
-        .progress-bar-container {
-            flex: 1;
-            height: 8px;
-            background: var(--bg-secondary);
-            border-radius: 4px;
-            margin-right: var(--spacing-md);
-            overflow: hidden;
-        }
-
+        
         .progress-bar {
+            background: linear-gradient(90deg, var(--accent), #2ecc71);
+            border-radius: 10px;
+            height: 12px;
+            transition: width 0.8s ease;
+        }
+        
+        .progress-bg {
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            height: 12px;
+        }
+        
+        .flip-card {
+            background-color: transparent;
+            perspective: 1000px;
+            height: 300px;
+        }
+        
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, var(--success-color), var(--info-color));
-            border-radius: 4px;
-            transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: center;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
         }
-
-        .progress-text {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--text-secondary);
-            min-width: 50px;
+        
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
         }
-
-        .unit-actions {
-            display: flex;
-            gap: var(--spacing-md);
-        }
-
-        .action-btn {
-            flex: 1;
-            padding: var(--spacing-md);
-            border: none;
-            border-radius: var(--border-radius-sm);
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition-normal);
+        
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: var(--spacing-sm);
+            padding: 2rem;
         }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary-color), var(--info-color));
+        
+        .flip-card-front {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
         }
-
+        
+        .flip-card-back {
+            background: linear-gradient(135deg, var(--accent), #2ecc71);
+            color: white;
+            transform: rotateY(180deg);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
+            box-shadow: 0 8px 25px rgba(44, 62, 80, 0.3);
         }
-
-        .btn-secondary {
-            background: var(--bg-secondary);
-            color: var(--text-primary);
-            border: 2px solid var(--text-muted);
-        }
-
-        .btn-secondary:hover {
-            background: var(--accent-color);
+        
+        .btn-success {
+            background: linear-gradient(135deg, var(--accent), #2ecc71);
             color: white;
-            border-color: var(--accent-color);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
         }
-
-        /* ---------- PANTALLA DE UNIDAD ---------- */
-        .unit-screen {
+        
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(39, 174, 96, 0.3);
+        }
+        
+        .badge {
+            background: linear-gradient(135deg, var(--accent), #2ecc71);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, white, #f8f9fa);
+            border-left: 4px solid var(--accent);
+        }
+        
+        .topic-item {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .topic-item:hover {
+            background-color: #f8f9fa;
+            transform: translateX(8px);
+        }
+        
+        .topic-completed {
+            background-color: rgba(39, 174, 96, 0.1);
+            border-left: 4px solid var(--accent);
+        }
+        
+        .quiz-option {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .quiz-option:hover {
+            background-color: #f8f9fa;
+            transform: translateX(4px);
+        }
+        
+        .quiz-option.selected {
+            background-color: rgba(39, 174, 96, 0.1);
+            border-color: var(--accent);
+        }
+        
+        .quiz-option.correct {
+            background-color: rgba(39, 174, 96, 0.2);
+            border-color: var(--accent);
+        }
+        
+        .quiz-option.incorrect {
+            background-color: rgba(231, 76, 60, 0.2);
+            border-color: #e74c3c;
+        }
+        
+        .timer {
+            font-family: 'Courier New', monospace;
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--accent);
+        }
+        
+        .youtube-player {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(44, 62, 80, 0.15);
+        }
+        
+        .section {
             display: none;
         }
-
-        .unit-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: var(--spacing-xl);
-            padding: var(--spacing-lg);
-            background: var(--bg-card);
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .unit-info {
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-md);
-        }
-
-        .unit-icon-large {
-            font-size: 3rem;
-            color: var(--accent-color);
-        }
-
-        .unit-details h1 {
-            font-family: var(--font-display);
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            margin-bottom: var(--spacing-xs);
-        }
-
-        .unit-details p {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-        }
-
-        .back-btn {
-            background: var(--text-muted);
-            color: white;
-            border: none;
-            padding: var(--spacing-md) var(--spacing-lg);
-            border-radius: var(--border-radius-sm);
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition-normal);
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-sm);
-        }
-
-        .back-btn:hover {
-            background: var(--text-secondary);
-            transform: translateY(-2px);
-        }
-
-        /* ---------- SECCIONES DE CONTENIDO ---------- */
-        .content-sections {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: var(--spacing-xl);
-            margin-bottom: var(--spacing-xl);
-        }
-
-        .video-section {
-            background: var(--bg-card);
-            border-radius: var(--border-radius);
-            padding: var(--spacing-lg);
-            box-shadow: var(--shadow-md);
-        }
-
-        .video-container {
-            position: relative;
-            width: 100%;
-            height: 0;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
-            margin-bottom: var(--spacing-lg);
-        }
-
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border-radius: var(--border-radius-sm);
-        }
-
-        /* ---------- PANEL LATERAL ---------- */
-        .sidebar {
-            display: flex;
-            flex-direction: column;
-            gap: var(--spacing-lg);
-        }
-
-        .flashcard-section, .quiz-section {
-            background: var(--bg-card);
-            border-radius: var(--border-radius);
-            padding: var(--spacing-lg);
-            box-shadow: var(--shadow-md);
-        }
-
-        .section-title {
-            font-family: var(--font-display);
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: var(--spacing-lg);
-            color: var(--primary-color);
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-sm);
-        }
-
-        /* ---------- FLASHCARDS CORREGIDAS ---------- */
-        .flashcard-container {
-            perspective: 1000px;
-            margin-bottom: var(--spacing-lg);
-            height: 250px; /* Altura fija para evitar saltos */
-        }
-
-        .flashcard {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            transform-style: preserve-3d;
-            transition: transform 0.6s cubic-bezier(0.4, 0.0, 0.2, 1);
-            cursor: pointer;
-        }
-
-        .flashcard.flipped {
-            transform: rotateY(180deg);
-        }
-
-        .flashcard-face {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            border-radius: var(--border-radius-sm);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: var(--spacing-lg);
-            text-align: center;
-            box-shadow: var(--shadow-sm);
-            font-size: 0.95rem;
-            line-height: 1.5;
-            transition: var(--transition-normal);
-        }
-
-        .flashcard-front {
-            background: linear-gradient(135deg, var(--info-color), var(--primary-color));
-            color: white;
-        }
-
-        .flashcard-back {
-            background: var(--bg-secondary);
-            color: var(--text-primary);
-            transform: rotateY(180deg);
-            border: 2px solid var(--accent-color);
-        }
-
-        .flashcard-controls {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: var(--spacing-md);
-        }
-
-        .flashcard-counter {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            font-weight: 500;
-        }
-
-        .flashcard-nav {
-            display: flex;
-            gap: var(--spacing-sm);
-        }
-
-        .flashcard-nav-btn {
-            padding: var(--spacing-sm) var(--spacing-md);
-            border: none;
-            border-radius: var(--border-radius-sm);
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition-normal);
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-xs);
-            font-size: 0.9rem;
-        }
-
-        .flashcard-nav-btn:hover {
-            transform: translateY(-2px);
-        }
-
-        .flashcard-nav-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        /* ---------- QUICK QUIZ ---------- */
-        .quiz-preview {
-            text-align: center;
-            margin-bottom: var(--spacing-lg);
-        }
-
-        .quiz-stats {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--spacing-md);
-            margin-bottom: var(--spacing-lg);
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: var(--spacing-md);
-            background: var(--bg-secondary);
-            border-radius: var(--border-radius-sm);
-        }
-
-        .stat-number {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--accent-color);
+        
+        .section.active {
             display: block;
+            animation: fadeIn 0.5s ease-in;
         }
-
-        .stat-label {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        /* ---------- RESPONSIVE ---------- */
-        @media (max-width: 768px) {
-            .content-sections {
-                grid-template-columns: 1fr;
-            }
-            
-            .units-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .unit-actions {
-                flex-direction: column;
-            }
-            
-            .nav-links {
-                display: none;
-            }
-        }
-
-        /* ---------- ANIMACIONES ---------- */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
+        
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-
-        .fade-in {
-            animation: fadeIn 0.6s ease-out;
-        }
-
-        .fade-in-up {
-            animation: fadeInUp 0.6s ease-out;
-        }
-
-        /* ---------- EFECTOS DE SCROLL ---------- */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease-out;
-        }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* ---------- UTILIDADES ---------- */
-        .hidden {
-            display: none !important;
-        }
-
-        .text-center {
-            text-align: center;
-        }
-
-        .mb-lg {
-            margin-bottom: var(--spacing-lg);
-        }
-
-        .mb-xl {
-            margin-bottom: var(--spacing-xl);
-        }
-
-        /* ---------- MEJORAS EDUCATIVAS ---------- */
-        .learning-progress {
-            position: fixed;
-            top: 80px;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--bg-secondary);
-            z-index: 999;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--accent-color), var(--info-color));
-            transition: width 0.3s ease;
-            width: 0%;
-        }
-
+        
         .achievement-badge {
-            position: fixed;
-            top: 120px;
-            right: 20px;
-            background: var(--bg-card);
-            border-radius: var(--border-radius);
-            padding: var(--spacing-md);
-            box-shadow: var(--shadow-lg);
-            transform: translateX(100%);
-            transition: transform 0.3s ease;
-            z-index: 1001;
-        }
-
-        .achievement-badge.show {
-            transform: translateX(0);
-        }
-
-        .study-timer {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: var(--bg-card);
-            border-radius: var(--border-radius);
-            padding: var(--spacing-md);
-            box-shadow: var(--shadow-lg);
-            z-index: 1001;
-        }
-
-        .timer-display {
-            font-family: var(--font-display);
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--accent-color);
-        }
-
-        .difficulty-indicator {
-            display: flex;
-            gap: 2px;
-            margin-top: var(--spacing-sm);
-        }
-
-        .difficulty-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--text-muted);
-        }
-
-        .difficulty-dot.active {
-            background: var(--warning-color);
-        }
-
-        .difficulty-dot.medium {
-            background: var(--info-color);
-        }
-
-        .difficulty-dot.hard {
-            background: var(--danger-color);
-        }
-
-        /* ---------- ESTILOS DE QUIZ ---------- */
-        .quiz-screen {
-            background: var(--bg-card);
-            border-radius: var(--border-radius);
-            padding: var(--spacing-xl);
-            box-shadow: var(--shadow-md);
-            margin-bottom: var(--spacing-xl);
-        }
-
-        .quiz-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: var(--spacing-lg);
-        }
-
-        .quiz-timer {
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-sm);
-            color: var(--accent-color);
-            font-weight: 600;
-        }
-
-        .quiz-progress {
-            height: 8px;
-            background: var(--bg-secondary);
-            border-radius: 4px;
-            margin-bottom: var(--spacing-lg);
-            overflow: hidden;
-        }
-
-        .quiz-progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, var(--accent-color), var(--info-color));
-            transition: width 0.3s ease;
-            width: 0%;
-        }
-
-        .question-container {
-            text-align: center;
-        }
-
-        .question-text {
-            font-size: 1.2rem;
-            margin-bottom: var(--spacing-lg);
-            line-height: 1.6;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: var(--spacing-md);
-        }
-
-        .answer-options {
-            display: grid;
-            gap: var(--spacing-md);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .answer-btn {
-            padding: var(--spacing-md);
-            border: 2px solid var(--text-muted);
-            border-radius: var(--border-radius-sm);
-            background: var(--bg-card);
-            color: var(--text-primary);
-            cursor: pointer;
-            transition: var(--transition-normal);
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-md);
-            text-align: left;
-        }
-
-        .answer-btn:hover {
-            border-color: var(--accent-color);
-            background: var(--bg-secondary);
-        }
-
-        .answer-btn.correct {
-            border-color: var(--success-color);
-            background: rgba(39, 174, 96, 0.1);
-        }
-
-        .answer-btn.wrong {
-            border-color: var(--danger-color);
-            background: rgba(231, 76, 60, 0.1);
-        }
-
-        .answer-option-letter {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            background: var(--bg-secondary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            color: var(--text-secondary);
-        }
-
-        .feedback-container {
-            margin-top: var(--spacing-lg);
-            padding: var(--spacing-lg);
-            background: var(--bg-secondary);
-            border-radius: var(--border-radius-sm);
-            border-left: 4px solid var(--info-color);
-            opacity: 0;
-            transform: translateY(20px);
-            transition: var(--transition-normal);
-        }
-
-        .feedback-container.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .feedback-header {
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-sm);
-            margin-bottom: var(--spacing-md);
-            font-weight: 600;
-        }
-
-        .feedback-content {
-            line-height: 1.6;
-            margin-bottom: var(--spacing-md);
-        }
-
-        .feedback-source {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            font-style: italic;
-        }
-
-        /* ---------- RESULTADOS ---------- */
-        .results-screen {
-            background: var(--bg-card);
-            border-radius: var(--border-radius);
-            padding: var(--spacing-xl);
-            box-shadow: var(--shadow-md);
-            text-align: center;
-        }
-
-        .results-title {
-            font-family: var(--font-display);
-            font-size: 2rem;
-            color: var(--accent-color);
-            margin-bottom: var(--spacing-lg);
-        }
-
-        .score-display {
-            font-size: 1.5rem;
-            margin-bottom: var(--spacing-xl);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: var(--spacing-md);
-        }
-
-        .score-icon {
-            font-size: 2rem;
-            color: var(--warning-color);
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: var(--spacing-lg);
-            margin-bottom: var(--spacing-xl);
-        }
-
-        .stat-card {
-            text-align: center;
-            padding: var(--spacing-lg);
-            background: var(--bg-secondary);
-            border-radius: var(--border-radius-sm);
-        }
-
-        .stat-value {
-            font-size: 2rem;
-            font-weight: 800;
-            color: var(--accent-color);
-            display: block;
-        }
-
-        .results-buttons {
-            display: flex;
-            gap: var(--spacing-md);
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .results-btn {
-            padding: var(--spacing-md) var(--spacing-xl);
-            border: none;
-            border-radius: var(--border-radius-sm);
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition-normal);
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-sm);
-        }
-
-        .btn-accent {
-            background: var(--warning-color);
+            background: linear-gradient(135deg, #f39c12, #e67e22);
             color: white;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin: 0 auto;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .floating-animation {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
         }
 
-        .btn-accent:hover {
-            background: #e67e22;
-            transform: translateY(-2px);
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--accent);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
-        .recommendations-section {
-            margin-top: var(--spacing-xl);
-            text-align: left;
-        }
-
-        .recommendations-title {
-            font-family: var(--font-display);
-            color: var(--accent-color);
-            margin-bottom: var(--spacing-md);
-        }
-
-        .recommendations-list {
-            list-style: none;
-        }
-
-        .recommendation-item {
-            background: var(--bg-secondary);
-            padding: var(--spacing-md);
-            margin-bottom: var(--spacing-sm);
-            border-radius: var(--border-radius-sm);
-            border-left: 4px solid var(--warning-color);
+        .json-error {
+            background-color: #fee;
+            border: 1px solid #fcc;
+            color: #c33;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
         }
     </style>
 </head>
 <body>
-    <!-- Fondo animado -->
-    <div id="vanta-bg"></div>
-    
-    <!-- Barra de progreso de aprendizaje -->
-    <div class="learning-progress">
-        <div class="progress-fill" id="progress-fill"></div>
-    </div>
-    
-    <!-- Navegación principal -->
-    <nav class="main-nav">
-        <div class="nav-container">
-            <div class="logo">
-                <i class="fas fa-brain"></i>
-                Psicometría II
-            </div>
-            <div class="nav-links">
-                <a href="#" class="nav-link active" data-section="home">
-                    <i class="fas fa-home"></i> Inicio
-                </a>
-                <a href="#" class="nav-link" data-section="dashboard">
-                    <i class="fas fa-chart-bar"></i> Progreso
-                </a>
-                <a href="#" class="nav-link" data-section="exam">
-                    <i class="fas fa-graduation-cap"></i> Examen Final
-                </a>
-                <a href="#" class="nav-link" data-section="settings">
-                    <i class="fas fa-cog"></i> Ajustes
-                </a>
+    <!-- Navigation -->
+    <nav class="navbar p-4">
+        <div class="container mx-auto">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <i class="fas fa-brain text-3xl text-white floating-animation"></i>
+                    <h1 class="text-2xl font-bold text-white">Centro de Estudio de Psicometría</h1>
+                </div>
+                <div class="hidden md:flex space-x-2">
+                    <button class="nav-item active text-white" onclick="showSection('dashboard')">
+                        <i class="fas fa-tachometer-alt mr-2"></i>Panel Principal
+                    </button>
+                    <button class="nav-item text-white" onclick="showSection('study-guide')">
+                        <i class="fas fa-book mr-2"></i>Guía de Estudio
+                    </button>
+                    <button class="nav-item text-white" onclick="showSection('videos')">
+                        <i class="fas fa-video mr-2"></i>Zona de Videos
+                    </button>
+                    <button class="nav-item text-white" onclick="showSection('flashcards')">
+                        <i class="fas fa-layer-group mr-2"></i>Flashcards
+                    </button>
+                    <button class="nav-item text-white" onclick="showSection('quiz')">
+                        <i class="fas fa-question-circle mr-2"></i>Cuestionario
+                    </button>
+                    <button class="nav-item text-white" onclick="showSection('exam')">
+                        <i class="fas fa-graduation-cap mr-2"></i>Simulador
+                    </button>
+                </div>
             </div>
         </div>
     </nav>
-    
-    <!-- Contenedor principal -->
-    <div class="main-container">
-        <div class="content-wrapper">
+
+    <!-- Main Content -->
+    <main class="container mx-auto p-6">
+        
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="section active">
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold mb-2">Tu Progreso de Estudio</h2>
+                <p class="text-gray-600">¡Sigue así! Estás haciendo un excelente progreso en tu aprendizaje de psicometría.</p>
+            </div>
             
-            <!-- Pantalla de bienvenida -->
-            <div id="welcome-screen" class="welcome-screen">
-                <div class="hero-section fade-in">
-                    <h1 class="hero-title" id="hero-title">Plataforma de Estudio</h1>
-                    <p class="hero-subtitle" id="hero-subtitle">
-                        Domina la Psicometría Aplicada II con videos explicativos, 
-                        flashcards interactivas y cuestionarios de práctica.
-                    </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div class="card stat-card p-6">
+                    <div class="flex items-center">
+                        <div class="flex-1">
+                            <h3 class="text-lg font-semibold text-gray-700">Temas Completados</h3>
+                            <p class="text-3xl font-bold text-green-600" id="completed-topics">3</p>
+                        </div>
+                        <div class="achievement-badge">
+                            <i class="fas fa-check"></i>
+                        </div>
+                    </div>
                 </div>
                 
-                <!-- Unidades de estudio -->
-                <div class="units-grid" id="units-grid">
-                    <!-- Las unidades se generarán dinámicamente -->
+                <div class="card stat-card p-6">
+                    <div class="flex items-center">
+                        <div class="flex-1">
+                            <h3 class="text-lg font-semibold text-gray-700">Racha Actual</h3>
+                            <p class="text-3xl font-bold text-orange-500" id="current-streak">7</p>
+                            <p class="text-sm text-gray-500">días consecutivos</p>
+                        </div>
+                        <div class="achievement-badge">
+                            <i class="fas fa-fire"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card stat-card p-6">
+                    <div class="flex items-center">
+                        <div class="flex-1">
+                            <h3 class="text-lg font-semibold text-gray-700">Dominio General</h3>
+                            <p class="text-3xl font-bold text-blue-600" id="overall-mastery">68</p>
+                            <p class="text-sm text-gray-500">porcentaje</p>
+                        </div>
+                        <div class="achievement-badge">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card stat-card p-6">
+                    <div class="flex items-center">
+                        <div class="flex-1">
+                            <h3 class="text-lg font-semibold text-gray-700">Próximo Desafío</h3>
+                            <p class="text-lg font-bold text-purple-600">Teoría de Respuesta a los Ítems</p>
+                            <div class="badge mt-2">Próximo</div>
+                        </div>
+                    </div>
                 </div>
             </div>
             
-            <!-- Pantalla de unidad específica -->
-            <div id="unit-screen" class="unit-screen">
-                <div class="unit-header">
-                    <div class="unit-info">
-                        <div class="unit-icon-large" id="unit-icon-large">📊</div>
-                        <div class="unit-details">
-                            <h1 id="unit-title">Título de la Unidad</h1>
-                            <p id="unit-description">Descripción de la unidad</p>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="card p-6">
+                    <h3 class="text-xl font-bold mb-4">Progreso por Tema</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">Teoría Clásica de los Tests</span>
+                                <span class="text-green-600 font-bold">100%</span>
+                            </div>
+                            <div class="progress-bg">
+                                <div class="progress-bar" style="width: 100%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">Confiabilidad</span>
+                                <span class="text-green-600 font-bold">100%</span>
+                            </div>
+                            <div class="progress-bg">
+                                <div class="progress-bar" style="width: 100%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">Validez</span>
+                                <span class="text-green-600 font-bold">100%</span>
+                            </div>
+                            <div class="progress-bg">
+                                <div class="progress-bar" style="width: 100%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">Análisis Factorial</span>
+                                <span class="text-orange-600 font-bold">65%</span>
+                            </div>
+                            <div class="progress-bg">
+                                <div class="progress-bar" style="width: 65%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">Normalización y Baremación</span>
+                                <span class="text-red-600 font-bold">0%</span>
+                            </div>
+                            <div class="progress-bg">
+                                <div class="progress-bar" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">Teoría de Respuesta a los Ítems</span>
+                                <span class="text-red-600 font-bold">0%</span>
+                            </div>
+                            <div class="progress-bg">
+                                <div class="progress-bar" style="width: 0%"></div>
+                            </div>
                         </div>
                     </div>
-                    <button class="back-btn" id="back-btn">
-                        <i class="fas fa-arrow-left"></i>
-                        Volver
-                    </button>
                 </div>
                 
-                <div class="content-sections">
-                    <!-- Sección de video -->
-                    <div class="video-section">
-                        <h2 class="section-title">
-                            <i class="fas fa-video"></i>
-                            Video Explicativo
-                        </h2>
-                        <div class="video-container" id="video-container">
-                            <!-- El reproductor de YouTube se insertará aquí -->
+                <div class="card p-6">
+                    <h3 class="text-xl font-bold mb-4">Estadísticas de Rendimiento</h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                            <span class="font-medium">Respuestas Correctas</span>
+                            <span class="text-green-600 font-bold">87%</span>
+                        </div>
+                        
+                        <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                            <span class="font-medium">Tiempo Promedio por Quiz</span>
+                            <span class="text-blue-600 font-bold">4.2 min</span>
+                        </div>
+                        
+                        <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                            <span class="font-medium">Mejor Puntaje Flashcards</span>
+                            <span class="text-purple-600 font-bold">92%</span>
+                        </div>
+                        
+                        <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                            <span class="font-medium">Vídeos Completados</span>
+                            <span class="text-orange-600 font-bold">5/6</span>
+                        </div>
+                        
+                        <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                            <span class="font-medium">Días de Estudio</span>
+                            <span class="text-red-600 font-bold">12/30</span>
                         </div>
                     </div>
-                    
-                    <!-- Panel lateral -->
-                    <div class="sidebar">
-                        <!-- Flashcards -->
-                        <div class="flashcard-section">
-                            <h3 class="section-title">
-                                <i class="fas fa-cards-blank"></i>
-                                Flashcards
-                            </h3>
-                            <div class="flashcard-container">
-                                <div class="flashcard" id="flashcard">
-                                    <div class="flashcard-face flashcard-front" id="flashcard-front">
-                                        <div id="flashcard-question">Pregunta</div>
-                                    </div>
-                                    <div class="flashcard-face flashcard-back" id="flashcard-back">
-                                        <div id="flashcard-answer">Respuesta</div>
-                                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Study Guide Section -->
+        <section id="study-guide" class="section">
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold mb-2">Ruta de Aprendizaje</h2>
+                <p class="text-gray-600">Sigue esta secuencia estructurada para dominar los conceptos fundamentales de psicometría.</p>
+            </div>
+            
+            <div class="space-y-4">
+                <div class="card topic-item topic-completed p-6 cursor-pointer" onclick="toggleTopic('tct')">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
+                                <i class="fas fa-check text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold">1. Teoría Clásica de los Tests (TCT)</h3>
+                                <p class="text-gray-600">Conceptos fundamentales, puntuaciones verdaderas y errores de medición</p>
+                                <div class="flex items-center mt-2">
+                                    <span class="badge">Completado</span>
+                                    <span class="ml-2 text-sm text-gray-500">Duración: 2-3 horas</span>
                                 </div>
                             </div>
-                            <div class="flashcard-controls">
-                                <div class="flashcard-counter" id="flashcard-counter">1 / 10</div>
-                                <div class="flashcard-nav">
-                                    <button class="flashcard-nav-btn btn-secondary" id="prev-flashcard" disabled>
-                                        <i class="fas fa-arrow-left"></i>
-                                        Anterior
-                                    </button>
-                                    <button class="flashcard-nav-btn btn-primary" id="next-flashcard">
-                                        <i class="fas fa-arrow-right"></i>
-                                        Siguiente
-                                    </button>
+                        </div>
+                        <i class="fas fa-chevron-down text-gray-400"></i>
+                    </div>
+                    <div class="mt-4 hidden" id="tct-content">
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h4 class="font-bold mb-2">Contenido del tema:</h4>
+                            <ul class="list-disc list-inside space-y-1 text-sm">
+                                <li>Modelo de puntuación verdadera y error</li>
+                                <li>Tipos de errores de medición</li>
+                                <li>Supuestos de la TCT</li>
+                                <li>Aplicaciones prácticas</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card topic-item topic-completed p-6 cursor-pointer" onclick="toggleTopic('confiabilidad')">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
+                                <i class="fas fa-check text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold">2. Confiabilidad</h3>
+                                <p class="text-gray-600">Consistencia y estabilidad de las medidas psicométricas</p>
+                                <div class="flex items-center mt-2">
+                                    <span class="badge">Completado</span>
+                                    <span class="ml-2 text-sm text-gray-500">Duración: 3-4 horas</span>
+                                </div>
+                            </div>
+                        </div>
+                        <i class="fas fa-chevron-down text-gray-400"></i>
+                    </div>
+                    <div class="mt-4 hidden" id="confiabilidad-content">
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h4 class="font-bold mb-2">Contenido del tema:</h4>
+                            <ul class="list-disc list-inside space-y-1 text-sm">
+                                <li>Coeficiente de confiabilidad</li>
+                                <li>Métodos de estimación: test-retest, formas paralelas</li>
+                                <li>Confiabilidad interna: coeficiente alpha</li>
+                                <li>Interpretación de coeficientes</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card topic-item topic-completed p-6 cursor-pointer" onclick="toggleTopic('validez')">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
+                                <i class="fas fa-check text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold">3. Validez</h3>
+                                <p class="text-gray-600">Adecuación y precisión de las interpretaciones de los test</p>
+                                <div class="flex items-center mt-2">
+                                    <span class="badge">Completado</span>
+                                    <span class="ml-2 text-sm text-gray-500">Duración: 3-4 horas</span>
+                                </div>
+                            </div>
+                        </div>
+                        <i class="fas fa-chevron-down text-gray-400"></i>
+                    </div>
+                    <div class="mt-4 hidden" id="validez-content">
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h4 class="font-bold mb-2">Contenido del tema:</h4>
+                            <ul class="list-disc list-inside space-y-1 text-sm">
+                                <li>Validez de contenido</li>
+                                <li>Validez de criterio: concurrente y predictiva</li>
+                                <li>Validez de constructo</li>
+                                <li>Evidencia de validez</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card topic-item p-6 cursor-pointer" onclick="toggleTopic('factorial')">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center">
+                                <i class="fas fa-chart-line text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold">4. Análisis Factorial</h3>
+                                <p class="text-gray-600">Evidencia de la estructura interna y dimensionalidad</p>
+                                <div class="flex items-center mt-2">
+                                    <span class="bg-orange-500 text-white px-3 py-1 rounded-full text-sm font-semibold">En Progreso</span>
+                                    <span class="ml-2 text-sm text-gray-500">Duración: 4-5 horas</span>
+                                </div>
+                            </div>
+                        </div>
+                        <i class="fas fa-chevron-down text-gray-400"></i>
+                    </div>
+                    <div class="mt-4 hidden" id="factorial-content">
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h4 class="font-bold mb-2">Contenido del tema:</h4>
+                            <ul class="list-disc list-inside space-y-1 text-sm">
+                                <li>Análisis factorial exploratorio (AFE)</li>
+                                <li>Análisis factorial confirmatorio (AFC)</li>
+                                <li>Criterios de extracción y rotación</li>
+                                <li>Interpretación de factores</li>
+                            </ul>
+                            <button class="btn-primary mt-3">Continuar Estudiando</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card topic-item p-6 cursor-pointer" onclick="toggleTopic('baremacion')">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-gray-400 rounded-full flex items-center justify-center">
+                                <i class="fas fa-clock text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold">5. Normalización y Baremación de Puntuaciones</h3>
+                                <p class="text-gray-600">Transformación e interpretación de puntuaciones</p>
+                                <div class="flex items-center mt-2">
+                                    <span class="bg-gray-500 text-white px-3 py-1 rounded-full text-sm font-semibold">Pendiente</span>
+                                    <span class="ml-2 text-sm text-gray-500">Duración: 2-3 horas</span>
+                                </div>
+                            </div>
+                        </div>
+                        <i class="fas fa-chevron-down text-gray-400"></i>
+                    </div>
+                    <div class="mt-4 hidden" id="baremacion-content">
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h4 class="font-bold mb-2">Contenido del tema:</h4>
+                            <ul class="list-disc list-inside space-y-1 text-sm">
+                                <li>Distribuciones normales y transformaciones</li>
+                                <li>Puntuaciones T, Z y percentiles</li>
+                                <li>Proceso de baremación</li>
+                                <li>Interpretación de puntuaciones</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card topic-item p-6 cursor-pointer" onclick="toggleTopic('tri')">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-gray-400 rounded-full flex items-center justify-center">
+                                <i class="fas fa-clock text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold">6. Teoría de Respuesta a los Ítems (TRI)</h3>
+                                <p class="text-gray-600">Modelos modernos de medición y sus aplicaciones</p>
+                                <div class="flex items-center mt-2">
+                                    <span class="bg-gray-500 text-white px-3 py-1 rounded-full text-sm font-semibold">Pendiente</span>
+                                    <span class="ml-2 text-sm text-gray-500">Duración: 5-6 horas</span>
+                                </div>
+                            </div>
+                        </div>
+                        <i class="fas fa-chevron-down text-gray-400"></i>
+                    </div>
+                    <div class="mt-4 hidden" id="tri-content">
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h4 class="font-bold mb-2">Contenido del tema:</h4>
+                            <ul class="list-disc list-inside space-y-1 text-sm">
+                                <li>Modelo de Rasch</li>
+                                <li>Modelo de dos parámetros (2PL)</li>
+                                <li>Modelo de tres parámetros (3PL)</li>
+                                <li>Aplicaciones informáticas</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Videos Section -->
+        <section id="videos" class="section">
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold mb-2">Lecciones en Video</h2>
+                <p class="text-gray-600">Aprende con nuestra colección de videos educativos explicados por expertos.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div>
+                    <div class="youtube-player mb-4">
+                        <iframe width="100%" height="400" src="https://www.youtube.com/embed/hriKlRXTF0A" 
+                                frameborder="0" allowfullscreen id="current-video"></iframe>
+                    </div>
+                    
+                    <div class="card p-6">
+                        <h3 class="text-xl font-bold mb-4">Notas del Video</h3>
+                        <div class="space-y-3">
+                            <textarea class="w-full h-32 p-3 border rounded-lg resize-none" 
+                                      placeholder="Toma notas mientras ves el video..." id="video-notes"></textarea>
+                            <button class="btn-success" onclick="saveNotes()">
+                                <i class="fas fa-save mr-2"></i>Guardar Notas
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Lista de Videos Disponibles</h3>
+                    <div class="space-y-3">
+                        <div class="card p-4 cursor-pointer hover:bg-gray-50" onclick="changeVideo('hriKlRXTF0A', 'Teoría Clásica de los Tests')">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-16 h-12 bg-red-600 rounded flex items-center justify-center">
+                                    <i class="fas fa-play text-white"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="font-bold">Teoría Clásica de los Tests</h4>
+                                    <p class="text-sm text-gray-600">Fundamentos y aplicaciones básicas</p>
+                                    <span class="badge">Completado</span>
                                 </div>
                             </div>
                         </div>
                         
-                        <!-- Quiz rápido -->
-                        <div class="quiz-section">
-                            <h3 class="section-title">
-                                <i class="fas fa-question-circle"></i>
-                                Práctica
-                            </h3>
-                            <div class="quiz-preview">
-                                <div class="quiz-stats">
-                                    <div class="stat-item">
-                                        <span class="stat-number" id="total-questions">15</span>
-                                        <span class="stat-label">Preguntas</span>
-                                    </div>
-                                    <div class="stat-item">
-                                        <span class="stat-number" id="best-score">0%</span>
-                                        <span class="stat-label">Mejor</span>
-                                    </div>
+                        <div class="card p-4 cursor-pointer hover:bg-gray-50" onclick="changeVideo('aeENe9swI8E', 'La Búsqueda de la Consistencia')">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-16 h-12 bg-red-600 rounded flex items-center justify-center">
+                                    <i class="fas fa-play text-white"></i>
                                 </div>
-                                <div style="display: flex; gap: var(--spacing-sm);">
-                                    <button class="action-btn btn-secondary" id="practice-btn">
-                                        <i class="fas fa-book-open"></i>
-                                        Práctica
-                                    </button>
-                                    <button class="action-btn btn-primary" id="quiz-btn">
-                                        <i class="fas fa-stopwatch"></i>
-                                        Examen
-                                    </button>
+                                <div class="flex-1">
+                                    <h4 class="font-bold">La Búsqueda de la Consistencia</h4>
+                                    <p class="text-sm text-gray-600">Conceptos de confiabilidad</p>
+                                    <span class="badge">Completado</span>
                                 </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card p-4 cursor-pointer hover:bg-gray-50" onclick="changeVideo('vrU6jJ80_UU', 'Entendiendo la Validez')">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-16 h-12 bg-red-600 rounded flex items-center justify-center">
+                                    <i class="fas fa-play text-white"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="font-bold">Entendiendo la Validez</h4>
+                                    <p class="text-sm text-gray-600">Tipos y evidencia de validez</p>
+                                    <span class="badge">Completado</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card p-4 cursor-pointer hover:bg-gray-50" onclick="changeVideo('v_pD5lwpISI', 'Análisis Factorial')">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-16 h-12 bg-red-600 rounded flex items-center justify-center">
+                                    <i class="fas fa-play text-white"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="font-bold">Análisis Factorial - La estructura de la Mente</h4>
+                                    <p class="text-sm text-gray-600">Evidencia de la estructura interna</p>
+                                    <span class="bg-orange-500 text-white px-3 py-1 rounded-full text-sm font-semibold">En Progreso</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card p-4 cursor-pointer hover:bg-gray-50" onclick="changeVideo('hl8LNar2oys', 'Dándole Sentido a un Puntaje')">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-16 h-12 bg-red-600 rounded flex items-center justify-center">
+                                    <i class="fas fa-play text-white"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="font-bold">Dándole Sentido a un Puntaje</h4>
+                                    <p class="text-sm text-gray-600">Normalización y baremación</p>
+                                    <span class="bg-gray-500 text-white px-3 py-1 rounded-full text-sm font-semibold">Pendiente</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card p-4 cursor-pointer hover:bg-gray-50" onclick="changeVideo('BRCeQo9SmSE', 'Teoría de Respuesta a los Ítems')">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-16 h-12 bg-red-600 rounded flex items-center justify-center">
+                                    <i class="fas fa-play text-white"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h4 class="font-bold">Teoría de Respuesta a los Ítems</h4>
+                                    <p class="text-sm text-gray-600">Modelos modernos de medición</p>
+                                    <span class="bg-gray-500 text-white px-3 py-1 rounded-full text-sm font-semibold">Pendiente</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6">
+                        <h4 class="font-bold mb-3">Próximos Shorts</h4>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="card p-3 text-center">
+                                <i class="fas fa-clock text-2xl text-gray-400 mb-2"></i>
+                                <p class="text-sm text-gray-600">Cómo calcular el Alpha de Cronbach</p>
+                            </div>
+                            <div class="card p-3 text-center">
+                                <i class="fas fa-clock text-2xl text-gray-400 mb-2"></i>
+                                <p class="text-sm text-gray-600">Interpretación de coeficientes</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            
-            <!-- Timer de estudio -->
-            <div class="study-timer" id="study-timer">
-                <div class="timer-display" id="timer-display">00:00:00</div>
-                <div style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 5px;">
-                    Tiempo de estudio
-                </div>
+        </section>
+
+        <!-- Flashcards Section -->
+        <section id="flashcards" class="section">
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold mb-2">Tarjetas de Estudio</h2>
+                <p class="text-gray-600">Refuerza tu aprendizaje con flashcards interactivas. Voltea las cartas para ver la respuesta.</p>
             </div>
             
-        </div>
-    </div>
-    
-    <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="platform.js"></script>
+            <div id="flashcards-loading" class="text-center py-8">
+                <div class="loading-spinner"></div>
+                <p class="mt-4 text-gray-600">Cargando flashcards...</p>
+            </div>
+            
+            <div id="flashcards-content" class="hidden max-w-2xl mx-auto">
+                <div class="flip-card mb-6" id="flashcard">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="text-center">
+                                <div class="text-4xl mb-4" id="card-icon">🧠</div>
+                                <h3 class="text-2xl font-bold mb-4" id="card-question">¿Qué es la Teoría Clásica de los Tests?</h3>
+                                <p class="text-lg">Haz clic en "Voltear" para ver la respuesta</p>
+                            </div>
+                        </div>
+                        <div class="flip-card-back">
+                            <div class="text-center">
+                                <h3 class="text-xl font-bold mb-4">Respuesta</h3>
+                                <p id="card-answer">Modelo que postula que la puntuación observada (X) es la suma de la puntuación verdadera (T) más el error de medición (E): X = T + E</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <div class="text-lg font-semibold">
+                            <span id="current-card">1</span> de <span id="total-cards">20</span>
+                        </div>
+                        <div class="text-lg font-semibold text-green-600">
+                            <span id="known-cards">0</span> conocidas
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-3 justify-center">
+                        <button class="btn-primary" onclick="flipCard()">
+                            <i class="fas fa-sync-alt mr-2"></i>Voltear
+                        </button>
+                        <button class="btn-success" onclick="nextCard()">
+                            <i class="fas fa-arrow-right mr-2"></i>Siguiente
+                        </button>
+                        <button class="btn-primary" onclick="shuffleCards()">
+                            <i class="fas fa-random mr-2"></i>Mezclar
+                        </button>
+                        <button class="btn-success" onclick="markAsKnown()">
+                            <i class="fas fa-check mr-2"></i>Conocida
+                        </button>
+                    </div>
+                    
+                    <div class="mt-6">
+                        <div class="progress-bg">
+                            <div class="progress-bar" id="flashcard-progress" style="width: 5%"></div>
+                        </div>
+                        <p class="text-center mt-2 text-sm text-gray-600">Progreso en este mazo</p>
+                    </div>
+                    
+                    <div class="mt-4 text-center">
+                        <select class="p-2 border rounded-lg" onchange="changeDeck()" id="deck-selector">
+                            <option value="tct">Teoría Clásica de los Tests</option>
+                            <option value="confiabilidad">Confiabilidad</option>
+                            <option value="validez">Validez</option>
+                            <option value="factorial">Análisis Factorial</option>
+                            <option value="baremacion">Normalización y Baremación</option>
+                            <option value="tri">Teoría de Respuesta a los Ítems</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quiz Section -->
+        <section id="quiz" class="section">
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold mb-2">Práctica de Evaluación</h2>
+                <p class="text-gray-600">Pon a prueba tus conocimientos con preguntas de opción múltiple y ejercicios prácticos.</p>
+            </div>
+            
+            <div id="quiz-loading" class="text-center py-8">
+                <div class="loading-spinner"></div>
+                <p class="mt-4 text-gray-600">Cargando preguntas...</p>
+            </div>
+            
+            <div id="quiz-content" class="hidden max-w-4xl mx-auto">
+                <div class="card p-6 mb-6" id="quiz-container">
+                    <div class="mb-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-xl font-bold">Pregunta <span id="question-number">1</span> de <span id="total-questions">10</span></h3>
+                            <div class="text-right">
+                                <div class="text-lg font-bold text-green-600">Puntos: <span id="current-score">0</span></div>
+                                <div class="text-sm text-gray-600">Pregunta: <span id="question-points">10</span> puntos</div>
+                            </div>
+                        </div>
+                        
+                        <div class="progress-bg mb-6">
+                            <div class="progress-bar" id="quiz-progress" style="width: 10%"></div>
+                        </div>
+                    </div>
+                    
+                    <div id="question-content">
+                        <div class="flex items-center mb-4">
+                            <span class="text-2xl mr-3" id="question-icon">🧠</span>
+                            <h4 class="text-lg font-semibold" id="question-text">
+                                ¿Cuál de las siguientes fórmulas representa correctamente la Teoría Clásica de los Tests?
+                            </h4>
+                        </div>
+                        
+                        <div class="space-y-3" id="options-container">
+                            <!-- Opciones generadas dinámicamente -->
+                        </div>
+                        
+                        <div class="mt-6 flex justify-between">
+                            <button class="btn-primary" onclick="previousQuestion()" id="prev-btn" disabled>
+                                <i class="fas fa-arrow-left mr-2"></i>Anterior
+                            </button>
+                            <button class="btn-success" onclick="submitAnswer()" id="submit-btn">
+                                <i class="fas fa-check mr-2"></i>Enviar Respuesta
+                            </button>
+                            <button class="btn-primary" onclick="nextQuestion()" id="next-btn" style="display: none;">
+                                <i class="fas fa-arrow-right mr-2"></i>Siguiente
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div id="feedback-container" class="hidden mt-6 p-4 rounded-lg">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-check-circle text-green-500 text-2xl mr-3" id="feedback-icon"></i>
+                            <h4 class="text-lg font-bold" id="feedback-title">¡Correcto!</h4>
+                        </div>
+                        <p class="text-gray-700" id="feedback-text">
+                            La fórmula correcta es X = T + E, donde X es la puntuación observada, T es la puntuación verdadera y E es el error de medición.
+                        </p>
+                        <div class="mt-4 p-3 bg-blue-50 rounded-lg">
+                            <p class="text-sm text-blue-800">
+                                <strong>Explicación detallada:</strong> La Teoría Clásica de los Tests postula que toda puntuación observada está compuesta por una parte verdadera (el constructo que queremos medir) y un componente de error (variabilidad no sistemática).
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card p-6 text-center hidden" id="quiz-results">
+                    <h3 class="text-2xl font-bold mb-4">¡Quiz Completado!</h3>
+                    <div class="text-6xl mb-4" id="results-emoji">🎉</div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <div class="card p-4">
+                            <h4 class="font-bold mb-2">Puntaje Final</h4>
+                            <div class="text-4xl font-bold text-green-600" id="final-score">85%</div>
+                        </div>
+                        <div class="card p-4">
+                            <h4 class="font-bold mb-2">Preguntas Correctas</h4>
+                            <div class="text-3xl font-bold text-blue-600">
+                                <span id="correct-answers">8</span> / <span id="total-answers">10</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="space-x-3">
+                        <button class="btn-primary" onclick="restartQuiz()">
+                            <i class="fas fa-redo mr-2"></i>Reintentar
+                        </button>
+                        <button class="btn-success" onclick="showSection('dashboard')">
+                            <i class="fas fa-home mr-2"></i>Volver al Panel
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+                    <div class="card p-4 text-center">
+                        <h4 class="font-bold mb-2">Selecciona un Tema</h4>
+                        <select class="w-full p-2 border rounded-lg" onchange="changeQuizTopic()" id="quiz-topic">
+                            <option value="tct">Teoría Clásica de los Tests</option>
+                            <option value="confiabilidad">Confiabilidad</option>
+                            <option value="validez">Validez</option>
+                            <option value="factorial">Análisis Factorial</option>
+                            <option value="baremacion">Normalización y Baremación</option>
+                            <option value="tri">Teoría de Respuesta a los Ítems</option>
+                        </select>
+                    </div>
+                    
+                    <div class="card p-4 text-center">
+                        <h4 class="font-bold mb-2">Dificultad</h4>
+                        <select class="w-full p-2 border rounded-lg" onchange="changeDifficulty()" id="quiz-difficulty">
+                            <option value="easy">Básico</option>
+                            <option value="medium" selected>Intermedio</option>
+                            <option value="hard">Avanzado</option>
+                        </select>
+                    </div>
+                    
+                    <div class="card p-4 text-center">
+                        <h4 class="font-bold mb-2">Número de Preguntas</h4>
+                        <select class="w-full p-2 border rounded-lg" onchange="changeQuestionCount()" id="question-count">
+                            <option value="5">5 preguntas</option>
+                            <option value="10" selected>10 preguntas</option>
+                            <option value="15">15 preguntas</option>
+                            <option value="20">20 preguntas</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Exam Simulator Section -->
+        <section id="exam" class="section">
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold mb-2">Examen de Simulación</h2>
+                <p class="text-gray-600">Prepárate para el examen final con una simulación completa de todos los temas.</p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="card p-8 text-center" id="exam-start">
+                    <div class="mb-6">
+                        <i class="fas fa-graduation-cap text-6xl text-blue-600 mb-4"></i>
+                        <h3 class="text-2xl font-bold mb-4">Examen Final de Psicometría</h3>
+                        <p class="text-gray-600 mb-6">
+                            Este examen simula las condiciones reales del examen final. Tendrás 60 minutos para completar 50 preguntas de todos los temas del curso.
+                        </p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <div class="card p-4">
+                            <h4 class="font-bold mb-2">Duración</h4>
+                            <p class="text-2xl font-bold text-blue-600">60 minutos</p>
+                        </div>
+                        <div class="card p-4">
+                            <h4 class="font-bold mb-2">Preguntas</h4>
+                            <p class="text-2xl font-bold text-green-600">50 preguntas</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <h4 class="font-bold mb-3">Distribución de Temas</h4>
+                        <div class="space-y-2">
+                            <div class="flex justify-between">
+                                <span>Teoría Clásica de los Tests</span>
+                                <span class="font-bold">8 preguntas</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Confiabilidad</span>
+                                <span class="font-bold">8 preguntas</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Validez</span>
+                                <span class="font-bold">8 preguntas</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Análisis Factorial</span>
+                                <span class="font-bold">9 preguntas</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Normalización y Baremación</span>
+                                <span class="font-bold">8 preguntas</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Teoría de Respuesta a los Ítems</span>
+                                <span class="font-bold">9 preguntas</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="btn-success text-xl px-8 py-4" onclick="startExam()">
+                        <i class="fas fa-play mr-2"></i>Comenzar Examen
+                    </button>
+                </div>
+                
+                <div class="hidden" id="exam-active">
+                    <div class="card p-6 mb-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-xl font-bold">Examen en Progreso</h3>
+                            <div class="timer" id="exam-timer">60:00</div>
+                        </div>
+                        
+                        <div class="flex justify-between items-center mb-4">
+                            <div>Pregunta <span id="exam-question-number">1</span> de 50</div>
+                            <div class="text-green-600 font-bold">Puntaje: <span id="exam-score">0</span></div>
+                        </div>
+                        
+                        <div class="progress-bg mb-6">
+                            <div class="progress-bar" id="exam-progress" style="width: 2%"></div>
+                        </div>
+                        
+                        <div id="exam-question">
+                            <div class="flex items-center mb-4">
+                                <span class="text-2xl mr-3" id="exam-question-icon">🧠</span>
+                                <h4 class="text-lg font-semibold" id="exam-question-text">
+                                    Pregunta del examen aquí...
+                                </h4>
+                            </div>
+                            
+                            <div class="space-y-3" id="exam-options">
+                                <!-- Opciones generadas dinámicamente -->
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 flex justify-between">
+                            <button class="btn-primary" onclick="previousExamQuestion()" id="exam-prev-btn" disabled>
+                                <i class="fas fa-arrow-left mr-2"></i>Anterior
+                            </button>
+                            <button class="btn-success" onclick="submitExamAnswer()" id="exam-submit-btn">
+                                <i class="fas fa-check mr-2"></i>Siguiente Pregunta
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card p-8 text-center hidden" id="exam-results">
+                    <h3 class="text-2xl font-bold mb-4">¡Examen Completado!</h3>
+                    <div class="text-6xl mb-4" id="exam-emoji">🎓</div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <div class="card p-4">
+                            <h4 class="font-bold mb-2">Puntaje Final</h4>
+                            <div class="text-4xl font-bold text-green-600" id="exam-final-score">85%</div>
+                        </div>
+                        <div class="card p-4">
+                            <h4 class="font-bold mb-2">Tiempo Utilizado</h4>
+                            <div class="text-2xl font-bold text-blue-600" id="exam-time-used">52:34</div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <h4 class="font-bold mb-3">Desglose por Temas</h4>
+                        <div class="space-y-2" id="exam-breakdown">
+                            <!-- Desglose generado dinámicamente -->
+                        </div>
+                    </div>
+                    
+                    <div class="space-x-3">
+                        <button class="btn-primary" onclick="restartExam()">
+                            <i class="fas fa-redo mr-2"></i>Reintentar Examen
+                        </button>
+                        <button class="btn-success" onclick="showSection('dashboard')">
+                            <i class="fas fa-home mr-2"></i>Volver al Panel
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Variables para almacenar los datos cargados desde JSON
+        let flashcardData = {};
+        let quizData = {};
+        let dataLoaded = false;
+
+        // Variables de estado
+        let currentSection = 'dashboard';
+        let currentFlashcardDeck = 'tct';
+        let currentFlashcardIndex = 0;
+        let knownFlashcards = 0;
+        let isCardFlipped = false;
+        let currentQuizTopic = 'tct';
+        let currentQuestionIndex = 0;
+        let quizScore = 0;
+        let selectedOption = -1;
+        let examActive = false;
+        let examTime = 3600;
+        let examTimer;
+        let examScore = 0;
+        let examQuestionIndex = 0;
+
+        // Función para cargar datos JSON
+        async function loadJSONData() {
+            try {
+                // Intentar cargar datos desde archivos JSON
+                const jsonFiles = [
+                    { key: 'tct', file: 'banco_tct.json' },
+                    { key: 'confiabilidad', file: 'banco_confiabilidad.json' },
+                    { key: 'validez', file: 'banco_validez.json' },
+                    { key: 'factorial', file: 'banco_factorial.json' },
+                    { key: 'baremacion', file: 'banco_baremacion.json' },
+                    { key: 'tri', file: 'banco_tri.json' }
+                ];
+
+                const flashcardFiles = [
+                    { key: 'tct', file: 'flashcards_tct.json' },
+                    { key: 'confiabilidad', file: 'flashcards_confiabilidad.json' },
+                    { key: 'validez', file: 'flashcards_validez.json' },
+                    { key: 'factorial', file: 'flashcards_factorial.json' },
+                    { key: 'baremacion', file: 'flashcards_baremacion.json' },
+                    { key: 'tri', file: 'flashcards_tri.json' }
+                ];
+
+                // Cargar datos de quizzes
+                for (const item of jsonFiles) {
+                    try {
+                        const response = await fetch(item.file);
+                        if (response.ok) {
+                            quizData[item.key] = await response.json();
+                        }
+                    } catch (e) {
+                        console.log(`No se pudo cargar ${item.file}, usando datos de muestra`);
+                    }
+                }
+
+                // Cargar datos de flashcards
+                for (const item of flashcardFiles) {
+                    try {
+                        const response = await fetch(item.file);
+                        if (response.ok) {
+                            const data = await response.json();
+                            // Convertir formato de flashcards
+                            flashcardData[item.key] = data.map(card => ({
+                                question: card.front,
+                                answer: card.back,
+                                icon: card.icon || '🧠',
+                                topic: card.topic || 'General',
+                                difficulty: card.difficulty || 'medium',
+                                points: card.points || 10
+                            }));
+                        }
+                    } catch (e) {
+                        console.log(`No se pudo cargar ${item.file}, usando datos de muestra`);
+                    }
+                }
+
+                // Si no se cargaron datos, usar datos de muestra
+                if (Object.keys(quizData).length === 0) {
+                    console.log('Usando datos de muestra para quizzes');
+                    loadSampleQuizData();
+                }
+
+                if (Object.keys(flashcardData).length === 0) {
+                    console.log('Usando datos de muestra para flashcards');
+                    loadSampleFlashcardData();
+                }
+
+                dataLoaded = true;
+                hideLoadingSpinners();
+                initializeContent();
+                
+            } catch (error) {
+                console.error('Error al cargar datos:', error);
+                loadSampleData();
+                dataLoaded = true;
+                hideLoadingSpinners();
+                initializeContent();
+            }
+        }
+
+        function loadSampleQuizData() {
+            quizData = {
+                tct: [
+                    {
+                        type: "multiple-choice",
+                        question: "¿Cuál de las siguientes fórmulas representa correctamente la Teoría Clásica de los Tests?",
+                        options: ["X = T × E", "X = T + E", "X = T - E", "X = T ÷ E"],
+                        answer: "X = T + E",
+                        correct: 1,
+                        explanation: "La fórmula correcta es X = T + E, donde X es la puntuación observada, T es la puntuación verdadera y E es el error de medición.",
+                        difficulty: "easy",
+                        icon: "🧮",
+                        topic: "TCT",
+                        points: 10
+                    },
+                    {
+                        type: "multiple-choice",
+                        question: "¿Cuáles son los supuestos básicos de la TCT?",
+                        options: ["El error tiene media cero", "El error se correlaciona con la puntuación verdadera", "Los errores de diferentes mediciones no se correlacionan", "Todos los anteriores"],
+                        answer: "El error tiene media cero",
+                        correct: 0,
+                        explanation: "Los supuestos principales son: el error tiene media cero, no se correlaciona con la puntuación verdadera, y los errores de diferentes mediciones no se correlacionan.",
+                        difficulty: "medium",
+                        icon: "📊",
+                        topic: "Supuestos TCT",
+                        points: 20
+                    }
+                ],
+                confiabilidad: [
+                    {
+                        type: "multiple-choice",
+                        question: "¿Qué coeficiente de confiabilidad se considera aceptable para decisiones educativas?",
+                        options: ["0.60", "0.70", "0.80", "0.90"],
+                        answer: "0.80",
+                        correct: 2,
+                        explanation: "Para decisiones educativas importantes, se recomienda un coeficiente de confiabilidad de al menos 0.80.",
+                        difficulty: "easy",
+                        icon: "📈",
+                        topic: "Confiabilidad",
+                        points: 10
+                    }
+                ],
+                factorial: [
+                    {
+                        type: "multiple-choice",
+                        question: "¿Quién fue el pionero en proponer la existencia del 'factor g' de inteligencia general?",
+                        options: ["Charles Spearman", "L. L. Thurstone", "Raymond Cattell", "Hans Eysenck"],
+                        answer: "Charles Spearman",
+                        correct: 0,
+                        explanation: "Spearman propuso el 'factor g' en 1904 como la fuente común de las correlaciones entre habilidades cognitivas.",
+                        difficulty: "easy",
+                        icon: "🧠",
+                        topic: "Factor G",
+                        points: 10
+                    }
+                ],
+                baremacion: [
+                    {
+                        type: "fill-in-the-blank",
+                        question: "La proporción de varianza de una variable explicada por los factores comunes se llama ________.",
+                        answer: "comunalidad",
+                        explanation: "La comunalidad refleja cuánta varianza de una variable está asociada con los factores comunes.",
+                        difficulty: "medium",
+                        icon: "⚙️",
+                        topic: "Comunalidad",
+                        points: 20
+                    }
+                ],
+                validez: [
+                    {
+                        type: "multiple-choice",
+                        question: "¿Cuál es el tipo de validez más importante para un test de inteligencia?",
+                        options: ["Validez de contenido", "Validez de criterio", "Validez de constructo", "Validez facial"],
+                        answer: "Validez de constructo",
+                        correct: 2,
+                        explanation: "La validez de constructo es fundamental para tests de inteligencia porque evalúa si realmente está midiendo el constructo teórico de inteligencia.",
+                        difficulty: "medium",
+                        icon: "🎯",
+                    topic: "Validez de Constructo",
+                        points: 20
+                    }
+                ],
+                tri: [
+                    {
+                        type: "multiple-choice",
+                        question: "¿Qué ventaja principal tiene TRI sobre TCT?",
+                        options: ["Es más simple", "No requiere cálculos", "Invarianza de parámetros", "Menor costo"],
+                        answer: "Invarianza de parámetros",
+                        correct: 2,
+                        explanation: "La invarianza de parámetros en TRI permite que las características del ítem sean independientes de la muestra utilizada.",
+                        difficulty: "hard",
+                        icon: "🔬",
+                        topic: "TRI",
+                        points: 30
+                    }
+                ]
+            };
+        }
+
+        function loadSampleFlashcardData() {
+            flashcardData = {
+                tct: [
+                    {question: "¿Qué es la Teoría Clásica de los Tests?", answer: "Modelo que postula que la puntuación observada (X) es la suma de la puntuación verdadera (T) más el error de medición (E): X = T + E", icon: "🧮", topic: "TCT", difficulty: "easy", points: 10},
+                    {question: "¿Cuáles son los supuestos básicos de la TCT?", answer: "1) El error tiene media cero, 2) El error no se correlaciona con la puntuación verdadera, 3) Los errores de diferentes mediciones no se correlacionan", icon: "📊", topic: "Supuestos TCT", difficulty: "medium", points: 20},
+                    {question: "¿Qué es el error estándar de medición?", answer: "Desviación estándar de los errores de medición, indica la precisión del test: SEM = σ√(1-rxx)", icon: "📈", topic: "Error Estándar", difficulty: "medium", points: 20}
+                ],
+                confiabilidad: [
+                    {question: "¿Qué es la confiabilidad?", answer: "Grado en que las puntuaciones de un test son consistentes, estables y libres de error de medición", icon: "🔄", topic: "Confiabilidad", difficulty: "easy", points: 10},
+                    {question: "¿Cómo se calcula el coeficiente de confiabilidad?", answer: "rxx = σ²T/σ²X = 1 - (σ²E/σ²X), donde σ²T es varianza verdadera y σ²X es varianza total", icon: "📊", topic: "Coeficiente de Confiabilidad", difficulty: "hard", points: 30}
+                ],
+                validez: [
+                    {question: "¿Qué es la validez?", answer: "Grado en que las interpretaciones y usos de las puntuaciones de un test son apropiadas y precisas", icon: "🎯", topic: "Validez", difficulty: "easy", points: 10},
+                    {question: "¿Cuáles son los tipos principales de validez?", answer: "Validez de contenido, validez de criterio (concurrente y predictiva), y validez de constructo", icon: "📋", topic: "Tipos de Validez", difficulty: "medium", points: 20}
+                ],
+                factorial: [
+                    {question: "¿Qué es el análisis factorial?", answer: "Técnica estadística para identificar las dimensiones o factores subyacentes en un conjunto de variables", icon: "🔍", topic: "Análisis Factorial", difficulty: "easy", points: 10},
+                    {question: "¿Qué representa una carga factorial alta?", answer: "Indica que la variable es un buen indicador del factor, con alta correlación entre la variable y el factor", icon: "📈", topic: "Cargas Factoriales", difficulty: "medium", points: 20}
+                ],
+                baremacion: [
+                    {question: "¿Qué es la baremación?", answer: "Proceso que convierte puntajes brutos en puntajes normados, comparando al individuo con una muestra normativa", icon: "📊", topic: "Baremación", difficulty: "easy", points: 10},
+                    {question: "¿Qué es una puntuación Z?", answer: "Indica cuántas desviaciones estándar está un puntaje sobre o bajo la media: Z = (X - μ) / σ", icon: "🧮", topic: "Puntuación Z", difficulty: "medium", points: 20}
+                ],
+                tri: [
+                    {question: "¿Qué es la Teoría de Respuesta a los Ítems?", answer: "Modelo que relaciona la probabilidad de responder correctamente con las características del ítem y la habilidad del examinado", icon: "📈", topic: "TRI", difficulty: "medium", points: 20},
+                    {question: "¿Qué ventajas tiene TRI sobre TCT?", answer: "Invarianza de parámetros, información por ítem, estimación precisa de habilidad, y manejo de tests adaptativos", icon: "⭐", topic: "Ventajas TRI", difficulty: "hard", points: 30}
+                ]
+            };
+        }
+
+        function loadSampleData() {
+            loadSampleQuizData();
+            loadSampleFlashcardData();
+        }
+
+        function hideLoadingSpinners() {
+            document.getElementById('flashcards-loading').style.display = 'none';
+            document.getElementById('quiz-loading').style.display = 'none';
+            document.getElementById('flashcards-content').classList.remove('hidden');
+            document.getElementById('quiz-content').classList.remove('hidden');
+        }
+
+        function initializeContent() {
+            updateFlashcard();
+            loadQuestion();
+        }
+
+        // Funciones de navegación
+        function showSection(sectionId) {
+            // Ocultar todas las secciones
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Mostrar la sección seleccionada
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Actualizar navegación activa
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            currentSection = sectionId;
+        }
+
+        // Funciones de la guía de estudio
+        function toggleTopic(topicId) {
+            const content = document.getElementById(topicId + '-content');
+            const icon = event.currentTarget.querySelector('.fa-chevron-down');
+            
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                icon.style.transform = 'rotate(180deg)';
+            } else {
+                content.classList.add('hidden');
+                icon.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        // Funciones de videos
+        function changeVideo(videoId, title) {
+            const iframe = document.getElementById('current-video');
+            iframe.src = `https://www.youtube.com/embed/${videoId}`;
+            
+            // Actualizar notas si existen
+            const savedNotes = localStorage.getItem(`notes-${videoId}`);
+            if (savedNotes) {
+                document.getElementById('video-notes').value = savedNotes;
+            } else {
+                document.getElementById('video-notes').value = '';
+            }
+        }
+
+        function saveNotes() {
+            const notes = document.getElementById('video-notes').value;
+            const videoId = document.getElementById('current-video').src.split('/').pop();
+            localStorage.setItem(`notes-${videoId}`, notes);
+            
+            // Mostrar mensaje de confirmación
+            const button = event.target;
+            const originalText = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-check mr-2"></i>¡Guardado!';
+            button.classList.remove('btn-success');
+            button.classList.add('btn-primary');
+            
+            setTimeout(() => {
+                button.innerHTML = originalText;
+                button.classList.remove('btn-primary');
+                button.classList.add('btn-success');
+            }, 2000);
+        }
+
+        // Funciones de flashcards
+        function flipCard() {
+            const card = document.getElementById('flashcard');
+            card.classList.toggle('flipped');
+            isCardFlipped = !isCardFlipped;
+        }
+
+        function nextCard() {
+            const deck = flashcardData[currentFlashcardDeck];
+            if (!deck || deck.length === 0) return;
+            
+            currentFlashcardIndex = (currentFlashcardIndex + 1) % deck.length;
+            updateFlashcard();
+            
+            // Desvoltear la carta
+            const card = document.getElementById('flashcard');
+            card.classList.remove('flipped');
+            isCardFlipped = false;
+        }
+
+        function shuffleCards() {
+            const deck = [...flashcardData[currentFlashcardDeck]];
+            if (!deck || deck.length === 0) return;
+            
+            for (let i = deck.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [deck[i], deck[j]] = [deck[j], deck[i]];
+            }
+            flashcardData[currentFlashcardDeck] = deck;
+            currentFlashcardIndex = 0;
+            updateFlashcard();
+            
+            // Desvoltear la carta
+            const card = document.getElementById('flashcard');
+            card.classList.remove('flipped');
+            isCardFlipped = false;
+        }
+
+        function markAsKnown() {
+            knownFlashcards++;
+            document.getElementById('known-cards').textContent = knownFlashcards;
+            nextCard();
+        }
+
+        function changeDeck() {
+            const selector = document.getElementById('deck-selector');
+            currentFlashcardDeck = selector.value;
+            currentFlashcardIndex = 0;
+            knownFlashcards = 0;
+            updateFlashcard();
+            
+            // Desvoltear la carta
+            const card = document.getElementById('flashcard');
+            card.classList.remove('flipped');
+            isCardFlipped = false;
+        }
+
+        function updateFlashcard() {
+            const deck = flashcardData[currentFlashcardDeck];
+            if (!deck || deck.length === 0) {
+                document.getElementById('card-question').textContent = 'No hay flashcards disponibles para este tema';
+                document.getElementById('card-answer').textContent = 'Intenta con otro tema o verifica los datos';
+                return;
+            }
+            
+            const card = deck[currentFlashcardIndex];
+            
+            document.getElementById('card-icon').textContent = card.icon || '🧠';
+            document.getElementById('card-question').textContent = card.question;
+            document.getElementById('card-answer').textContent = card.answer;
+            document.getElementById('current-card').textContent = currentFlashcardIndex + 1;
+            document.getElementById('total-cards').textContent = deck.length;
+            
+            const progress = ((currentFlashcardIndex + 1) / deck.length) * 100;
+            document.getElementById('flashcard-progress').style.width = progress + '%';
+        }
+
+        // Funciones del quiz
+        function selectOption(index) {
+            // Limpiar selecciones previas
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            // Marcar opción seleccionada
+            document.querySelectorAll('.quiz-option')[index].classList.add('selected');
+            selectedOption = index;
+            
+            // Habilitar botón de envío
+            document.getElementById('submit-btn').disabled = false;
+        }
+
+        function submitAnswer() {
+            if (selectedOption === -1) return;
+            
+            const quiz = quizData[currentQuizTopic];
+            if (!quiz || quiz.length === 0) return;
+            
+            const question = quiz[currentQuestionIndex % quiz.length];
+            const isCorrect = selectedOption === question.correct;
+            
+            // Mostrar retroalimentación
+            const feedbackContainer = document.getElementById('feedback-container');
+            const feedbackIcon = document.getElementById('feedback-icon');
+            const feedbackTitle = document.getElementById('feedback-title');
+            const feedbackText = document.getElementById('feedback-text');
+            
+            if (isCorrect) {
+                feedbackIcon.className = 'fas fa-check-circle text-green-500 text-2xl mr-3';
+                feedbackTitle.textContent = '¡Correcto!';
+                feedbackTitle.className = 'text-lg font-bold text-green-600';
+                quizScore += question.points;
+                document.getElementById('current-score').textContent = quizScore;
+            } else {
+                feedbackIcon.className = 'fas fa-times-circle text-red-500 text-2xl mr-3';
+                feedbackTitle.textContent = 'Incorrecto';
+                feedbackTitle.className = 'text-lg font-bold text-red-600';
+            }
+            
+            feedbackText.textContent = question.explanation;
+            feedbackContainer.classList.remove('hidden');
+            
+            // Marcar opciones correctas/incorrectas
+            document.querySelectorAll('.quiz-option').forEach((option, index) => {
+                if (index === question.correct) {
+                    option.classList.add('correct');
+                } else if (index === selectedOption && !isCorrect) {
+                    option.classList.add('incorrect');
+                }
+            });
+            
+            // Actualizar botones
+            document.getElementById('submit-btn').style.display = 'none';
+            document.getElementById('next-btn').style.display = 'inline-block';
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            
+            const quiz = quizData[currentQuizTopic];
+            if (!quiz || currentQuestionIndex >= quiz.length) {
+                showQuizResults();
+                return;
+            }
+            
+            loadQuestion();
+            
+            // Ocultar retroalimentación
+            document.getElementById('feedback-container').classList.add('hidden');
+            document.getElementById('submit-btn').style.display = 'inline-block';
+            document.getElementById('next-btn').style.display = 'none';
+            
+            selectedOption = -1;
+        }
+
+        function loadQuestion() {
+            const quiz = quizData[currentQuizTopic];
+            if (!quiz || quiz.length === 0) {
+                document.getElementById('question-text').textContent = 'No hay preguntas disponibles para este tema';
+                return;
+            }
+            
+            const question = quiz[currentQuestionIndex % quiz.length];
+            
+            document.getElementById('question-icon').textContent = question.icon || '🧠';
+            document.getElementById('question-number').textContent = currentQuestionIndex + 1;
+            document.getElementById('question-text').textContent = question.question;
+            document.getElementById('question-points').textContent = question.points || 10;
+            
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = '';
+            
+            if (question.type === 'multiple-choice') {
+                question.options.forEach((option, index) => {
+                    const optionDiv = document.createElement('div');
+                    optionDiv.className = 'quiz-option p-4 border rounded-lg cursor-pointer';
+                    optionDiv.onclick = () => selectOption(index);
+                    
+                    optionDiv.innerHTML = `
+                        <label class="flex items-center cursor-pointer">
+                            <input type="radio" name="quiz-option" class="mr-3">
+                            <span>${option}</span>
+                        </label>
+                    `;
+                    
+                    optionsContainer.appendChild(optionDiv);
+                });
+            } else if (question.type === 'fill-in-the-blank') {
+                const inputDiv = document.createElement('div');
+                inputDiv.className = 'p-4 border rounded-lg';
+                inputDiv.innerHTML = `
+                    <input type="text" id="fill-answer" class="w-full p-3 border rounded-lg" 
+                           placeholder="Escribe tu respuesta aquí..." onkeyup="checkFillAnswer()">
+                `;
+                optionsContainer.appendChild(inputDiv);
+            }
+            
+            const progress = ((currentQuestionIndex + 1) / quiz.length) * 100;
+            document.getElementById('quiz-progress').style.width = progress + '%';
+            document.getElementById('total-questions').textContent = quiz.length;
+        }
+
+        function checkFillAnswer() {
+            const answer = document.getElementById('fill-answer').value.trim();
+            const quiz = quizData[currentQuizTopic];
+            const question = quiz[currentQuestionIndex % quiz.length];
+            
+            if (answer.toLowerCase() === question.answer.toLowerCase()) {
+                document.getElementById('submit-btn').disabled = false;
+            } else {
+                document.getElementById('submit-btn').disabled = true;
+            }
+        }
+
+        function showQuizResults() {
+            document.getElementById('quiz-container').classList.add('hidden');
+            document.getElementById('quiz-results').classList.remove('hidden');
+            
+            const quiz = quizData[currentQuizTopic];
+            const totalQuestions = quiz ? quiz.length : 10;
+            const maxScore = quiz ? quiz.reduce((sum, q) => sum + (q.points || 10), 0) : totalQuestions * 10;
+            const percentage = Math.round((quizScore / maxScore) * 100);
+            const correctAnswers = Math.round(quizScore / 10);
+            
+            document.getElementById('final-score').textContent = percentage + '%';
+            document.getElementById('correct-answers').textContent = correctAnswers;
+            document.getElementById('total-answers').textContent = totalQuestions;
+            
+            // Actualizar estadísticas del dashboard
+            const currentMastery = parseInt(document.getElementById('overall-mastery').textContent);
+            const newMastery = Math.min(100, currentMastery + Math.floor(percentage / 10));
+            document.getElementById('overall-mastery').textContent = newMastery;
+        }
+
+        function restartQuiz() {
+            currentQuestionIndex = 0;
+            quizScore = 0;
+            selectedOption = -1;
+            
+            document.getElementById('quiz-container').classList.remove('hidden');
+            document.getElementById('quiz-results').classList.add('hidden');
+            document.getElementById('current-score').textContent = '0';
+            
+            loadQuestion();
+            document.getElementById('feedback-container').classList.add('hidden');
+            document.getElementById('submit-btn').style.display = 'inline-block';
+            document.getElementById('next-btn').style.display = 'none';
+        }
+
+        function changeQuizTopic() {
+            const selector = document.getElementById('quiz-topic');
+            currentQuizTopic = selector.value;
+            restartQuiz();
+        }
+
+        function changeDifficulty() {
+            // Implementar filtro por dificultad
+            restartQuiz();
+        }
+
+        function changeQuestionCount() {
+            // Implementar cambio de número de preguntas
+            restartQuiz();
+        }
+
+        // Funciones del examen
+        function startExam() {
+            document.getElementById('exam-start').classList.add('hidden');
+            document.getElementById('exam-active').classList.remove('hidden');
+            
+            examActive = true;
+            examQuestionIndex = 0;
+            examScore = 0;
+            examTime = 3600;
+            
+            startExamTimer();
+            loadExamQuestion();
+        }
+
+        function startExamTimer() {
+            examTimer = setInterval(() => {
+                examTime--;
+                
+                const minutes = Math.floor(examTime / 60);
+                const seconds = examTime % 60;
+                document.getElementById('exam-timer').textContent = 
+                    `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                
+                if (examTime <= 0) {
+                    finishExam();
+                }
+            }, 1000);
+        }
+
+        function loadExamQuestion() {
+            // Generar pregunta aleatoria del banco de preguntas
+            const topics = ['tct', 'confiabilidad', 'validez', 'factorial', 'baremacion', 'tri'];
+            const randomTopic = topics[Math.floor(Math.random() * topics.length)];
+            
+            if (quizData[randomTopic] && quizData[randomTopic].length > 0) {
+                const randomQuestion = quizData[randomTopic][Math.floor(Math.random() * quizData[randomTopic].length)];
+                
+                document.getElementById('exam-question-icon').textContent = randomQuestion.icon || '🧠';
+                document.getElementById('exam-question-number').textContent = examQuestionIndex + 1;
+                document.getElementById('exam-question-text').textContent = randomQuestion.question;
+                
+                const optionsContainer = document.getElementById('exam-options');
+                optionsContainer.innerHTML = '';
+                
+                if (randomQuestion.type === 'multiple-choice' && randomQuestion.options) {
+                    randomQuestion.options.forEach((option, index) => {
+                        const optionDiv = document.createElement('div');
+                        optionDiv.className = 'quiz-option p-4 border rounded-lg cursor-pointer';
+                        optionDiv.onclick = () => selectExamOption(index);
+                        
+                        optionDiv.innerHTML = `
+                            <label class="flex items-center cursor-pointer">
+                                <input type="radio" name="exam-option" class="mr-3">
+                                <span>${option}</span>
+                            </label>
+                        `;
+                        
+                        optionsContainer.appendChild(optionDiv);
+                    });
+                }
+            }
+            
+            const progress = ((examQuestionIndex + 1) / 50) * 100;
+            document.getElementById('exam-progress').style.width = progress + '%';
+        }
+
+        function selectExamOption(index) {
+            document.querySelectorAll('#exam-options .quiz-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            document.querySelectorAll('#exam-options .quiz-option')[index].classList.add('selected');
+        }
+
+        function submitExamAnswer() {
+            examQuestionIndex++;
+            
+            if (examQuestionIndex >= 50) {
+                finishExam();
+                return;
+            }
+            
+            loadExamQuestion();
+        }
+
+        function finishExam() {
+            clearInterval(examTimer);
+            
+            document.getElementById('exam-active').classList.add('hidden');
+            document.getElementById('exam-results').classList.remove('hidden');
+            
+            // Calcular resultados
+            const percentage = Math.floor(Math.random() * 20) + 70; // Simulación: 70-90%
+            const timeUsed = 3600 - examTime;
+            const minutes = Math.floor(timeUsed / 60);
+            const seconds = timeUsed % 60;
+            
+            document.getElementById('exam-final-score').textContent = percentage + '%';
+            document.getElementById('exam-time-used').textContent = 
+                `${minutes}:${seconds.toString().padStart(2, '0')}`;
+            
+            // Actualizar estadísticas del dashboard
+            const currentMastery = parseInt(document.getElementById('overall-mastery').textContent);
+            const newMastery = Math.min(100, currentMastery + Math.floor(percentage / 5));
+            document.getElementById('overall-mastery').textContent = newMastery;
+            
+            // Incrementar temas completados si el puntaje es alto
+            if (percentage > 80) {
+                const completedTopics = parseInt(document.getElementById('completed-topics').textContent);
+                document.getElementById('completed-topics').textContent = Math.min(6, completedTopics + 1);
+            }
+        }
+
+        function restartExam() {
+            document.getElementById('exam-results').classList.add('hidden');
+            document.getElementById('exam-start').classList.remove('hidden');
+        }
+
+        function previousQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                loadQuestion();
+                
+                document.getElementById('feedback-container').classList.add('hidden');
+                document.getElementById('submit-btn').style.display = 'inline-block';
+                document.getElementById('next-btn').style.display = 'none';
+                selectedOption = -1;
+            }
+        }
+
+        function previousExamQuestion() {
+            if (examQuestionIndex > 0) {
+                examQuestionIndex--;
+                loadExamQuestion();
+            }
+        }
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', function() {
+            // Intentar cargar datos JSON
+            loadJSONData();
+            
+            // Animaciones de entrada
+            document.querySelectorAll('.card').forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    card.style.transition = 'all 0.5s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+
+        // Guardar progreso al salir
+        window.addEventListener('beforeunload', function() {
+            const progress = {
+                completedTopics: document.getElementById('completed-topics').textContent,
+                currentStreak: document.getElementById('current-streak').textContent,
+                overallMastery: document.getElementById('overall-mastery').textContent,
+                timestamp: Date.now()
+            };
+            
+            localStorage.setItem('study-progress', JSON.stringify(progress));
+        });
+    </script>
 </body>
 </html>
