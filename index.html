@@ -277,6 +277,75 @@
             border-radius: 8px;
             margin: 1rem 0;
         }
+
+        /* Estilos para reactivos de asociación */
+        .association-item {
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 0.5rem;
+            cursor: move;
+            transition: all 0.3s ease;
+        }
+
+        .association-item:hover {
+            border-color: var(--accent);
+            transform: scale(1.02);
+        }
+
+        .association-item.dragging {
+            opacity: 0.5;
+        }
+
+        .association-target {
+            background: #f8f9fa;
+            border: 2px dashed #ddd;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 0.5rem;
+            min-height: 60px;
+            transition: all 0.3s ease;
+        }
+
+        .association-target.drag-over {
+            background: #e3f2fd;
+            border-color: #2196f3;
+        }
+
+        .association-target.correct {
+            background: #e8f5e8;
+            border-color: #4caf50;
+        }
+
+        .association-target.incorrect {
+            background: #ffeaea;
+            border-color: #f44336;
+        }
+
+        /* Estilos para fill-in-the-blank */
+        .fill-input {
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            padding: 0.5rem;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .fill-input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .fill-input.correct {
+            border-color: #4caf50;
+            background-color: #e8f5e8;
+        }
+
+        .fill-input.incorrect {
+            border-color: #f44336;
+            background-color: #ffeaea;
+        }
     </style>
 </head>
 <body>
@@ -288,25 +357,8 @@
                     <i class="fas fa-brain text-3xl text-white floating-animation"></i>
                     <h1 class="text-2xl font-bold text-white">Centro de Estudio de Psicometría</h1>
                 </div>
-                <div class="hidden md:flex space-x-2">
-                    <button class="nav-item active text-white" onclick="showSection('dashboard')">
-                        <i class="fas fa-tachometer-alt mr-2"></i>Panel Principal
-                    </button>
-                    <button class="nav-item text-white" onclick="showSection('study-guide')">
-                        <i class="fas fa-book mr-2"></i>Guía de Estudio
-                    </button>
-                    <button class="nav-item text-white" onclick="showSection('videos')">
-                        <i class="fas fa-video mr-2"></i>Zona de Videos
-                    </button>
-                    <button class="nav-item text-white" onclick="showSection('flashcards')">
-                        <i class="fas fa-layer-group mr-2"></i>Flashcards
-                    </button>
-                    <button class="nav-item text-white" onclick="showSection('quiz')">
-                        <i class="fas fa-question-circle mr-2"></i>Cuestionario
-                    </button>
-                    <button class="nav-item text-white" onclick="showSection('exam')">
-                        <i class="fas fa-graduation-cap mr-2"></i>Simulador
-                    </button>
+                <div class="hidden md:flex space-x-2" id="main-navigation">
+                    <!-- Navegación se generará dinámicamente -->
                 </div>
             </div>
         </div>
@@ -315,8 +367,65 @@
     <!-- Main Content -->
     <main class="container mx-auto p-6">
         
+        <!-- Landing Page -->
+        <section id="landing" class="section active">
+            <div class="text-center py-16">
+                <div class="mb-8">
+                    <i class="fas fa-brain text-8xl text-blue-600 mb-4"></i>
+                    <h1 class="text-5xl font-bold mb-4">Centro de Estudio de Psicometría</h1>
+                    <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                        Domina los conceptos fundamentales de psicometría con nuestra plataforma interactiva
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                    <div class="card p-6 cursor-pointer" onclick="showSection('study-guide')">
+                        <i class="fas fa-book text-4xl text-blue-600 mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">Guía de Estudio</h3>
+                        <p class="text-gray-600">Ruta estructurada de aprendizaje</p>
+                    </div>
+                    
+                    <div class="card p-6 cursor-pointer" onclick="showSection('videos')">
+                        <i class="fas fa-video text-4xl text-red-600 mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">Zona de Videos</h3>
+                        <p class="text-gray-600">Lecciones explicadas por expertos</p>
+                    </div>
+                    
+                    <div class="card p-6 cursor-pointer" onclick="showSection('flashcards')">
+                        <i class="fas fa-layer-group text-4xl text-green-600 mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">Flashcards</h3>
+                        <p class="text-gray-600">Refuerza tu aprendizaje</p>
+                    </div>
+                    
+                    <div class="card p-6 cursor-pointer" onclick="showSection('quiz')">
+                        <i class="fas fa-question-circle text-4xl text-purple-600 mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">Cuestionario</h3>
+                        <p class="text-gray-600">Pon a prueba tus conocimientos</p>
+                    </div>
+                    
+                    <div class="card p-6 cursor-pointer" onclick="showSection('exam')">
+                        <i class="fas fa-graduation-cap text-4xl text-orange-600 mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">Simulador</h3>
+                        <p class="text-gray-600">Examen final de práctica</p>
+                    </div>
+                    
+                    <div class="card p-6 cursor-pointer" onclick="showSection('dashboard')">
+                        <i class="fas fa-tachometer-alt text-4xl text-indigo-600 mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">Panel de Progreso</h3>
+                        <p class="text-gray-600">Ve tu avance completo</p>
+                    </div>
+                </div>
+                
+                <div class="mt-12">
+                    <button class="btn-success text-xl px-8 py-4" onclick="showSection('study-guide')">
+                        <i class="fas fa-play mr-2"></i>Comenzar Aprendizaje
+                    </button>
+                </div>
+            </div>
+        </section>
+        
         <!-- Dashboard Section -->
-        <section id="dashboard" class="section active">
+        <section id="dashboard" class="section">
             <div class="mb-8">
                 <h2 class="text-3xl font-bold mb-2">Tu Progreso de Estudio</h2>
                 <p class="text-gray-600">¡Sigue así! Estás haciendo un excelente progreso en tu aprendizaje de psicometría.</p>
@@ -327,7 +436,7 @@
                     <div class="flex items-center">
                         <div class="flex-1">
                             <h3 class="text-lg font-semibold text-gray-700">Temas Completados</h3>
-                            <p class="text-3xl font-bold text-green-600" id="completed-topics">3</p>
+                            <p class="text-3xl font-bold text-green-600" id="completed-topics">0</p>
                         </div>
                         <div class="achievement-badge">
                             <i class="fas fa-check"></i>
@@ -339,7 +448,7 @@
                     <div class="flex items-center">
                         <div class="flex-1">
                             <h3 class="text-lg font-semibold text-gray-700">Racha Actual</h3>
-                            <p class="text-3xl font-bold text-orange-500" id="current-streak">7</p>
+                            <p class="text-3xl font-bold text-orange-500" id="current-streak">0</p>
                             <p class="text-sm text-gray-500">días consecutivos</p>
                         </div>
                         <div class="achievement-badge">
@@ -352,7 +461,7 @@
                     <div class="flex items-center">
                         <div class="flex-1">
                             <h3 class="text-lg font-semibold text-gray-700">Dominio General</h3>
-                            <p class="text-3xl font-bold text-blue-600" id="overall-mastery">68</p>
+                            <p class="text-3xl font-bold text-blue-600" id="overall-mastery">0</p>
                             <p class="text-sm text-gray-500">porcentaje</p>
                         </div>
                         <div class="achievement-badge">
@@ -365,8 +474,8 @@
                     <div class="flex items-center">
                         <div class="flex-1">
                             <h3 class="text-lg font-semibold text-gray-700">Próximo Desafío</h3>
-                            <p class="text-lg font-bold text-purple-600">Teoría de Respuesta a los Ítems</p>
-                            <div class="badge mt-2">Próximo</div>
+                            <p class="text-lg font-bold text-purple-600" id="next-challenge">Teoría Clásica de los Tests</p>
+                            <div class="badge mt-2">Por Comenzar</div>
                         </div>
                     </div>
                 </div>
@@ -375,96 +484,15 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <div class="card p-6">
                     <h3 class="text-xl font-bold mb-4">Progreso por Tema</h3>
-                    <div class="space-y-4">
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span class="font-medium">Teoría Clásica de los Tests</span>
-                                <span class="text-green-600 font-bold">100%</span>
-                            </div>
-                            <div class="progress-bg">
-                                <div class="progress-bar" style="width: 100%"></div>
-                            </div>
-                        </div>
-                        
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span class="font-medium">Confiabilidad</span>
-                                <span class="text-green-600 font-bold">100%</span>
-                            </div>
-                            <div class="progress-bg">
-                                <div class="progress-bar" style="width: 100%"></div>
-                            </div>
-                        </div>
-                        
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span class="font-medium">Validez</span>
-                                <span class="text-green-600 font-bold">100%</span>
-                            </div>
-                            <div class="progress-bg">
-                                <div class="progress-bar" style="width: 100%"></div>
-                            </div>
-                        </div>
-                        
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span class="font-medium">Análisis Factorial</span>
-                                <span class="text-orange-600 font-bold">65%</span>
-                            </div>
-                            <div class="progress-bg">
-                                <div class="progress-bar" style="width: 65%"></div>
-                            </div>
-                        </div>
-                        
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span class="font-medium">Normalización y Baremación</span>
-                                <span class="text-red-600 font-bold">0%</span>
-                            </div>
-                            <div class="progress-bg">
-                                <div class="progress-bar" style="width: 0%"></div>
-                            </div>
-                        </div>
-                        
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span class="font-medium">Teoría de Respuesta a los Ítems</span>
-                                <span class="text-red-600 font-bold">0%</span>
-                            </div>
-                            <div class="progress-bg">
-                                <div class="progress-bar" style="width: 0%"></div>
-                            </div>
-                        </div>
+                    <div class="space-y-4" id="topic-progress">
+                        <!-- Progreso se cargará dinámicamente -->
                     </div>
                 </div>
                 
                 <div class="card p-6">
                     <h3 class="text-xl font-bold mb-4">Estadísticas de Rendimiento</h3>
-                    <div class="space-y-4">
-                        <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
-                            <span class="font-medium">Respuestas Correctas</span>
-                            <span class="text-green-600 font-bold">87%</span>
-                        </div>
-                        
-                        <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
-                            <span class="font-medium">Tiempo Promedio por Quiz</span>
-                            <span class="text-blue-600 font-bold">4.2 min</span>
-                        </div>
-                        
-                        <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
-                            <span class="font-medium">Mejor Puntaje Flashcards</span>
-                            <span class="text-purple-600 font-bold">92%</span>
-                        </div>
-                        
-                        <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
-                            <span class="font-medium">Vídeos Completados</span>
-                            <span class="text-orange-600 font-bold">5/6</span>
-                        </div>
-                        
-                        <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
-                            <span class="font-medium">Días de Estudio</span>
-                            <span class="text-red-600 font-bold">12/30</span>
-                        </div>
+                    <div class="space-y-4" id="performance-stats">
+                        <!-- Estadísticas se cargarán dinámicamente -->
                     </div>
                 </div>
             </div>
@@ -477,187 +505,8 @@
                 <p class="text-gray-600">Sigue esta secuencia estructurada para dominar los conceptos fundamentales de psicometría.</p>
             </div>
             
-            <div class="space-y-4">
-                <div class="card topic-item topic-completed p-6 cursor-pointer" onclick="toggleTopic('tct')">
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center space-x-4">
-                            <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
-                                <i class="fas fa-check text-white text-xl"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-xl font-bold">1. Teoría Clásica de los Tests (TCT)</h3>
-                                <p class="text-gray-600">Conceptos fundamentales, puntuaciones verdaderas y errores de medición</p>
-                                <div class="flex items-center mt-2">
-                                    <span class="badge">Completado</span>
-                                    <span class="ml-2 text-sm text-gray-500">Duración: 2-3 horas</span>
-                                </div>
-                            </div>
-                        </div>
-                        <i class="fas fa-chevron-down text-gray-400"></i>
-                    </div>
-                    <div class="mt-4 hidden" id="tct-content">
-                        <div class="bg-gray-50 p-4 rounded-lg">
-                            <h4 class="font-bold mb-2">Contenido del tema:</h4>
-                            <ul class="list-disc list-inside space-y-1 text-sm">
-                                <li>Modelo de puntuación verdadera y error</li>
-                                <li>Tipos de errores de medición</li>
-                                <li>Supuestos de la TCT</li>
-                                <li>Aplicaciones prácticas</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="card topic-item topic-completed p-6 cursor-pointer" onclick="toggleTopic('confiabilidad')">
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center space-x-4">
-                            <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
-                                <i class="fas fa-check text-white text-xl"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-xl font-bold">2. Confiabilidad</h3>
-                                <p class="text-gray-600">Consistencia y estabilidad de las medidas psicométricas</p>
-                                <div class="flex items-center mt-2">
-                                    <span class="badge">Completado</span>
-                                    <span class="ml-2 text-sm text-gray-500">Duración: 3-4 horas</span>
-                                </div>
-                            </div>
-                        </div>
-                        <i class="fas fa-chevron-down text-gray-400"></i>
-                    </div>
-                    <div class="mt-4 hidden" id="confiabilidad-content">
-                        <div class="bg-gray-50 p-4 rounded-lg">
-                            <h4 class="font-bold mb-2">Contenido del tema:</h4>
-                            <ul class="list-disc list-inside space-y-1 text-sm">
-                                <li>Coeficiente de confiabilidad</li>
-                                <li>Métodos de estimación: test-retest, formas paralelas</li>
-                                <li>Confiabilidad interna: coeficiente alpha</li>
-                                <li>Interpretación de coeficientes</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="card topic-item topic-completed p-6 cursor-pointer" onclick="toggleTopic('validez')">
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center space-x-4">
-                            <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
-                                <i class="fas fa-check text-white text-xl"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-xl font-bold">3. Validez</h3>
-                                <p class="text-gray-600">Adecuación y precisión de las interpretaciones de los test</p>
-                                <div class="flex items-center mt-2">
-                                    <span class="badge">Completado</span>
-                                    <span class="ml-2 text-sm text-gray-500">Duración: 3-4 horas</span>
-                                </div>
-                            </div>
-                        </div>
-                        <i class="fas fa-chevron-down text-gray-400"></i>
-                    </div>
-                    <div class="mt-4 hidden" id="validez-content">
-                        <div class="bg-gray-50 p-4 rounded-lg">
-                            <h4 class="font-bold mb-2">Contenido del tema:</h4>
-                            <ul class="list-disc list-inside space-y-1 text-sm">
-                                <li>Validez de contenido</li>
-                                <li>Validez de criterio: concurrente y predictiva</li>
-                                <li>Validez de constructo</li>
-                                <li>Evidencia de validez</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="card topic-item p-6 cursor-pointer" onclick="toggleTopic('factorial')">
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center space-x-4">
-                            <div class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center">
-                                <i class="fas fa-chart-line text-white text-xl"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-xl font-bold">4. Análisis Factorial</h3>
-                                <p class="text-gray-600">Evidencia de la estructura interna y dimensionalidad</p>
-                                <div class="flex items-center mt-2">
-                                    <span class="bg-orange-500 text-white px-3 py-1 rounded-full text-sm font-semibold">En Progreso</span>
-                                    <span class="ml-2 text-sm text-gray-500">Duración: 4-5 horas</span>
-                                </div>
-                            </div>
-                        </div>
-                        <i class="fas fa-chevron-down text-gray-400"></i>
-                    </div>
-                    <div class="mt-4 hidden" id="factorial-content">
-                        <div class="bg-gray-50 p-4 rounded-lg">
-                            <h4 class="font-bold mb-2">Contenido del tema:</h4>
-                            <ul class="list-disc list-inside space-y-1 text-sm">
-                                <li>Análisis factorial exploratorio (AFE)</li>
-                                <li>Análisis factorial confirmatorio (AFC)</li>
-                                <li>Criterios de extracción y rotación</li>
-                                <li>Interpretación de factores</li>
-                            </ul>
-                            <button class="btn-primary mt-3">Continuar Estudiando</button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="card topic-item p-6 cursor-pointer" onclick="toggleTopic('baremacion')">
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center space-x-4">
-                            <div class="w-12 h-12 bg-gray-400 rounded-full flex items-center justify-center">
-                                <i class="fas fa-clock text-white text-xl"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-xl font-bold">5. Normalización y Baremación de Puntuaciones</h3>
-                                <p class="text-gray-600">Transformación e interpretación de puntuaciones</p>
-                                <div class="flex items-center mt-2">
-                                    <span class="bg-gray-500 text-white px-3 py-1 rounded-full text-sm font-semibold">Pendiente</span>
-                                    <span class="ml-2 text-sm text-gray-500">Duración: 2-3 horas</span>
-                                </div>
-                            </div>
-                        </div>
-                        <i class="fas fa-chevron-down text-gray-400"></i>
-                    </div>
-                    <div class="mt-4 hidden" id="baremacion-content">
-                        <div class="bg-gray-50 p-4 rounded-lg">
-                            <h4 class="font-bold mb-2">Contenido del tema:</h4>
-                            <ul class="list-disc list-inside space-y-1 text-sm">
-                                <li>Distribuciones normales y transformaciones</li>
-                                <li>Puntuaciones T, Z y percentiles</li>
-                                <li>Proceso de baremación</li>
-                                <li>Interpretación de puntuaciones</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="card topic-item p-6 cursor-pointer" onclick="toggleTopic('tri')">
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center space-x-4">
-                            <div class="w-12 h-12 bg-gray-400 rounded-full flex items-center justify-center">
-                                <i class="fas fa-clock text-white text-xl"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-xl font-bold">6. Teoría de Respuesta a los Ítems (TRI)</h3>
-                                <p class="text-gray-600">Modelos modernos de medición y sus aplicaciones</p>
-                                <div class="flex items-center mt-2">
-                                    <span class="bg-gray-500 text-white px-3 py-1 rounded-full text-sm font-semibold">Pendiente</span>
-                                    <span class="ml-2 text-sm text-gray-500">Duración: 5-6 horas</span>
-                                </div>
-                            </div>
-                        </div>
-                        <i class="fas fa-chevron-down text-gray-400"></i>
-                    </div>
-                    <div class="mt-4 hidden" id="tri-content">
-                        <div class="bg-gray-50 p-4 rounded-lg">
-                            <h4 class="font-bold mb-2">Contenido del tema:</h4>
-                            <ul class="list-disc list-inside space-y-1 text-sm">
-                                <li>Modelo de Rasch</li>
-                                <li>Modelo de dos parámetros (2PL)</li>
-                                <li>Modelo de tres parámetros (3PL)</li>
-                                <li>Aplicaciones informáticas</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+            <div class="space-y-4" id="study-topics">
+                <!-- Temas se cargarán dinámicamente -->
             </div>
         </section>
 
@@ -689,98 +538,8 @@
                 
                 <div>
                     <h3 class="text-xl font-bold mb-4">Lista de Videos Disponibles</h3>
-                    <div class="space-y-3">
-                        <div class="card p-4 cursor-pointer hover:bg-gray-50" onclick="changeVideo('hriKlRXTF0A', 'Teoría Clásica de los Tests')">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-16 h-12 bg-red-600 rounded flex items-center justify-center">
-                                    <i class="fas fa-play text-white"></i>
-                                </div>
-                                <div class="flex-1">
-                                    <h4 class="font-bold">Teoría Clásica de los Tests</h4>
-                                    <p class="text-sm text-gray-600">Fundamentos y aplicaciones básicas</p>
-                                    <span class="badge">Completado</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="card p-4 cursor-pointer hover:bg-gray-50" onclick="changeVideo('aeENe9swI8E', 'La Búsqueda de la Consistencia')">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-16 h-12 bg-red-600 rounded flex items-center justify-center">
-                                    <i class="fas fa-play text-white"></i>
-                                </div>
-                                <div class="flex-1">
-                                    <h4 class="font-bold">La Búsqueda de la Consistencia</h4>
-                                    <p class="text-sm text-gray-600">Conceptos de confiabilidad</p>
-                                    <span class="badge">Completado</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="card p-4 cursor-pointer hover:bg-gray-50" onclick="changeVideo('vrU6jJ80_UU', 'Entendiendo la Validez')">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-16 h-12 bg-red-600 rounded flex items-center justify-center">
-                                    <i class="fas fa-play text-white"></i>
-                                </div>
-                                <div class="flex-1">
-                                    <h4 class="font-bold">Entendiendo la Validez</h4>
-                                    <p class="text-sm text-gray-600">Tipos y evidencia de validez</p>
-                                    <span class="badge">Completado</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="card p-4 cursor-pointer hover:bg-gray-50" onclick="changeVideo('v_pD5lwpISI', 'Análisis Factorial')">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-16 h-12 bg-red-600 rounded flex items-center justify-center">
-                                    <i class="fas fa-play text-white"></i>
-                                </div>
-                                <div class="flex-1">
-                                    <h4 class="font-bold">Análisis Factorial - La estructura de la Mente</h4>
-                                    <p class="text-sm text-gray-600">Evidencia de la estructura interna</p>
-                                    <span class="bg-orange-500 text-white px-3 py-1 rounded-full text-sm font-semibold">En Progreso</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="card p-4 cursor-pointer hover:bg-gray-50" onclick="changeVideo('hl8LNar2oys', 'Dándole Sentido a un Puntaje')">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-16 h-12 bg-red-600 rounded flex items-center justify-center">
-                                    <i class="fas fa-play text-white"></i>
-                                </div>
-                                <div class="flex-1">
-                                    <h4 class="font-bold">Dándole Sentido a un Puntaje</h4>
-                                    <p class="text-sm text-gray-600">Normalización y baremación</p>
-                                    <span class="bg-gray-500 text-white px-3 py-1 rounded-full text-sm font-semibold">Pendiente</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="card p-4 cursor-pointer hover:bg-gray-50" onclick="changeVideo('BRCeQo9SmSE', 'Teoría de Respuesta a los Ítems')">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-16 h-12 bg-red-600 rounded flex items-center justify-center">
-                                    <i class="fas fa-play text-white"></i>
-                                </div>
-                                <div class="flex-1">
-                                    <h4 class="font-bold">Teoría de Respuesta a los Ítems</h4>
-                                    <p class="text-sm text-gray-600">Modelos modernos de medición</p>
-                                    <span class="bg-gray-500 text-white px-3 py-1 rounded-full text-sm font-semibold">Pendiente</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="mt-6">
-                        <h4 class="font-bold mb-3">Próximos Shorts</h4>
-                        <div class="grid grid-cols-2 gap-3">
-                            <div class="card p-3 text-center">
-                                <i class="fas fa-clock text-2xl text-gray-400 mb-2"></i>
-                                <p class="text-sm text-gray-600">Cómo calcular el Alpha de Cronbach</p>
-                            </div>
-                            <div class="card p-3 text-center">
-                                <i class="fas fa-clock text-2xl text-gray-400 mb-2"></i>
-                                <p class="text-sm text-gray-600">Interpretación de coeficientes</p>
-                            </div>
-                        </div>
+                    <div class="space-y-3" id="video-list">
+                        <!-- Videos se cargarán dinámicamente -->
                     </div>
                 </div>
             </div>
@@ -804,14 +563,14 @@
                         <div class="flip-card-front">
                             <div class="text-center">
                                 <div class="text-4xl mb-4" id="card-icon">🧠</div>
-                                <h3 class="text-2xl font-bold mb-4" id="card-question">¿Qué es la Teoría Clásica de los Tests?</h3>
+                                <h3 class="text-2xl font-bold mb-4" id="card-question">Cargando...</h3>
                                 <p class="text-lg">Haz clic en "Voltear" para ver la respuesta</p>
                             </div>
                         </div>
                         <div class="flip-card-back">
                             <div class="text-center">
                                 <h3 class="text-xl font-bold mb-4">Respuesta</h3>
-                                <p id="card-answer">Modelo que postula que la puntuación observada (X) es la suma de la puntuación verdadera (T) más el error de medición (E): X = T + E</p>
+                                <p id="card-answer">Cargando...</p>
                             </div>
                         </div>
                     </div>
@@ -820,7 +579,7 @@
                 <div class="card p-6">
                     <div class="flex justify-between items-center mb-4">
                         <div class="text-lg font-semibold">
-                            <span id="current-card">1</span> de <span id="total-cards">20</span>
+                            <span id="current-card">1</span> de <span id="total-cards">0</span>
                         </div>
                         <div class="text-lg font-semibold text-green-600">
                             <span id="known-cards">0</span> conocidas
@@ -844,19 +603,14 @@
                     
                     <div class="mt-6">
                         <div class="progress-bg">
-                            <div class="progress-bar" id="flashcard-progress" style="width: 5%"></div>
+                            <div class="progress-bar" id="flashcard-progress" style="width: 0%"></div>
                         </div>
                         <p class="text-center mt-2 text-sm text-gray-600">Progreso en este mazo</p>
                     </div>
                     
                     <div class="mt-4 text-center">
                         <select class="p-2 border rounded-lg" onchange="changeDeck()" id="deck-selector">
-                            <option value="tct">Teoría Clásica de los Tests</option>
-                            <option value="confiabilidad">Confiabilidad</option>
-                            <option value="validez">Validez</option>
-                            <option value="factorial">Análisis Factorial</option>
-                            <option value="baremacion">Normalización y Baremación</option>
-                            <option value="tri">Teoría de Respuesta a los Ítems</option>
+                            <option value="">Selecciona un tema...</option>
                         </select>
                     </div>
                 </div>
@@ -879,15 +633,15 @@
                 <div class="card p-6 mb-6" id="quiz-container">
                     <div class="mb-6">
                         <div class="flex justify-between items-center mb-4">
-                            <h3 class="text-xl font-bold">Pregunta <span id="question-number">1</span> de <span id="total-questions">10</span></h3>
+                            <h3 class="text-xl font-bold">Pregunta <span id="question-number">1</span> de <span id="total-questions">0</span></h3>
                             <div class="text-right">
                                 <div class="text-lg font-bold text-green-600">Puntos: <span id="current-score">0</span></div>
-                                <div class="text-sm text-gray-600">Pregunta: <span id="question-points">10</span> puntos</div>
+                                <div class="text-sm text-gray-600">Pregunta: <span id="question-points">0</span> puntos</div>
                             </div>
                         </div>
                         
                         <div class="progress-bg mb-6">
-                            <div class="progress-bar" id="quiz-progress" style="width: 10%"></div>
+                            <div class="progress-bar" id="quiz-progress" style="width: 0%"></div>
                         </div>
                     </div>
                     
@@ -895,7 +649,7 @@
                         <div class="flex items-center mb-4">
                             <span class="text-2xl mr-3" id="question-icon">🧠</span>
                             <h4 class="text-lg font-semibold" id="question-text">
-                                ¿Cuál de las siguientes fórmulas representa correctamente la Teoría Clásica de los Tests?
+                                Cargando pregunta...
                             </h4>
                         </div>
                         
@@ -922,11 +676,11 @@
                             <h4 class="text-lg font-bold" id="feedback-title">¡Correcto!</h4>
                         </div>
                         <p class="text-gray-700" id="feedback-text">
-                            La fórmula correcta es X = T + E, donde X es la puntuación observada, T es la puntuación verdadera y E es el error de medición.
+                            Esperando respuesta...
                         </p>
                         <div class="mt-4 p-3 bg-blue-50 rounded-lg">
                             <p class="text-sm text-blue-800">
-                                <strong>Explicación detallada:</strong> La Teoría Clásica de los Tests postula que toda puntuación observada está compuesta por una parte verdadera (el constructo que queremos medir) y un componente de error (variabilidad no sistemática).
+                                <strong>Explicación detallada:</strong> <span id="feedback-explanation"></span>
                             </p>
                         </div>
                     </div>
@@ -939,12 +693,12 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                         <div class="card p-4">
                             <h4 class="font-bold mb-2">Puntaje Final</h4>
-                            <div class="text-4xl font-bold text-green-600" id="final-score">85%</div>
+                            <div class="text-4xl font-bold text-green-600" id="final-score">0%</div>
                         </div>
                         <div class="card p-4">
                             <h4 class="font-bold mb-2">Preguntas Correctas</h4>
                             <div class="text-3xl font-bold text-blue-600">
-                                <span id="correct-answers">8</span> / <span id="total-answers">10</span>
+                                <span id="correct-answers">0</span> / <span id="total-answers">0</span>
                             </div>
                         </div>
                     </div>
@@ -963,20 +717,16 @@
                     <div class="card p-4 text-center">
                         <h4 class="font-bold mb-2">Selecciona un Tema</h4>
                         <select class="w-full p-2 border rounded-lg" onchange="changeQuizTopic()" id="quiz-topic">
-                            <option value="tct">Teoría Clásica de los Tests</option>
-                            <option value="confiabilidad">Confiabilidad</option>
-                            <option value="validez">Validez</option>
-                            <option value="factorial">Análisis Factorial</option>
-                            <option value="baremacion">Normalización y Baremación</option>
-                            <option value="tri">Teoría de Respuesta a los Ítems</option>
+                            <option value="">Selecciona un tema...</option>
                         </select>
                     </div>
                     
                     <div class="card p-4 text-center">
                         <h4 class="font-bold mb-2">Dificultad</h4>
                         <select class="w-full p-2 border rounded-lg" onchange="changeDifficulty()" id="quiz-difficulty">
+                            <option value="all">Todas las dificultades</option>
                             <option value="easy">Básico</option>
-                            <option value="medium" selected>Intermedio</option>
+                            <option value="medium">Intermedio</option>
                             <option value="hard">Avanzado</option>
                         </select>
                     </div>
@@ -1024,31 +774,8 @@
                     
                     <div class="mb-6">
                         <h4 class="font-bold mb-3">Distribución de Temas</h4>
-                        <div class="space-y-2">
-                            <div class="flex justify-between">
-                                <span>Teoría Clásica de los Tests</span>
-                                <span class="font-bold">8 preguntas</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span>Confiabilidad</span>
-                                <span class="font-bold">8 preguntas</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span>Validez</span>
-                                <span class="font-bold">8 preguntas</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span>Análisis Factorial</span>
-                                <span class="font-bold">9 preguntas</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span>Normalización y Baremación</span>
-                                <span class="font-bold">8 preguntas</span>
-                            </div>
-                            <div class="flex justify-between">
-                                <span>Teoría de Respuesta a los Ítems</span>
-                                <span class="font-bold">9 preguntas</span>
-                            </div>
+                        <div class="space-y-2" id="exam-distribution">
+                            <!-- Distribución se cargará dinámicamente -->
                         </div>
                     </div>
                     
@@ -1104,11 +831,11 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                         <div class="card p-4">
                             <h4 class="font-bold mb-2">Puntaje Final</h4>
-                            <div class="text-4xl font-bold text-green-600" id="exam-final-score">85%</div>
+                            <div class="text-4xl font-bold text-green-600" id="exam-final-score">0%</div>
                         </div>
                         <div class="card p-4">
                             <h4 class="font-bold mb-2">Tiempo Utilizado</h4>
-                            <div class="text-2xl font-bold text-blue-600" id="exam-time-used">52:34</div>
+                            <div class="text-2xl font-bold text-blue-600" id="exam-time-used">00:00</div>
                         </div>
                     </div>
                     
@@ -1133,18 +860,16 @@
     </main>
 
     <script>
-        // Variables para almacenar los datos cargados desde JSON
+        // Variables globales
         let flashcardData = {};
         let quizData = {};
         let dataLoaded = false;
-
-        // Variables de estado
-        let currentSection = 'dashboard';
-        let currentFlashcardDeck = 'tct';
+        let currentSection = 'landing';
+        let currentFlashcardDeck = '';
         let currentFlashcardIndex = 0;
         let knownFlashcards = 0;
         let isCardFlipped = false;
-        let currentQuizTopic = 'tct';
+        let currentQuizTopic = '';
         let currentQuestionIndex = 0;
         let quizScore = 0;
         let selectedOption = -1;
@@ -1154,86 +879,174 @@
         let examScore = 0;
         let examQuestionIndex = 0;
 
-        // Función para cargar datos JSON
-        async function loadJSONData() {
-            try {
-                // Intentar cargar datos desde archivos JSON
-                const jsonFiles = [
-                    { key: 'tct', file: 'banco_tct.json' },
-                    { key: 'confiabilidad', file: 'banco_confiabilidad.json' },
-                    { key: 'validez', file: 'banco_validez.json' },
-                    { key: 'factorial', file: 'banco_factorial.json' },
-                    { key: 'baremacion', file: 'banco_baremacion.json' },
-                    { key: 'tri', file: 'banco_tri.json' }
-                ];
+        // Configuración de temas
+        const topics = [
+            { id: 'tct', name: 'Teoría Clásica de los Tests', icon: '🧮', color: 'blue' },
+            { id: 'confiabilidad', name: 'Confiabilidad', icon: '🔄', color: 'green' },
+            { id: 'validez', name: 'Validez', icon: '🎯', color: 'purple' },
+            { id: 'factorial', name: 'Análisis Factorial', icon: '🔍', color: 'orange' },
+            { id: 'baremacion', name: 'Normalización y Baremación', icon: '📊', color: 'red' },
+            { id: 'tri', name: 'Teoría de Respuesta a los Ítems', icon: '📈', color: 'indigo' }
+        ];
 
-                const flashcardFiles = [
-                    { key: 'tct', file: 'flashcards_tct.json' },
-                    { key: 'confiabilidad', file: 'flashcards_confiabilidad.json' },
-                    { key: 'validez', file: 'flashcards_validez.json' },
-                    { key: 'factorial', file: 'flashcards_factorial.json' },
-                    { key: 'baremacion', file: 'flashcards_baremacion.json' },
-                    { key: 'tri', file: 'flashcards_tri.json' }
-                ];
+        // Orden de navegación
+        const navigationOrder = [
+            { id: 'landing', title: 'Inicio', icon: 'fas fa-home' },
+            { id: 'study-guide', title: 'Guía de Estudio', icon: 'fas fa-book' },
+            { id: 'videos', title: 'Zona de Videos', icon: 'fas fa-video' },
+            { id: 'flashcards', title: 'Flashcards', icon: 'fas fa-layer-group' },
+            { id: 'quiz', title: 'Cuestionario', icon: 'fas fa-question-circle' },
+            { id: 'exam', title: 'Simulador', icon: 'fas fa-graduation-cap' },
+            { id: 'dashboard', title: 'Panel de Progreso', icon: 'fas fa-tachometer-alt' }
+        ];
 
-                // Cargar datos de quizzes
-                for (const item of jsonFiles) {
-                    try {
-                        const response = await fetch(item.file);
-                        if (response.ok) {
-                            quizData[item.key] = await response.json();
-                        }
-                    } catch (e) {
-                        console.log(`No se pudo cargar ${item.file}, usando datos de muestra`);
-                    }
-                }
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', function() {
+            createNavigation();
+            loadJSONData();
+            initializeDashboard();
+            loadLandingPage();
+            setupEventListeners();
+        });
 
-                // Cargar datos de flashcards
-                for (const item of flashcardFiles) {
-                    try {
-                        const response = await fetch(item.file);
-                        if (response.ok) {
-                            const data = await response.json();
-                            // Convertir formato de flashcards
-                            flashcardData[item.key] = data.map(card => ({
-                                question: card.front,
-                                answer: card.back,
-                                icon: card.icon || '🧠',
-                                topic: card.topic || 'General',
-                                difficulty: card.difficulty || 'medium',
-                                points: card.points || 10
-                            }));
-                        }
-                    } catch (e) {
-                        console.log(`No se pudo cargar ${item.file}, usando datos de muestra`);
-                    }
-                }
+        // Funciones de navegación
+        function createNavigation() {
+            const navContainer = document.getElementById('main-navigation');
+            navContainer.innerHTML = '';
+            
+            navigationOrder.forEach((item, index) => {
+                const button = document.createElement('button');
+                button.className = `nav-item text-white ${index === 0 ? 'active' : ''}`;
+                button.onclick = () => showSection(item.id);
+                button.innerHTML = `
+                    <i class="${item.icon} mr-2"></i>${item.title}
+                `;
+                navContainer.appendChild(button);
+            });
+        }
 
-                // Si no se cargaron datos, usar datos de muestra
-                if (Object.keys(quizData).length === 0) {
-                    console.log('Usando datos de muestra para quizzes');
-                    loadSampleQuizData();
-                }
-
-                if (Object.keys(flashcardData).length === 0) {
-                    console.log('Usando datos de muestra para flashcards');
-                    loadSampleFlashcardData();
-                }
-
-                dataLoaded = true;
-                hideLoadingSpinners();
-                initializeContent();
-                
-            } catch (error) {
-                console.error('Error al cargar datos:', error);
-                loadSampleData();
-                dataLoaded = true;
-                hideLoadingSpinners();
-                initializeContent();
+        function showSection(sectionId) {
+            // Pausar videos al cambiar de sección
+            const iframes = document.querySelectorAll('iframe[src*="youtube"]');
+            iframes.forEach(iframe => {
+                const src = iframe.src;
+                iframe.src = '';
+                iframe.src = src;
+            });
+            
+            // Ocultar todas las secciones
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Mostrar la sección seleccionada
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Actualizar navegación activa
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            currentSection = sectionId;
+            
+            // Actualizar progreso si es necesario
+            if (sectionId === 'dashboard') {
+                updateDashboard();
             }
         }
 
-        function loadSampleQuizData() {
+        // Carga de datos JSON
+        async function loadJSONData() {
+            const jsonFiles = [
+                { key: 'tct', file: 'banco_tct.json' },
+                { key: 'confiabilidad', file: 'banco_confiabilidad.json' },
+                { key: 'validez', file: 'banco_validez.json' },
+                { key: 'factorial', file: 'banco_factorial.json' },
+                { key: 'baremacion', file: 'banco_baremacion.json' },
+                { key: 'tri', file: 'banco_tri.json' }
+            ];
+
+            const flashcardFiles = [
+                { key: 'tct', file: 'flashcards_tct.json' },
+                { key: 'confiabilidad', file: 'flashcards_confiabilidad.json' },
+                { key: 'validez', file: 'flashcards_validez.json' },
+                { key: 'factorial', file: 'flashcards_factorial.json' },
+                { key: 'baremacion', file: 'flashcards_baremacion.json' },
+                { key: 'tri', file: 'flashcards_tri.json' }
+            ];
+
+            // Cargar datos de quizzes
+            for (const item of jsonFiles) {
+                try {
+                    const response = await fetch(item.file);
+                    if (response.ok) {
+                        quizData[item.key] = await response.json();
+                    } else {
+                        console.warn(`Archivo no encontrado: ${item.file}`);
+                    }
+                } catch (error) {
+                    console.error(`Error al cargar ${item.file}:`, error);
+                }
+            }
+
+            // Cargar datos de flashcards
+            for (const item of flashcardFiles) {
+                try {
+                    const response = await fetch(item.file);
+                    if (response.ok) {
+                        const data = await response.json();
+                        flashcardData[item.key] = data.map(card => ({
+                            question: card.front,
+                            answer: card.back,
+                            icon: card.icon || '🧠',
+                            topic: card.topic || 'General',
+                            difficulty: card.difficulty || 'medium',
+                            points: card.points || 10
+                        }));
+                    } else {
+                        console.warn(`Archivo no encontrado: ${item.file}`);
+                    }
+                } catch (error) {
+                    console.error(`Error al cargar ${item.file}:`, error);
+                }
+            }
+
+            // Si no se cargaron datos, usar datos de muestra
+            if (Object.keys(quizData).length === 0 && Object.keys(flashcardData).length === 0) {
+                loadSampleData();
+            }
+
+            dataLoaded = true;
+            hideLoadingSpinners();
+            initializeContent();
+        }
+
+        function loadSampleData() {
+            // Datos de muestra para flashcards
+            flashcardData = {
+                tct: [
+                    {question: "¿Qué es la Teoría Clásica de los Tests?", answer: "Modelo que postula que la puntuación observada (X) es la suma de la puntuación verdadera (T) más el error de medición (E): X = T + E", icon: "🧮", topic: "TCT", difficulty: "easy", points: 10},
+                    {question: "¿Cuáles son los supuestos básicos de la TCT?", answer: "1) El error tiene media cero, 2) El error no se correlaciona con la puntuación verdadera, 3) Los errores de diferentes mediciones no se correlacionan", icon: "📊", topic: "Supuestos TCT", difficulty: "medium", points: 20}
+                ],
+                confiabilidad: [
+                    {question: "¿Qué es la confiabilidad?", answer: "Grado en que las puntuaciones de un test son consistentes, estables y libres de error de medición", icon: "🔄", topic: "Confiabilidad", difficulty: "easy", points: 10}
+                ],
+                validez: [
+                    {question: "¿Qué es la validez?", answer: "Grado en que las interpretaciones y usos de las puntuaciones de un test son apropiadas y precisas", icon: "🎯", topic: "Validez", difficulty: "easy", points: 10}
+                ],
+                factorial: [
+                    {question: "¿Qué es el análisis factorial?", answer: "Técnica estadística para identificar las dimensiones o factores subyacentes en un conjunto de variables", icon: "🔍", topic: "Análisis Factorial", difficulty: "easy", points: 10}
+                ],
+                baremacion: [
+                    {question: "¿Qué es la baremación?", answer: "Proceso que convierte puntajes brutos en puntajes normados, comparando al individuo con una muestra normativa", icon: "📊", topic: "Baremación", difficulty: "easy", points: 10}
+                ],
+                tri: [
+                    {question: "¿Qué es la Teoría de Respuesta a los Ítems?", answer: "Modelo que relaciona la probabilidad de responder correctamente con las características del ítem y la habilidad del examinado", icon: "📈", topic: "TRI", difficulty: "medium", points: 20}
+                ]
+            };
+
+            // Datos de muestra para quizzes
             quizData = {
                 tct: [
                     {
@@ -1249,15 +1062,13 @@
                         points: 10
                     },
                     {
-                        type: "multiple-choice",
-                        question: "¿Cuáles son los supuestos básicos de la TCT?",
-                        options: ["El error tiene media cero", "El error se correlaciona con la puntuación verdadera", "Los errores de diferentes mediciones no se correlacionan", "Todos los anteriores"],
-                        answer: "El error tiene media cero",
-                        correct: 0,
-                        explanation: "Los supuestos principales son: el error tiene media cero, no se correlaciona con la puntuación verdadera, y los errores de diferentes mediciones no se correlacionan.",
+                        type: "fill-in-the-blank",
+                        question: "La proporción de varianza de una variable explicada por los factores comunes se llama ________.",
+                        answer: "comunalidad",
+                        explanation: "La comunalidad refleja cuánta varianza de una variable está asociada con los factores comunes.",
                         difficulty: "medium",
-                        icon: "📊",
-                        topic: "Supuestos TCT",
+                        icon: "⚙️",
+                        topic: "Comunalidad",
                         points: 20
                     }
                 ],
@@ -1275,32 +1086,6 @@
                         points: 10
                     }
                 ],
-                factorial: [
-                    {
-                        type: "multiple-choice",
-                        question: "¿Quién fue el pionero en proponer la existencia del 'factor g' de inteligencia general?",
-                        options: ["Charles Spearman", "L. L. Thurstone", "Raymond Cattell", "Hans Eysenck"],
-                        answer: "Charles Spearman",
-                        correct: 0,
-                        explanation: "Spearman propuso el 'factor g' en 1904 como la fuente común de las correlaciones entre habilidades cognitivas.",
-                        difficulty: "easy",
-                        icon: "🧠",
-                        topic: "Factor G",
-                        points: 10
-                    }
-                ],
-                baremacion: [
-                    {
-                        type: "fill-in-the-blank",
-                        question: "La proporción de varianza de una variable explicada por los factores comunes se llama ________.",
-                        answer: "comunalidad",
-                        explanation: "La comunalidad refleja cuánta varianza de una variable está asociada con los factores comunes.",
-                        difficulty: "medium",
-                        icon: "⚙️",
-                        topic: "Comunalidad",
-                        points: 20
-                    }
-                ],
                 validez: [
                     {
                         type: "multiple-choice",
@@ -1311,7 +1096,38 @@
                         explanation: "La validez de constructo es fundamental para tests de inteligencia porque evalúa si realmente está midiendo el constructo teórico de inteligencia.",
                         difficulty: "medium",
                         icon: "🎯",
-                    topic: "Validez de Constructo",
+                        topic: "Validez de Constructo",
+                        points: 20
+                    }
+                ],
+                factorial: [
+                    {
+                        type: "association",
+                        question: "Empareja los conceptos con sus definiciones:",
+                        pairs: [
+                            { left: "Factor G", right: "Factor general de inteligencia propuesto por Spearman" },
+                            { left: "Análisis Factorial Exploratorio", right: "Técnica para identificar factores subyacentes sin hipótesis previas" },
+                            { left: "Carga Factorial", right: "Correlación entre una variable y un factor" },
+                            { left: "Comunalidad", right: "Proporción de varianza explicada por los factores comunes" }
+                        ],
+                        explanation: "Estos conceptos son fundamentales para entender el análisis factorial.",
+                        difficulty: "medium",
+                        icon: "🔍",
+                        topic: "Conceptos Factoriales",
+                        points: 30
+                    }
+                ],
+                baremacion: [
+                    {
+                        type: "multiple-choice",
+                        question: "¿Qué transformación convierte una puntuación X en una puntuación Z?",
+                        options: ["Z = (X - μ) / σ", "Z = X + μ - σ", "Z = X × μ ÷ σ", "Z = X - μ + σ"],
+                        answer: "Z = (X - μ) / σ",
+                        correct: 0,
+                        explanation: "La puntuación Z indica cuántas desviaciones estándar está un puntaje sobre o bajo la media.",
+                        difficulty: "medium",
+                        icon: "🧮",
+                        topic: "Puntuación Z",
                         points: 20
                     }
                 ],
@@ -1332,41 +1148,6 @@
             };
         }
 
-        function loadSampleFlashcardData() {
-            flashcardData = {
-                tct: [
-                    {question: "¿Qué es la Teoría Clásica de los Tests?", answer: "Modelo que postula que la puntuación observada (X) es la suma de la puntuación verdadera (T) más el error de medición (E): X = T + E", icon: "🧮", topic: "TCT", difficulty: "easy", points: 10},
-                    {question: "¿Cuáles son los supuestos básicos de la TCT?", answer: "1) El error tiene media cero, 2) El error no se correlaciona con la puntuación verdadera, 3) Los errores de diferentes mediciones no se correlacionan", icon: "📊", topic: "Supuestos TCT", difficulty: "medium", points: 20},
-                    {question: "¿Qué es el error estándar de medición?", answer: "Desviación estándar de los errores de medición, indica la precisión del test: SEM = σ√(1-rxx)", icon: "📈", topic: "Error Estándar", difficulty: "medium", points: 20}
-                ],
-                confiabilidad: [
-                    {question: "¿Qué es la confiabilidad?", answer: "Grado en que las puntuaciones de un test son consistentes, estables y libres de error de medición", icon: "🔄", topic: "Confiabilidad", difficulty: "easy", points: 10},
-                    {question: "¿Cómo se calcula el coeficiente de confiabilidad?", answer: "rxx = σ²T/σ²X = 1 - (σ²E/σ²X), donde σ²T es varianza verdadera y σ²X es varianza total", icon: "📊", topic: "Coeficiente de Confiabilidad", difficulty: "hard", points: 30}
-                ],
-                validez: [
-                    {question: "¿Qué es la validez?", answer: "Grado en que las interpretaciones y usos de las puntuaciones de un test son apropiadas y precisas", icon: "🎯", topic: "Validez", difficulty: "easy", points: 10},
-                    {question: "¿Cuáles son los tipos principales de validez?", answer: "Validez de contenido, validez de criterio (concurrente y predictiva), y validez de constructo", icon: "📋", topic: "Tipos de Validez", difficulty: "medium", points: 20}
-                ],
-                factorial: [
-                    {question: "¿Qué es el análisis factorial?", answer: "Técnica estadística para identificar las dimensiones o factores subyacentes en un conjunto de variables", icon: "🔍", topic: "Análisis Factorial", difficulty: "easy", points: 10},
-                    {question: "¿Qué representa una carga factorial alta?", answer: "Indica que la variable es un buen indicador del factor, con alta correlación entre la variable y el factor", icon: "📈", topic: "Cargas Factoriales", difficulty: "medium", points: 20}
-                ],
-                baremacion: [
-                    {question: "¿Qué es la baremación?", answer: "Proceso que convierte puntajes brutos en puntajes normados, comparando al individuo con una muestra normativa", icon: "📊", topic: "Baremación", difficulty: "easy", points: 10},
-                    {question: "¿Qué es una puntuación Z?", answer: "Indica cuántas desviaciones estándar está un puntaje sobre o bajo la media: Z = (X - μ) / σ", icon: "🧮", topic: "Puntuación Z", difficulty: "medium", points: 20}
-                ],
-                tri: [
-                    {question: "¿Qué es la Teoría de Respuesta a los Ítems?", answer: "Modelo que relaciona la probabilidad de responder correctamente con las características del ítem y la habilidad del examinado", icon: "📈", topic: "TRI", difficulty: "medium", points: 20},
-                    {question: "¿Qué ventajas tiene TRI sobre TCT?", answer: "Invarianza de parámetros, información por ítem, estimación precisa de habilidad, y manejo de tests adaptativos", icon: "⭐", topic: "Ventajas TRI", difficulty: "hard", points: 30}
-                ]
-            };
-        }
-
-        function loadSampleData() {
-            loadSampleQuizData();
-            loadSampleFlashcardData();
-        }
-
         function hideLoadingSpinners() {
             document.getElementById('flashcards-loading').style.display = 'none';
             document.getElementById('quiz-loading').style.display = 'none';
@@ -1375,30 +1156,174 @@
         }
 
         function initializeContent() {
+            populateSelectors();
             updateFlashcard();
             loadQuestion();
+            initializeStudyGuide();
+            initializeVideos();
+            initializeExam();
         }
 
-        // Funciones de navegación
-        function showSection(sectionId) {
-            // Ocultar todas las secciones
-            document.querySelectorAll('.section').forEach(section => {
-                section.classList.remove('active');
+        function populateSelectors() {
+            // Llenar selectores de temas
+            const deckSelector = document.getElementById('deck-selector');
+            const quizTopicSelector = document.getElementById('quiz-topic');
+            
+            deckSelector.innerHTML = '<option value="">Selecciona un tema...</option>';
+            quizTopicSelector.innerHTML = '<option value="">Selecciona un tema...</option>';
+            
+            topics.forEach(topic => {
+                if (flashcardData[topic.id]) {
+                    deckSelector.innerHTML += `<option value="${topic.id}">${topic.name}</option>`;
+                }
+                if (quizData[topic.id]) {
+                    quizTopicSelector.innerHTML += `<option value="${topic.id}">${topic.name}</option>`;
+                }
             });
+        }
+
+        // Funciones del dashboard
+        function initializeDashboard() {
+            const savedProgress = JSON.parse(localStorage.getItem('studyProgress') || '{}');
             
-            // Mostrar la sección seleccionada
-            document.getElementById(sectionId).classList.add('active');
+            // Inicializar con valores en 0 si no hay datos guardados
+            document.getElementById('completed-topics').textContent = savedProgress.completedTopics || 0;
+            document.getElementById('current-streak').textContent = savedProgress.currentStreak || 0;
+            document.getElementById('overall-mastery').textContent = savedProgress.overallMastery || 0;
             
-            // Actualizar navegación activa
-            document.querySelectorAll('.nav-item').forEach(item => {
-                item.classList.remove('active');
+            updateTopicProgress();
+            updatePerformanceStats();
+        }
+
+        function updateDashboard() {
+            const savedProgress = JSON.parse(localStorage.getItem('studyProgress') || '{}');
+            initializeDashboard();
+        }
+
+        function updateTopicProgress() {
+            const container = document.getElementById('topic-progress');
+            const savedProgress = JSON.parse(localStorage.getItem('studyProgress') || '{}');
+            const topicProgress = savedProgress.topicProgress || {};
+            
+            container.innerHTML = '';
+            
+            topics.forEach(topic => {
+                const progress = topicProgress[topic.id] || 0;
+                const isCompleted = progress >= 80;
+                
+                container.innerHTML += `
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium">${topic.icon} ${topic.name}</span>
+                            <span class="font-bold ${isCompleted ? 'text-green-600' : progress > 0 ? 'text-orange-600' : 'text-red-600'}">${progress}%</span>
+                        </div>
+                        <div class="progress-bg">
+                            <div class="progress-bar" style="width: ${progress}%"></div>
+                        </div>
+                    </div>
+                `;
             });
-            event.target.classList.add('active');
+        }
+
+        function updatePerformanceStats() {
+            const container = document.getElementById('performance-stats');
+            const savedProgress = JSON.parse(localStorage.getItem('studyProgress') || '{}');
+            const stats = savedProgress.performanceStats || {
+                correctAnswers: 0,
+                averageTime: 0,
+                bestFlashcardScore: 0,
+                videosCompleted: 0,
+                studyDays: 0
+            };
             
-            currentSection = sectionId;
+            container.innerHTML = `
+                <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                    <span class="font-medium">Respuestas Correctas</span>
+                    <span class="text-green-600 font-bold">${stats.correctAnswers}%</span>
+                </div>
+                <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                    <span class="font-medium">Tiempo Promedio por Quiz</span>
+                    <span class="text-blue-600 font-bold">${stats.averageTime} min</span>
+                </div>
+                <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                    <span class="font-medium">Mejor Puntaje Flashcards</span>
+                    <span class="text-purple-600 font-bold">${stats.bestFlashcardScore}%</span>
+                </div>
+                <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                    <span class="font-medium">Vídeos Completados</span>
+                    <span class="text-orange-600 font-bold">${stats.videosCompleted}/6</span>
+                </div>
+                <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                    <span class="font-medium">Días de Estudio</span>
+                    <span class="text-red-600 font-bold">${stats.studyDays}/30</span>
+                </div>
+            `;
         }
 
         // Funciones de la guía de estudio
+        function initializeStudyGuide() {
+            const container = document.getElementById('study-topics');
+            const savedProgress = JSON.parse(localStorage.getItem('studyProgress') || '{}');
+            const topicProgress = savedProgress.topicProgress || {};
+            
+            container.innerHTML = '';
+            
+            topics.forEach((topic, index) => {
+                const progress = topicProgress[topic.id] || 0;
+                const isCompleted = progress >= 80;
+                const isInProgress = progress > 0 && progress < 80;
+                
+                let statusBadge, statusColor, statusIcon;
+                
+                if (isCompleted) {
+                    statusBadge = 'Completado';
+                    statusColor = 'green';
+                    statusIcon = 'check';
+                } else if (isInProgress) {
+                    statusBadge = 'En Progreso';
+                    statusColor = 'orange';
+                    statusIcon = 'clock';
+                } else {
+                    statusBadge = 'Pendiente';
+                    statusColor = 'gray';
+                    statusIcon = 'clock';
+                }
+                
+                container.innerHTML += `
+                    <div class="card topic-item ${isCompleted ? 'topic-completed' : ''} p-6 cursor-pointer" onclick="toggleTopic('${topic.id}')">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 bg-${statusColor}-500 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-${statusIcon} text-white text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold">${index + 1}. ${topic.name}</h3>
+                                    <p class="text-gray-600">Conceptos fundamentales de ${topic.name.toLowerCase()}</p>
+                                    <div class="flex items-center mt-2">
+                                        <span class="bg-${statusColor}-500 text-white px-3 py-1 rounded-full text-sm font-semibold">${statusBadge}</span>
+                                        <span class="ml-2 text-sm text-gray-500">Progreso: ${progress}%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <i class="fas fa-chevron-down text-gray-400"></i>
+                        </div>
+                        <div class="mt-4 hidden" id="${topic.id}-content">
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <h4 class="font-bold mb-2">Contenido del tema:</h4>
+                                <div class="progress-bg mb-4">
+                                    <div class="progress-bar" style="width: ${progress}%"></div>
+                                </div>
+                                <p class="text-sm text-gray-600 mb-3">Has completado el ${progress}% de este tema</p>
+                                <button class="btn-primary" onclick="startTopic('${topic.id}')">
+                                    ${isCompleted ? 'Revisar' : isInProgress ? 'Continuar' : 'Comenzar'}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
         function toggleTopic(topicId) {
             const content = document.getElementById(topicId + '-content');
             const icon = event.currentTarget.querySelector('.fa-chevron-down');
@@ -1412,7 +1337,48 @@
             }
         }
 
+        function startTopic(topicId) {
+            // Guardar progreso y redirigir al quiz correspondiente
+            showSection('quiz');
+            document.getElementById('quiz-topic').value = topicId;
+            changeQuizTopic();
+        }
+
         // Funciones de videos
+        function initializeVideos() {
+            const videos = [
+                { id: 'hriKlRXTF0A', title: 'Teoría Clásica de los Tests', description: 'Fundamentos y aplicaciones básicas', status: 'Completado' },
+                { id: 'aeENe9swI8E', title: 'La Búsqueda de la Consistencia', description: 'Conceptos de confiabilidad', status: 'Completado' },
+                { id: 'vrU6jJ80_UU', title: 'Entendiendo la Validez', description: 'Tipos y evidencia de validez', status: 'Completado' },
+                { id: 'v_pD5lwpISI', title: 'Análisis Factorial - La estructura de la Mente', description: 'Evidencia de la estructura interna', status: 'En Progreso' },
+                { id: 'hl8LNar2oys', title: 'Dándole Sentido a un Puntaje', description: 'Normalización y baremación', status: 'Pendiente' },
+                { id: 'BRCeQo9SmSE', title: 'Teoría de Respuesta a los Ítems', description: 'Modelos modernos de medición', status: 'Pendiente' }
+            ];
+            
+            const container = document.getElementById('video-list');
+            container.innerHTML = '';
+            
+            videos.forEach(video => {
+                const statusClass = video.status === 'Completado' ? 'green' : 
+                                  video.status === 'En Progreso' ? 'orange' : 'gray';
+                
+                container.innerHTML += `
+                    <div class="card p-4 cursor-pointer hover:bg-gray-50" onclick="changeVideo('${video.id}', '${video.title}')">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-16 h-12 bg-red-600 rounded flex items-center justify-center">
+                                <i class="fas fa-play text-white"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="font-bold">${video.title}</h4>
+                                <p class="text-sm text-gray-600">${video.description}</p>
+                                <span class="bg-${statusClass}-500 text-white px-2 py-1 rounded-full text-xs font-semibold">${video.status}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
         function changeVideo(videoId, title) {
             const iframe = document.getElementById('current-video');
             iframe.src = `https://www.youtube.com/embed/${videoId}`;
@@ -1424,11 +1390,26 @@
             } else {
                 document.getElementById('video-notes').value = '';
             }
+            
+            // Actualizar progreso
+            updateVideoProgress(videoId);
+        }
+
+        function updateVideoProgress(videoId) {
+            const savedProgress = JSON.parse(localStorage.getItem('studyProgress') || '{}');
+            savedProgress.videosWatched = savedProgress.videosWatched || [];
+            
+            if (!savedProgress.videosWatched.includes(videoId)) {
+                savedProgress.videosWatched.push(videoId);
+                savedProgress.videosCompleted = savedProgress.videosWatched.length;
+                localStorage.setItem('studyProgress', JSON.stringify(savedProgress));
+                updatePerformanceStats();
+            }
         }
 
         function saveNotes() {
             const notes = document.getElementById('video-notes').value;
-            const videoId = document.getElementById('current-video').src.split('/').pop();
+            const videoId = document.getElementById('current-video').src.split('/').pop().split('?')[0];
             localStorage.setItem(`notes-${videoId}`, notes);
             
             // Mostrar mensaje de confirmación
@@ -1486,6 +1467,9 @@
         function markAsKnown() {
             knownFlashcards++;
             document.getElementById('known-cards').textContent = knownFlashcards;
+            
+            // Actualizar progreso
+            updateFlashcardProgress();
             nextCard();
         }
 
@@ -1505,8 +1489,11 @@
         function updateFlashcard() {
             const deck = flashcardData[currentFlashcardDeck];
             if (!deck || deck.length === 0) {
-                document.getElementById('card-question').textContent = 'No hay flashcards disponibles para este tema';
-                document.getElementById('card-answer').textContent = 'Intenta con otro tema o verifica los datos';
+                document.getElementById('card-question').textContent = 'Selecciona un tema para comenzar';
+                document.getElementById('card-answer').textContent = 'Elige un mazo de flashcards del menú desplegable';
+                document.getElementById('current-card').textContent = '0';
+                document.getElementById('total-cards').textContent = '0';
+                document.getElementById('flashcard-progress').style.width = '0%';
                 return;
             }
             
@@ -1517,9 +1504,30 @@
             document.getElementById('card-answer').textContent = card.answer;
             document.getElementById('current-card').textContent = currentFlashcardIndex + 1;
             document.getElementById('total-cards').textContent = deck.length;
+            document.getElementById('known-cards').textContent = knownFlashcards;
             
             const progress = ((currentFlashcardIndex + 1) / deck.length) * 100;
             document.getElementById('flashcard-progress').style.width = progress + '%';
+        }
+
+        function updateFlashcardProgress() {
+            const savedProgress = JSON.parse(localStorage.getItem('studyProgress') || '{}');
+            const deck = flashcardData[currentFlashcardDeck];
+            
+            if (deck && deck.length > 0) {
+                const progress = (knownFlashcards / deck.length) * 100;
+                savedProgress.flashcardProgress = savedProgress.flashcardProgress || {};
+                savedProgress.flashcardProgress[currentFlashcardDeck] = progress;
+                
+                // Actualizar mejor puntaje
+                savedProgress.performanceStats = savedProgress.performanceStats || {};
+                savedProgress.performanceStats.bestFlashcardScore = Math.max(
+                    savedProgress.performanceStats.bestFlashcardScore || 0,
+                    progress
+                );
+                
+                localStorage.setItem('studyProgress', JSON.stringify(savedProgress));
+            }
         }
 
         // Funciones del quiz
@@ -1538,19 +1546,26 @@
         }
 
         function submitAnswer() {
-            if (selectedOption === -1) return;
-            
             const quiz = quizData[currentQuizTopic];
             if (!quiz || quiz.length === 0) return;
             
             const question = quiz[currentQuestionIndex % quiz.length];
-            const isCorrect = selectedOption === question.correct;
+            let isCorrect = false;
+            
+            if (question.type === 'multiple-choice') {
+                if (selectedOption === -1) return;
+                isCorrect = selectedOption === question.correct;
+            } else if (question.type === 'fill-in-the-blank') {
+                const answer = document.getElementById('fill-answer').value.trim();
+                isCorrect = answer.toLowerCase() === question.answer.toLowerCase();
+            }
             
             // Mostrar retroalimentación
             const feedbackContainer = document.getElementById('feedback-container');
             const feedbackIcon = document.getElementById('feedback-icon');
             const feedbackTitle = document.getElementById('feedback-title');
             const feedbackText = document.getElementById('feedback-text');
+            const feedbackExplanation = document.getElementById('feedback-explanation');
             
             if (isCorrect) {
                 feedbackIcon.className = 'fas fa-check-circle text-green-500 text-2xl mr-3';
@@ -1564,21 +1579,27 @@
                 feedbackTitle.className = 'text-lg font-bold text-red-600';
             }
             
-            feedbackText.textContent = question.explanation;
+            feedbackText.textContent = isCorrect ? '¡Buen trabajo!' : 'Sigue practicando.';
+            feedbackExplanation.textContent = question.explanation;
             feedbackContainer.classList.remove('hidden');
             
             // Marcar opciones correctas/incorrectas
-            document.querySelectorAll('.quiz-option').forEach((option, index) => {
-                if (index === question.correct) {
-                    option.classList.add('correct');
-                } else if (index === selectedOption && !isCorrect) {
-                    option.classList.add('incorrect');
-                }
-            });
+            if (question.type === 'multiple-choice') {
+                document.querySelectorAll('.quiz-option').forEach((option, index) => {
+                    if (index === question.correct) {
+                        option.classList.add('correct');
+                    } else if (index === selectedOption && !isCorrect) {
+                        option.classList.add('incorrect');
+                    }
+                });
+            }
             
             // Actualizar botones
             document.getElementById('submit-btn').style.display = 'none';
             document.getElementById('next-btn').style.display = 'inline-block';
+            
+            // Actualizar estadísticas
+            updateQuizStats(isCorrect);
         }
 
         function nextQuestion() {
@@ -1603,7 +1624,7 @@
         function loadQuestion() {
             const quiz = quizData[currentQuizTopic];
             if (!quiz || quiz.length === 0) {
-                document.getElementById('question-text').textContent = 'No hay preguntas disponibles para este tema';
+                document.getElementById('question-text').textContent = 'Selecciona un tema para comenzar';
                 return;
             }
             
@@ -1633,30 +1654,231 @@
                     optionsContainer.appendChild(optionDiv);
                 });
             } else if (question.type === 'fill-in-the-blank') {
-                const inputDiv = document.createElement('div');
-                inputDiv.className = 'p-4 border rounded-lg';
-                inputDiv.innerHTML = `
-                    <input type="text" id="fill-answer" class="w-full p-3 border rounded-lg" 
-                           placeholder="Escribe tu respuesta aquí..." onkeyup="checkFillAnswer()">
+                optionsContainer.innerHTML = `
+                    <div class="p-4 border rounded-lg">
+                        <input type="text" id="fill-answer" class="w-full p-3 border rounded-lg fill-input" 
+                               placeholder="Escribe tu respuesta aquí..." 
+                               onkeyup="checkFillAnswer()">
+                        <div id="fill-feedback" class="hidden mt-3 p-3 rounded-lg"></div>
+                    </div>
                 `;
-                optionsContainer.appendChild(inputDiv);
+            } else if (question.type === 'association') {
+                createAssociationQuestion(question.pairs);
             }
             
             const progress = ((currentQuestionIndex + 1) / quiz.length) * 100;
             document.getElementById('quiz-progress').style.width = progress + '%';
             document.getElementById('total-questions').textContent = quiz.length;
+            
+            // Deshabilitar botón de envío inicialmente
+            document.getElementById('submit-btn').disabled = true;
         }
 
         function checkFillAnswer() {
             const answer = document.getElementById('fill-answer').value.trim();
             const quiz = quizData[currentQuizTopic];
             const question = quiz[currentQuestionIndex % quiz.length];
+            const feedback = document.getElementById('fill-feedback');
             
-            if (answer.toLowerCase() === question.answer.toLowerCase()) {
+            if (answer.length > 0) {
+                feedback.classList.remove('hidden');
+                
+                if (answer.toLowerCase() === question.answer.toLowerCase()) {
+                    feedback.className = 'mt-3 p-3 rounded-lg bg-green-100 text-green-800';
+                    feedback.innerHTML = '<i class="fas fa-check mr-2"></i>¡Respuesta correcta!';
+                    document.getElementById('submit-btn').disabled = false;
+                    document.getElementById('fill-answer').classList.add('correct');
+                    document.getElementById('fill-answer').classList.remove('incorrect');
+                } else {
+                    feedback.className = 'mt-3 p-3 rounded-lg bg-red-100 text-red-800';
+                    feedback.innerHTML = '<i class="fas fa-times mr-2"></i>Respuesta incorrecta. Inténtalo de nuevo.';
+                    document.getElementById('submit-btn').disabled = true;
+                    document.getElementById('fill-answer').classList.add('incorrect');
+                    document.getElementById('fill-answer').classList.remove('correct');
+                }
+            } else {
+                feedback.classList.add('hidden');
+                document.getElementById('submit-btn').disabled = true;
+                document.getElementById('fill-answer').classList.remove('correct', 'incorrect');
+            }
+        }
+
+        function createAssociationQuestion(pairs) {
+            const container = document.getElementById('options-container');
+            
+            // Mezclar las opciones
+            const shuffledPairs = [...pairs].sort(() => Math.random() - 0.5);
+            const shuffledRights = [...pairs].sort(() => Math.random() - 0.5);
+            
+            let leftItems = '';
+            let rightItems = '';
+            
+            shuffledPairs.forEach((pair, index) => {
+                leftItems += `
+                    <div class="association-item" draggable="true" data-id="${pairs.findIndex(p => p.left === pair.left)}">
+                        ${pair.left}
+                    </div>
+                `;
+            });
+            
+            shuffledRights.forEach((pair, index) => {
+                rightItems += `
+                    <div class="association-target" data-match="${pairs.findIndex(p => p.right === pair.right)}">
+                        <div class="target-label">${pair.right}</div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = `
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="font-bold mb-4">Arrastra desde aquí:</h4>
+                        <div class="space-y-2" id="left-items">${leftItems}</div>
+                    </div>
+                    <div>
+                        <h4 class="font-bold mb-4">Empareja aquí:</h4>
+                        <div class="space-y-2" id="right-items">${rightItems}</div>
+                    </div>
+                </div>
+                <button class="btn-success mt-4" onclick="checkAssociations()">
+                    <i class="fas fa-check mr-2"></i>Verificar Emparejamiento
+                </button>
+                <div id="association-feedback" class="hidden mt-3 p-3 rounded-lg"></div>
+            `;
+            
+            initializeDragAndDrop();
+        }
+
+        function initializeDragAndDrop() {
+            const items = document.querySelectorAll('.association-item');
+            const targets = document.querySelectorAll('.association-target');
+            
+            items.forEach(item => {
+                item.addEventListener('dragstart', (e) => {
+                    e.dataTransfer.setData('text/plain', e.target.dataset.id);
+                    e.target.classList.add('dragging');
+                });
+                
+                item.addEventListener('dragend', (e) => {
+                    e.target.classList.remove('dragging');
+                });
+            });
+            
+            targets.forEach(target => {
+                target.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    target.classList.add('drag-over');
+                });
+                
+                target.addEventListener('dragleave', (e) => {
+                    target.classList.remove('drag-over');
+                });
+                
+                target.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    target.classList.remove('drag-over');
+                    
+                    const itemId = e.dataTransfer.getData('text/plain');
+                    const draggedItem = document.querySelector(`[data-id="${itemId}"]`);
+                    
+                    // Verificar si ya hay un elemento en el target
+                    const existingItem = target.querySelector('.association-item');
+                    if (existingItem && existingItem !== draggedItem) {
+                        // Mover el elemento existente de vuelta a la lista izquierda
+                        document.getElementById('left-items').appendChild(existingItem);
+                    }
+                    
+                    // Mover el nuevo elemento al target
+                    target.appendChild(draggedItem);
+                    
+                    // Verificar si es correcto
+                    if (target.dataset.match === itemId) {
+                        draggedItem.classList.add('bg-green-100');
+                        draggedItem.classList.remove('bg-red-100');
+                        target.classList.add('correct');
+                        target.classList.remove('incorrect');
+                    } else {
+                        draggedItem.classList.add('bg-red-100');
+                        draggedItem.classList.remove('bg-green-100');
+                        target.classList.add('incorrect');
+                        target.classList.remove('correct');
+                    }
+                    
+                    checkAllAssociations();
+                });
+            });
+        }
+
+        function checkAllAssociations() {
+            const targets = document.querySelectorAll('.association-target');
+            const total = targets.length;
+            let correct = 0;
+            
+            targets.forEach(target => {
+                const item = target.querySelector('.association-item');
+                if (item && target.dataset.match === item.dataset.id) {
+                    correct++;
+                }
+            });
+            
+            const feedback = document.getElementById('association-feedback');
+            if (feedback) {
+                if (correct === total) {
+                    feedback.className = 'hidden mt-3 p-3 rounded-lg bg-green-100 text-green-800';
+                    feedback.innerHTML = '<i class="fas fa-check mr-2"></i>¡Todas las asociaciones son correctas!';
+                    document.getElementById('submit-btn').disabled = false;
+                } else {
+                    feedback.className = 'hidden mt-3 p-3 rounded-lg bg-blue-100 text-blue-800';
+                    feedback.innerHTML = `<i class="fas fa-info mr-2"></i>Llevas ${correct} de ${total} correctas.`;
+                }
+            }
+        }
+
+        function checkAssociations() {
+            const targets = document.querySelectorAll('.association-target');
+            const total = targets.length;
+            let correct = 0;
+            
+            targets.forEach(target => {
+                const item = target.querySelector('.association-item');
+                if (item && target.dataset.match === item.dataset.id) {
+                    correct++;
+                }
+            });
+            
+            const feedback = document.getElementById('association-feedback');
+            feedback.classList.remove('hidden');
+            
+            if (correct === total) {
+                feedback.className = 'mt-3 p-3 rounded-lg bg-green-100 text-green-800';
+                feedback.innerHTML = '<i class="fas fa-check mr-2"></i>¡Excelente! Todas las asociaciones son correctas.';
                 document.getElementById('submit-btn').disabled = false;
             } else {
+                feedback.className = 'mt-3 p-3 rounded-lg bg-orange-100 text-orange-800';
+                feedback.innerHTML = `<i class="fas fa-exclamation mr-2"></i>Tienes ${correct} de ${total} correctas. Revisa tus respuestas.`;
                 document.getElementById('submit-btn').disabled = true;
             }
+        }
+
+        function updateQuizStats(isCorrect) {
+            const savedProgress = JSON.parse(localStorage.getItem('studyProgress') || '{}');
+            savedProgress.quizStats = savedProgress.quizStats || {
+                totalQuestions: 0,
+                correctAnswers: 0,
+                totalTime: 0
+            };
+            
+            savedProgress.quizStats.totalQuestions++;
+            if (isCorrect) savedProgress.quizStats.correctAnswers++;
+            
+            // Calcular porcentaje de respuestas correctas
+            const correctPercentage = Math.round((savedProgress.quizStats.correctAnswers / savedProgress.quizStats.totalQuestions) * 100);
+            
+            savedProgress.performanceStats = savedProgress.performanceStats || {};
+            savedProgress.performanceStats.correctAnswers = correctPercentage;
+            
+            localStorage.setItem('studyProgress', JSON.stringify(savedProgress));
+            updatePerformanceStats();
         }
 
         function showQuizResults() {
@@ -1664,19 +1886,43 @@
             document.getElementById('quiz-results').classList.remove('hidden');
             
             const quiz = quizData[currentQuizTopic];
-            const totalQuestions = quiz ? quiz.length : 10;
+            const totalQuestions = quiz ? quiz.length : 0;
             const maxScore = quiz ? quiz.reduce((sum, q) => sum + (q.points || 10), 0) : totalQuestions * 10;
-            const percentage = Math.round((quizScore / maxScore) * 100);
-            const correctAnswers = Math.round(quizScore / 10);
+            const percentage = totalQuestions > 0 ? Math.round((quizScore / maxScore) * 100) : 0;
+            const correctAnswers = quizScore > 0 ? Math.round(quizScore / 10) : 0;
             
             document.getElementById('final-score').textContent = percentage + '%';
             document.getElementById('correct-answers').textContent = correctAnswers;
             document.getElementById('total-answers').textContent = totalQuestions;
             
+            // Actualizar progreso del tema
+            updateTopicProgressFromQuiz(percentage);
+            
             // Actualizar estadísticas del dashboard
-            const currentMastery = parseInt(document.getElementById('overall-mastery').textContent);
+            const savedProgress = JSON.parse(localStorage.getItem('studyProgress') || '{}');
+            const currentMastery = savedProgress.overallMastery || 0;
             const newMastery = Math.min(100, currentMastery + Math.floor(percentage / 10));
-            document.getElementById('overall-mastery').textContent = newMastery;
+            
+            savedProgress.overallMastery = newMastery;
+            savedProgress.topicProgress = savedProgress.topicProgress || {};
+            savedProgress.topicProgress[currentQuizTopic] = percentage;
+            
+            // Incrementar temas completados si el puntaje es alto
+            if (percentage >= 80) {
+                savedProgress.completedTopics = (savedProgress.completedTopics || 0) + 1;
+            }
+            
+            localStorage.setItem('studyProgress', JSON.stringify(savedProgress));
+            initializeDashboard();
+        }
+
+        function updateTopicProgressFromQuiz(percentage) {
+            const savedProgress = JSON.parse(localStorage.getItem('studyProgress') || '{}');
+            savedProgress.topicProgress = savedProgress.topicProgress || {};
+            savedProgress.topicProgress[currentQuizTopic] = percentage;
+            
+            localStorage.setItem('studyProgress', JSON.stringify(savedProgress));
+            updateTopicProgress();
         }
 
         function restartQuiz() {
@@ -1710,7 +1956,34 @@
             restartQuiz();
         }
 
+        function previousQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                loadQuestion();
+                
+                document.getElementById('feedback-container').classList.add('hidden');
+                document.getElementById('submit-btn').style.display = 'inline-block';
+                document.getElementById('next-btn').style.display = 'none';
+                selectedOption = -1;
+            }
+        }
+
         // Funciones del examen
+        function initializeExam() {
+            const container = document.getElementById('exam-distribution');
+            container.innerHTML = '';
+            
+            topics.forEach(topic => {
+                const count = topic.id === 'factorial' || topic.id === 'tri' ? 9 : 8;
+                container.innerHTML += `
+                    <div class="flex justify-between">
+                        <span>${topic.icon} ${topic.name}</span>
+                        <span class="font-bold">${count} preguntas</span>
+                    </div>
+                `;
+            });
+        }
+
         function startExam() {
             document.getElementById('exam-start').classList.add('hidden');
             document.getElementById('exam-active').classList.remove('hidden');
@@ -1740,36 +2013,45 @@
         }
 
         function loadExamQuestion() {
-            // Generar pregunta aleatoria del banco de preguntas
-            const topics = ['tct', 'confiabilidad', 'validez', 'factorial', 'baremacion', 'tri'];
-            const randomTopic = topics[Math.floor(Math.random() * topics.length)];
+            // Seleccionar pregunta aleatoria de todos los temas
+            const availableTopics = Object.keys(quizData).filter(topic => quizData[topic].length > 0);
+            if (availableTopics.length === 0) return;
             
-            if (quizData[randomTopic] && quizData[randomTopic].length > 0) {
-                const randomQuestion = quizData[randomTopic][Math.floor(Math.random() * quizData[randomTopic].length)];
+            const randomTopic = availableTopics[Math.floor(Math.random() * availableTopics.length)];
+            const topicQuestions = quizData[randomTopic];
+            const randomQuestion = topicQuestions[Math.floor(Math.random() * topicQuestions.length)];
+            
+            // Clonar la pregunta para evitar modificar el original
+            const question = JSON.parse(JSON.stringify(randomQuestion));
+            
+            document.getElementById('exam-question-icon').textContent = question.icon || '🧠';
+            document.getElementById('exam-question-number').textContent = examQuestionIndex + 1;
+            document.getElementById('exam-question-text').textContent = question.question;
+            
+            const optionsContainer = document.getElementById('exam-options');
+            optionsContainer.innerHTML = '';
+            
+            if (question.type === 'multiple-choice' && question.options) {
+                // Mezclar opciones para el examen
+                const shuffledOptions = [...question.options].sort(() => Math.random() - 0.5);
+                const originalCorrectIndex = question.correct;
+                const correctAnswer = question.options[originalCorrectIndex];
+                question.correct = shuffledOptions.indexOf(correctAnswer);
                 
-                document.getElementById('exam-question-icon').textContent = randomQuestion.icon || '🧠';
-                document.getElementById('exam-question-number').textContent = examQuestionIndex + 1;
-                document.getElementById('exam-question-text').textContent = randomQuestion.question;
-                
-                const optionsContainer = document.getElementById('exam-options');
-                optionsContainer.innerHTML = '';
-                
-                if (randomQuestion.type === 'multiple-choice' && randomQuestion.options) {
-                    randomQuestion.options.forEach((option, index) => {
-                        const optionDiv = document.createElement('div');
-                        optionDiv.className = 'quiz-option p-4 border rounded-lg cursor-pointer';
-                        optionDiv.onclick = () => selectExamOption(index);
-                        
-                        optionDiv.innerHTML = `
-                            <label class="flex items-center cursor-pointer">
-                                <input type="radio" name="exam-option" class="mr-3">
-                                <span>${option}</span>
-                            </label>
-                        `;
-                        
-                        optionsContainer.appendChild(optionDiv);
-                    });
-                }
+                shuffledOptions.forEach((option, index) => {
+                    const optionDiv = document.createElement('div');
+                    optionDiv.className = 'quiz-option p-4 border rounded-lg cursor-pointer';
+                    optionDiv.onclick = () => selectExamOption(index);
+                    
+                    optionDiv.innerHTML = `
+                        <label class="flex items-center cursor-pointer">
+                            <input type="radio" name="exam-option" class="mr-3">
+                            <span>${option}</span>
+                        </label>
+                    `;
+                    
+                    optionsContainer.appendChild(optionDiv);
+                });
             }
             
             const progress = ((examQuestionIndex + 1) / 50) * 100;
@@ -1785,6 +2067,10 @@
         }
 
         function submitExamAnswer() {
+            // Calcular puntaje (simulación)
+            const isCorrect = Math.random() > 0.3; // 70% de probabilidad de acierto
+            if (isCorrect) examScore += 2; // 2 puntos por pregunta correcta
+            
             examQuestionIndex++;
             
             if (examQuestionIndex >= 50) {
@@ -1802,7 +2088,7 @@
             document.getElementById('exam-results').classList.remove('hidden');
             
             // Calcular resultados
-            const percentage = Math.floor(Math.random() * 20) + 70; // Simulación: 70-90%
+            const percentage = Math.round((examScore / 100) * 100); // Máximo 100 puntos
             const timeUsed = 3600 - examTime;
             const minutes = Math.floor(timeUsed / 60);
             const seconds = timeUsed % 60;
@@ -1812,32 +2098,56 @@
                 `${minutes}:${seconds.toString().padStart(2, '0')}`;
             
             // Actualizar estadísticas del dashboard
-            const currentMastery = parseInt(document.getElementById('overall-mastery').textContent);
+            const savedProgress = JSON.parse(localStorage.getItem('studyProgress') || '{}');
+            const currentMastery = savedProgress.overallMastery || 0;
             const newMastery = Math.min(100, currentMastery + Math.floor(percentage / 5));
-            document.getElementById('overall-mastery').textContent = newMastery;
+            
+            savedProgress.overallMastery = newMastery;
+            savedProgress.examAttempts = (savedProgress.examAttempts || 0) + 1;
+            savedProgress.bestExamScore = Math.max(savedProgress.bestExamScore || 0, percentage);
             
             // Incrementar temas completados si el puntaje es alto
-            if (percentage > 80) {
-                const completedTopics = parseInt(document.getElementById('completed-topics').textContent);
-                document.getElementById('completed-topics').textContent = Math.min(6, completedTopics + 1);
+            if (percentage >= 70) {
+                savedProgress.completedTopics = Math.min(6, (savedProgress.completedTopics || 0) + 1);
             }
+            
+            localStorage.setItem('studyProgress', JSON.stringify(savedProgress));
+            initializeDashboard();
+            
+            // Generar desglose por temas
+            generateExamBreakdown();
+        }
+
+        function generateExamBreakdown() {
+            const container = document.getElementById('exam-breakdown');
+            const topics = ['tct', 'confiabilidad', 'validez', 'factorial', 'baremacion', 'tri'];
+            const topicNames = {
+                'tct': 'Teoría Clásica de los Tests',
+                'confiabilidad': 'Confiabilidad',
+                'validez': 'Validez',
+                'factorial': 'Análisis Factorial',
+                'baremacion': 'Normalización y Baremación',
+                'tri': 'Teoría de Respuesta a los Ítems'
+            };
+            
+            container.innerHTML = '';
+            
+            topics.forEach(topic => {
+                const score = Math.floor(Math.random() * 30) + 70; // Simulación: 70-100%
+                const status = score >= 80 ? 'text-green-600' : score >= 60 ? 'text-orange-600' : 'text-red-600';
+                
+                container.innerHTML += `
+                    <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                        <span class="font-medium">${topicNames[topic]}</span>
+                        <span class="font-bold ${status}">${score}%</span>
+                    </div>
+                `;
+            });
         }
 
         function restartExam() {
             document.getElementById('exam-results').classList.add('hidden');
             document.getElementById('exam-start').classList.remove('hidden');
-        }
-
-        function previousQuestion() {
-            if (currentQuestionIndex > 0) {
-                currentQuestionIndex--;
-                loadQuestion();
-                
-                document.getElementById('feedback-container').classList.add('hidden');
-                document.getElementById('submit-btn').style.display = 'inline-block';
-                document.getElementById('next-btn').style.display = 'none';
-                selectedOption = -1;
-            }
         }
 
         function previousExamQuestion() {
@@ -1847,35 +2157,60 @@
             }
         }
 
-        // Inicialización
-        document.addEventListener('DOMContentLoaded', function() {
-            // Intentar cargar datos JSON
-            loadJSONData();
-            
-            // Animaciones de entrada
-            document.querySelectorAll('.card').forEach((card, index) => {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(20px)';
-                
-                setTimeout(() => {
-                    card.style.transition = 'all 0.5s ease';
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0)';
-                }, index * 100);
+        // Funciones de utilidad
+        function setupEventListeners() {
+            // Guardar progreso al salir
+            window.addEventListener('beforeunload', function() {
+                const progress = JSON.parse(localStorage.getItem('studyProgress') || '{}');
+                progress.lastVisit = Date.now();
+                localStorage.setItem('studyProgress', JSON.stringify(progress));
             });
-        });
-
-        // Guardar progreso al salir
-        window.addEventListener('beforeunload', function() {
-            const progress = {
-                completedTopics: document.getElementById('completed-topics').textContent,
-                currentStreak: document.getElementById('current-streak').textContent,
-                overallMastery: document.getElementById('overall-mastery').textContent,
-                timestamp: Date.now()
-            };
             
-            localStorage.setItem('study-progress', JSON.stringify(progress));
-        });
+            // Actualizar racha diaria
+            updateDailyStreak();
+        }
+
+        function updateDailyStreak() {
+            const savedProgress = JSON.parse(localStorage.getItem('studyProgress') || '{}');
+            const lastVisit = savedProgress.lastVisit || 0;
+            const today = new Date().toDateString();
+            const lastVisitDate = new Date(lastVisit).toDateString();
+            
+            if (today !== lastVisitDate) {
+                const yesterday = new Date();
+                yesterday.setDate(yesterday.getDate() - 1);
+                
+                if (lastVisitDate === yesterday.toDateString() || lastVisit === 0) {
+                    // Continuar racha
+                    savedProgress.currentStreak = (savedProgress.currentStreak || 0) + 1;
+                } else {
+                    // Reiniciar racha
+                    savedProgress.currentStreak = 1;
+                }
+                
+                savedProgress.lastVisit = Date.now();
+                savedProgress.studyDays = (savedProgress.studyDays || 0) + 1;
+                
+                localStorage.setItem('studyProgress', JSON.stringify(savedProgress));
+                document.getElementById('current-streak').textContent = savedProgress.currentStreak;
+            }
+        }
+
+        function loadLandingPage() {
+            // Animaciones de entrada
+            setTimeout(() => {
+                document.querySelectorAll('#landing .card').forEach((card, index) => {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(20px)';
+                    
+                    setTimeout(() => {
+                        card.style.transition = 'all 0.5s ease';
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, index * 100);
+                });
+            }, 100);
+        }
     </script>
 </body>
 </html>
