@@ -2269,11 +2269,14 @@
                     card.className = 'card p-5 flex flex-col justify-between gap-3';
                     card.innerHTML = `
                         <div>
-                            <h3 class="text-xl font-semibold mb-2">${item.titulo}</h3>
-                            <p class="text-gray-600 text-sm">${item.descripcion || ''}</p>
+                            <h3 class="text-xl font-semibold mb-2"></h3>
+                            <p class="text-gray-600 text-sm"></p>
                         </div>
-                        <a class="btn-primary inline-block text-center" href="${item.url}" target="_blank" rel="noopener">Abrir Notebook</a>
+                        <a class="btn-primary inline-block text-center" target="_blank" rel="noopener">Abrir Notebook</a>
                     `;
+                    card.querySelector('h3').textContent = item.titulo;
+                    card.querySelector('p').textContent = item.descripcion || '';
+                    card.querySelector('a').href = item.url;
                     grid.appendChild(card);
                 });
             } catch (error) {
