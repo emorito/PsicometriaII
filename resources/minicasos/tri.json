@@ -1,0 +1,19 @@
+{
+  "unidad": "tri",
+  "items": [
+    {
+      "id": "tri-01",
+      "titulo": "Curvas que no informan",
+      "escenario": "Al calibrar un ítem de opción múltiple aparece parámetro a=0.45 y c=0.30.",
+      "opciones": [
+        "Es un ítem excelente, deja los parámetros así",
+        "Considerar revisar redacción u opciones porque discrimina poco y el azar es alto",
+        "Subir la dificultad manualmente",
+        "Eliminar el ítem porque la TRI no sirve"
+      ],
+      "correcta": 1,
+      "retro": "Un parámetro a bajo indica discriminación limitada y un c alto sugiere acierto por azar. Revisar el ítem ayuda a mejorar la calidad del banco.",
+      "referencias": []
+    }
+  ]
+}

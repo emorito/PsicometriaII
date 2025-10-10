@@ -1,0 +1,19 @@
+{
+  "unidad": "estructura",
+  "items": [
+    {
+      "id": "est-01",
+      "titulo": "Factor inesperado",
+      "escenario": "El AFE muestra un tercer factor con solo dos ítems que cargan >0.30 y comunalidades bajas.",
+      "opciones": [
+        "Conservarlo porque suma varianza explicada",
+        "Revisar redacción de los ítems y considerar eliminarlos o replantear el modelo",
+        "Rotar a varimax siempre resuelve el problema",
+        "Ignorar comunalidades, solo importan las cargas"
+      ],
+      "correcta": 1,
+      "retro": "Factores con pocos ítems y comunalidades bajas suelen indicar ruido. Es mejor revisar el contenido y decidir si mantenerlos.",
+      "referencias": []
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
+<head>' 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Centro de Estudio de Psicometría</title>
@@ -797,11 +797,12 @@
             
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <div>
+                    <div id="prevideo-humor"></div>
                     <div class="youtube-player mb-4">
-                        <iframe width="100%" height="400" src="https://www.youtube.com/embed/hriKlRXTF0A" 
+                        <iframe width="100%" height="400" src="https://www.youtube.com/embed/hriKlRXTF0A"
                                 frameborder="0" allowfullscreen id="current-video"></iframe>
                     </div>
-                    
+
                     <div class="card p-6">
                         <h3 class="text-xl font-bold mb-4">Notas del Video</h3>
                         <div class="space-y-3">
@@ -894,6 +895,8 @@
                 </div>
             </div>
         </section>
+
+        <section id="mini-caso" class="section container"></section>
 
         <!-- Quiz Section -->
         <section id="quiz" class="section">
@@ -1135,6 +1138,7 @@
                 </div>
             </div>
         </section>
+        <section id="notebooklm" class="section container"></section>
     </main>
 
     <footer>
@@ -1193,6 +1197,7 @@
             initializeDashboard();
             loadLandingPage();
             setupEventListeners();
+            renderNotebookLMSection();
         });
 
         // Funciones de navegación
@@ -2536,6 +2541,53 @@
             }
         }
 
+        async function renderNotebookLMSection() {
+            const root = document.getElementById('notebooklm');
+            if (!root) return;
+            const description = 'NotebookLM es un entorno de estudio de Google con materiales curados por tema. Cada notebook está actualizado y funciona como un mini-centro de aprendizaje para profundizar antes del cuestionario o cuando necesites repasar con más contexto.';
+
+            root.innerHTML = `
+                <div class="py-12">
+                    <h2 class="text-3xl font-bold mb-4 text-center md:text-left">Material ampliado (NotebookLM)</h2>
+                    <p class="text-gray-600 max-w-3xl mb-6">${description}</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="notebooklm-grid"></div>
+                </div>
+            `;
+
+            const grid = root.querySelector('#notebooklm-grid');
+
+            try {
+                const response = await fetch('resources/notebooklm-links.json', { cache: 'no-store' });
+                if (!response.ok) {
+                    throw new Error('No se pudo cargar');
+                }
+                const data = await response.json();
+                data.forEach(item => {
+                    const card = document.createElement('div');
+                    card.className = 'card p-5 flex flex-col justify-between gap-3';
+                    card.innerHTML = `
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2"></h3>
+                            <p class="text-gray-600 text-sm"></p>
+                        </div>
+                        <a class="btn-primary inline-block text-center" target="_blank" rel="noopener">Abrir Notebook</a>
+                    `;
+                    card.querySelector('h3').textContent = item.titulo;
+                    card.querySelector('p').textContent = item.descripcion || '';
+                    card.querySelector('a').href = item.url;
+                    grid.appendChild(card);
+                });
+            } catch (error) {
+                console.error('Error al cargar los enlaces de NotebookLM:', error);
+                root.innerHTML = '<div class="json-error">No fue posible cargar los enlaces de NotebookLM en este momento.</div>';
+            }
+
+            const landing = document.getElementById('landing');
+            if (landing && landing.classList.contains('active')) {
+                root.classList.add('active');
+            }
+        }
+
         function loadLandingPage() {
             // Animaciones de entrada
             setTimeout(() => {
@@ -2563,6 +2615,75 @@
                 });
             }, 100);
         }
+    </script>
+    <script type="module">
+        import { showHumor } from './assets/js/humor.js';
+        import { renderMiniCaso } from './assets/js/minicaso.js';
+
+        const videoUnitMap = {
+            'hriKlRXTF0A': 'tct',
+            'aeENe9swI8E': 'confiabilidad',
+            'vrU6jJ80_UU': 'validez',
+            'v_pD5lwpISI': 'estructura',
+            'hl8LNar2oys': 'estandares',
+            'BRCeQo9SmSE': 'tri'
+        };
+
+        const humorMount = '#prevideo-humor';
+        const miniCasoMount = '#mini-caso';
+
+        const showHumorForVideo = (videoId) => {
+            const slug = videoUnitMap[videoId] || 'tct';
+            showHumor(slug, humorMount);
+        };
+
+        const clearMiniCaso = () => {
+            const mount = document.querySelector(miniCasoMount);
+            if (mount) {
+                mount.innerHTML = '';
+            }
+        };
+
+        const renderMiniCasoForDeck = (slug) => {
+            if (!slug) {
+                clearMiniCaso();
+                return;
+            }
+            renderMiniCaso(slug, miniCasoMount);
+        };
+
+        const originalChangeVideo = window.changeVideo;
+        window.changeVideo = function(videoId, title) {
+            if (typeof originalChangeVideo === 'function') {
+                originalChangeVideo.apply(this, arguments);
+            }
+            showHumorForVideo(videoId);
+        };
+
+        const originalChangeDeck = window.changeDeck;
+        window.changeDeck = function() {
+            if (typeof originalChangeDeck === 'function') {
+                originalChangeDeck.apply(this, arguments);
+            }
+            const selector = document.getElementById('deck-selector');
+            renderMiniCasoForDeck(selector ? selector.value : '');
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const iframe = document.getElementById('current-video');
+            if (iframe && iframe.src) {
+                const url = new URL(iframe.src);
+                const videoId = url.pathname.split('/').pop();
+                showHumorForVideo(videoId);
+            }
+
+            const selector = document.getElementById('deck-selector');
+            if (selector && selector.value) {
+                renderMiniCasoForDeck(selector.value);
+            } else {
+                clearMiniCaso();
+            }
+        });
     </script>
 </body>
 </html>
