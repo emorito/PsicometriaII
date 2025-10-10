@@ -1,0 +1,19 @@
+{
+  "unidad": "tct",
+  "items": [
+    {
+      "id": "tct-01",
+      "titulo": "Alfa bajo en escala corta",
+      "escenario": "Aplicaste un test de 10 ítems y obtuviste α=0.48. El objetivo es tomar decisiones individuales.",
+      "opciones": [
+        "El test tiene buena consistencia interna",
+        "Revisar ítems y posiblemente ampliar la escala",
+        "El alfa no sirve para nada",
+        "Aplicar igual; 0.48 es aceptable"
+      ],
+      "correcta": 1,
+      "retro": "Valores por debajo de ~0.7 alertan sobre consistencia interna baja. Revisá ítems (discriminación, redacción) y evaluá aumentar número de reactivos.",
+      "referencias": []
+    }
+  ]
+}
