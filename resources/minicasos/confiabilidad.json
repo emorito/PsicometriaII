@@ -1,0 +1,19 @@
+{
+  "unidad": "confiabilidad",
+  "items": [
+    {
+      "id": "conf-01",
+      "titulo": "Test–retest sospechoso",
+      "escenario": "Volviste a aplicar el test a la misma muestra tras 2 semanas. La correlación test–retest quedó en 0.42.",
+      "opciones": [
+        "Concluir que el test es muy estable",
+        "Revisar condiciones de aplicación y posibles mejoras de estandarización",
+        "Calcular solo alfa y olvidarse del test–retest",
+        "Reducir el intervalo entre aplicaciones a un día"
+      ],
+      "correcta": 1,
+      "retro": "Un coeficiente cercano a 0.40 indica estabilidad baja. Conviene revisar instrucciones, motivación y consistencia de aplicación antes de interpretar.",
+      "referencias": []
+    }
+  ]
+}

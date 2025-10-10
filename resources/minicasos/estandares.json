@@ -1,0 +1,19 @@
+{
+  "unidad": "estandares",
+  "items": [
+    {
+      "id": "estandares-01",
+      "titulo": "Interpretación sin norma",
+      "escenario": "Obtuviste una puntuación bruta de 32/50 en un test de lectura. Solo tienes media y desviación estándar del grupo piloto.",
+      "opciones": [
+        "Reportar 32/50 y dejar que el lector infiera",
+        "Convertir la puntuación a un z y luego a percentil para brindar contexto",
+        "Crear una escala de 0 a 100 arbitrariamente",
+        "Restar la media y listo"
+      ],
+      "correcta": 1,
+      "retro": "Transformar a puntuaciones típicas y percentiles permite ubicar al evaluado respecto a la norma y evita interpretaciones ambiguas.",
+      "referencias": []
+    }
+  ]
+}
