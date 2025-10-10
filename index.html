@@ -346,6 +346,39 @@
             border-color: #f44336;
             background-color: #ffeaea;
         }
+
+        .boicoteador{
+            border:1px dashed rgba(44, 62, 80, 0.35);
+            background: rgba(255,255,255,.6);
+            padding:.75rem 1rem;
+            border-radius:12px;
+            margin-bottom:10px;
+            font-size:.98rem;
+            color: #34495e;
+        }
+
+        .minicaso{
+            border:1px solid rgba(44, 62, 80, 0.15);
+            border-radius:12px;
+            padding:14px;
+            background: rgba(255,255,255,.8);
+        }
+
+        .mc-title{ margin:0 0 .35rem; font-weight:700; }
+        .mc-esc{ color: #5f6b7a; margin:.25rem 0 .75rem; }
+        .mc-opts{ list-style:none; padding:0; margin:0; display:grid; gap:8px; }
+        .mc-btn{
+            padding:.6rem .8rem;
+            border:1px solid rgba(44, 62, 80, 0.18);
+            border-radius:10px;
+            background:transparent;
+            cursor:pointer;
+            transition: border-color .2s ease;
+        }
+        .mc-btn:hover{ border-color: #2c3e50; }
+        .mc-ok{ border-color: #27ae60; }
+        .mc-no{ border-color: #e74c3c; }
+        .mc-retro{ margin-top:.75rem; color: #5f6b7a; }
     </style>
 </head>
 <body>
@@ -519,11 +552,12 @@
             
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <div>
+                    <div id="prevideo-humor"></div>
                     <div class="youtube-player mb-4">
-                        <iframe width="100%" height="400" src="https://www.youtube.com/embed/hriKlRXTF0A" 
+                        <iframe width="100%" height="400" src="https://www.youtube.com/embed/hriKlRXTF0A"
                                 frameborder="0" allowfullscreen id="current-video"></iframe>
                     </div>
-                    
+
                     <div class="card p-6">
                         <h3 class="text-xl font-bold mb-4">Notas del Video</h3>
                         <div class="space-y-3">
@@ -616,6 +650,8 @@
                 </div>
             </div>
         </section>
+
+        <section id="mini-caso" class="section container"></section>
 
         <!-- Quiz Section -->
         <section id="quiz" class="section">
@@ -857,6 +893,7 @@
                 </div>
             </div>
         </section>
+        <section id="notebooklm" class="section container"></section>
     </main>
 
     <script>
@@ -907,6 +944,7 @@
             initializeDashboard();
             loadLandingPage();
             setupEventListeners();
+            renderNotebookLMSection();
         });
 
         // Funciones de navegación
@@ -940,7 +978,16 @@
             });
             
             // Mostrar la sección seleccionada
-            document.getElementById(sectionId).classList.add('active');
+            const targetSection = document.getElementById(sectionId);
+            if (!targetSection) return;
+            targetSection.classList.add('active');
+
+            if (sectionId === 'landing') {
+                const notebookSection = document.getElementById('notebooklm');
+                if (notebookSection) {
+                    notebookSection.classList.add('active');
+                }
+            }
             
             // Actualizar navegación activa
             document.querySelectorAll('.nav-item').forEach(item => {
@@ -2196,6 +2243,49 @@
             }
         }
 
+        async function renderNotebookLMSection() {
+            const root = document.getElementById('notebooklm');
+            if (!root) return;
+            const description = 'NotebookLM es un entorno de estudio de Google con materiales curados por tema. Cada notebook está actualizado y funciona como un mini-centro de aprendizaje para profundizar antes del cuestionario o cuando necesites repasar con más contexto.';
+
+            root.innerHTML = `
+                <div class="py-12">
+                    <h2 class="text-3xl font-bold mb-4 text-center md:text-left">Material ampliado (NotebookLM)</h2>
+                    <p class="text-gray-600 max-w-3xl mb-6">${description}</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="notebooklm-grid"></div>
+                </div>
+            `;
+
+            const grid = root.querySelector('#notebooklm-grid');
+
+            try {
+                const response = await fetch('resources/notebooklm-links.json', { cache: 'no-store' });
+                if (!response.ok) {
+                    throw new Error('No se pudo cargar');
+                }
+                const data = await response.json();
+                data.forEach(item => {
+                    const card = document.createElement('div');
+                    card.className = 'card p-5 flex flex-col justify-between gap-3';
+                    card.innerHTML = `
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2">${item.titulo}</h3>
+                            <p class="text-gray-600 text-sm">${item.descripcion || ''}</p>
+                        </div>
+                        <a class="btn-primary inline-block text-center" href="${item.url}" target="_blank" rel="noopener">Abrir Notebook</a>
+                    `;
+                    grid.appendChild(card);
+                });
+            } catch (error) {
+                root.innerHTML = '<div class="json-error">No fue posible cargar los enlaces de NotebookLM en este momento.</div>';
+            }
+
+            const landing = document.getElementById('landing');
+            if (landing && landing.classList.contains('active')) {
+                root.classList.add('active');
+            }
+        }
+
         function loadLandingPage() {
             // Animaciones de entrada
             setTimeout(() => {
@@ -2211,6 +2301,76 @@
                 });
             }, 100);
         }
+    </script>
+    <script type="module">
+        import { showHumor } from './assets/js/humor.js';
+        import { renderMiniCaso } from './assets/js/minicaso.js';
+
+        const videoUnitMap = {
+            'hriKlRXTF0A': 'tct',
+            'aeENe9swI8E': 'confiabilidad',
+            'vrU6jJ80_UU': 'validez',
+            'v_pD5lwpISI': 'estructura',
+            'hl8LNar2oys': 'estandares',
+            'BRCeQo9SmSE': 'tri'
+        };
+
+        const humorMount = '#prevideo-humor';
+        const miniCasoMount = '#mini-caso';
+
+        const showHumorForVideo = (videoId) => {
+            const slug = videoUnitMap[videoId] || 'tct';
+            showHumor(slug, humorMount);
+        };
+
+        const clearMiniCaso = () => {
+            const mount = document.querySelector(miniCasoMount);
+            if (mount) {
+                mount.innerHTML = '';
+            }
+        };
+
+        const renderMiniCasoForDeck = (slug) => {
+            if (!slug) {
+                clearMiniCaso();
+                return;
+            }
+            renderMiniCaso(slug, miniCasoMount);
+        };
+
+        const originalChangeVideo = window.changeVideo;
+        window.changeVideo = function(videoId, title) {
+            if (typeof originalChangeVideo === 'function') {
+                originalChangeVideo.apply(this, arguments);
+            }
+            showHumorForVideo(videoId);
+        };
+
+        const originalChangeDeck = window.changeDeck;
+        window.changeDeck = function() {
+            if (typeof originalChangeDeck === 'function') {
+                originalChangeDeck.apply(this, arguments);
+            }
+            const selector = document.getElementById('deck-selector');
+            renderMiniCasoForDeck(selector ? selector.value : '');
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const iframe = document.getElementById('current-video');
+            if (iframe && iframe.src) {
+                const parts = iframe.src.split('/');
+                const last = parts[parts.length - 1];
+                const videoId = last.split('?')[0];
+                showHumorForVideo(videoId);
+            }
+
+            const selector = document.getElementById('deck-selector');
+            if (selector && selector.value) {
+                renderMiniCasoForDeck(selector.value);
+            } else {
+                clearMiniCaso();
+            }
+        });
     </script>
 </body>
 </html>
