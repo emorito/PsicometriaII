@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Validez · Flashcards</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/unit.css">
+</head>
+<body class="unit-body" data-unit="validez">
+  <header class="unit-header">
+    <a class="unit-back" href="/index.html">← Volver a la portada</a>
+    <p class="unit-edition">Psicometría Inmersiva — Edición 2025</p>
+    <h1 class="unit-title" data-unit-title>Validez</h1>
+  </header>
+  <main class="unit-main">
+    <section class="unit-section unit-grid two">
+      <article class="unit-card">
+        <div class="flashcard-shell">
+          <div class="flashcard-face">
+            <h3 id="flash-question">Cargando tarjetas…</h3>
+            <p id="flash-answer" hidden>Respuesta</p>
+          </div>
+          <p class="unit-status" id="flash-counter"></p>
+        </div>
+        <div class="flashcard-controls">
+          <button id="flash-prev" class="unit-button outline">Anterior</button>
+          <button id="flash-reveal" class="unit-button primary">Mostrar respuesta</button>
+          <button id="flash-next" class="unit-button outline">Siguiente</button>
+        </div>
+        <div class="unit-actions">
+          <button id="flash-complete" class="unit-button primary">Marcar flashcards como completadas</button>
+          <button id="flash-next-step" class="unit-button outline" disabled>Ir al siguiente paso</button>
+        </div>
+        <p class="unit-status" id="flash-status"></p>
+      </article>
+      <article class="unit-card notice">
+        <strong>Consejo rápido:</strong>
+        <p>Usa las tarjetas para recordar ideas clave. Vuelve a marcar la ronda cuando necesites reforzar la unidad.</p>
+      </article>
+    </section>
+    <section id="mini-caso" class="unit-section"></section>
+  </main>
+  <script type="module" src="/assets/js/page-flashcards.js"></script>
+</body>
+</html>

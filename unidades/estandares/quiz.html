@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Normalización y Baremación · Cuestionario</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/unit.css">
+</head>
+<body class="unit-body" data-unit="estandares">
+  <header class="unit-header">
+    <a class="unit-back" href="/index.html">← Volver a la portada</a>
+    <p class="unit-edition">Psicometría Inmersiva — Edición 2025</p>
+    <h1 class="unit-title" data-unit-title>Normalización y Baremación</h1>
+  </header>
+  <main class="unit-main">
+    <section class="unit-section unit-card">
+      <p class="unit-status" id="quiz-status"></p>
+      <div class="quiz-question">
+        <div class="notice">Selecciona la respuesta correcta para cada pregunta. Se registrará tu porcentaje final.</div>
+        <h3 id="quiz-question">Cargando pregunta…</h3>
+        <div id="quiz-options" class="quiz-options"></div>
+      </div>
+      <div class="unit-actions">
+        <button id="quiz-submit" class="unit-button primary">Enviar respuesta</button>
+        <button id="quiz-next" class="unit-button outline" disabled>Siguiente pregunta</button>
+        <button id="quiz-restart" class="unit-button outline">Reiniciar cuestionario</button>
+      </div>
+      <div class="unit-status">
+        <div style="height:6px;border-radius:999px;background:rgba(148,163,184,0.2);overflow:hidden;">
+          <div id="quiz-progress" style="height:100%;width:0%;background:linear-gradient(90deg,#38bdf8,#0ea5e9);"></div>
+        </div>
+      </div>
+      <article id="quiz-summary" class="unit-card result-card hidden">
+        <h3>Resumen</h3>
+        <p class="result-score" id="quiz-score">0%</p>
+        <p>Correctas: <span id="quiz-correct">0</span> de <span id="quiz-count">0</span></p>
+      </article>
+      <div class="unit-actions">
+        <button id="quiz-next-step" class="unit-button outline" disabled>Ir al siguiente paso</button>
+      </div>
+    </section>
+  </main>
+  <script type="module" src="/assets/js/page-quiz.js"></script>
+</body>
+</html>

@@ -2,7 +2,7 @@ export async function renderNotebookLMSection(rootSelector = '#notebooklm') {
   const root = document.querySelector(rootSelector);
   if (!root) return;
 
-  const desc = 'NotebookLM es un entorno de estudio de Google con materiales curados por tema. Cada notebook está actualizado y funciona como un mini-centro de aprendizaje para profundizar antes del cuestionario o cuando necesites repasar con más contexto.';
+  const desc = `NotebookLM es un entorno de estudio de Google con materiales curados por tema. Cada notebook está actualizado y funciona como un mini-centro de aprendizaje para profundizar antes del cuestionario o cuando necesites repasar con más contexto.`;
 
   try {
     const res = await fetch('/resources/notebooklm-links.json', { cache: 'no-store' });

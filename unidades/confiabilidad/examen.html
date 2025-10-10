@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Confiabilidad · Examen final</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/unit.css">
+</head>
+<body class="unit-body" data-unit="confiabilidad">
+  <header class="unit-header">
+    <a class="unit-back" href="/index.html">← Volver a la portada</a>
+    <p class="unit-edition">Psicometría Inmersiva — Edición 2025</p>
+    <h1 class="unit-title" data-unit-title>Confiabilidad</h1>
+  </header>
+  <main class="unit-main">
+    <section class="unit-section unit-card">
+      <p class="unit-status" id="exam-status"></p>
+      <div class="notice">Responde la simulación cronometrada (15 min). Tu puntaje se registra al finalizar.</div>
+      <p class="unit-status">Tiempo restante: <span id="exam-timer">15:00</span></p>
+      <h3 id="exam-question">Cargando pregunta…</h3>
+      <div id="exam-options" class="quiz-options"></div>
+      <div class="unit-actions">
+        <button id="exam-submit" class="unit-button primary">Responder</button>
+        <button id="exam-next" class="unit-button outline" disabled>Siguiente</button>
+        <button id="exam-restart" class="unit-button outline">Reiniciar simulación</button>
+      </div>
+      <div class="unit-status">
+        <div style="height:6px;border-radius:999px;background:rgba(148,163,184,0.2);overflow:hidden;">
+          <div id="exam-progress" style="height:100%;width:0%;background:linear-gradient(90deg,#22c55e,#0ea5e9);"></div>
+        </div>
+      </div>
+      <article id="exam-summary" class="unit-card result-card hidden">
+        <h3>Resultados del examen</h3>
+        <p class="result-score" id="exam-score">0%</p>
+        <p><span id="exam-correct">0</span> correctas de <span id="exam-total">0</span></p>
+      </article>
+      <div class="unit-actions">
+        <button id="exam-next-step" class="unit-button outline" disabled>Volver al inicio de la unidad</button>
+      </div>
+    </section>
+  </main>
+  <script type="module" src="/assets/js/page-exam.js"></script>
+</body>
+</html>
