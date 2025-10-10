@@ -445,26 +445,6 @@
             border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
-        .hero-bubble {
-            position: absolute;
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.8), rgba(129, 140, 248, 0.65));
-            backdrop-filter: blur(8px);
-            border-radius: 24px;
-            padding: 1.5rem;
-            box-shadow: 0 20px 40px rgba(30, 64, 175, 0.3);
-            max-width: 260px;
-        }
-
-        .hero-bubble.top {
-            top: 10%;
-            right: 8%;
-        }
-
-        .hero-bubble.bottom {
-            bottom: 12%;
-            left: 6%;
-        }
-
         .glass-card {
             background: rgba(255, 255, 255, 0.92);
             border-radius: 20px;
@@ -494,81 +474,25 @@
             box-shadow: 0 22px 55px rgba(15, 23, 42, 0.14);
         }
 
-        .metric-card {
+        .highlight-card {
             background: rgba(15, 23, 42, 0.35);
             border: 1px solid rgba(148, 163, 184, 0.35);
             border-radius: 18px;
-            padding: 1.25rem;
-        }
-
-        .metric-value {
-            font-size: 2rem;
-            font-weight: 700;
-        }
-
-        .quality-score {
-            font-size: 3.5rem;
-            font-weight: 800;
-            line-height: 1;
-        }
-
-        .quality-label {
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            font-size: 0.75rem;
-        }
-
-        .quality-chip {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: rgba(34, 197, 94, 0.15);
-            color: #22c55e;
-            padding: 0.4rem 1rem;
-            border-radius: 9999px;
-            font-weight: 600;
-        }
-
-        .quality-chip.warning {
-            background: rgba(250, 204, 21, 0.2);
-            color: #facc15;
-        }
-
-        .quality-chip.danger {
-            background: rgba(248, 113, 113, 0.2);
-            color: #f87171;
-        }
-
-        .insight-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .insight-list li {
+            padding: 1.5rem;
             display: flex;
-            gap: 0.75rem;
-            align-items: flex-start;
-            padding: 0.75rem 0;
-            border-bottom: 1px solid rgba(226, 232, 240, 0.7);
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .highlight-card h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #f8fafc;
+        }
+
+        .highlight-card p {
             font-size: 0.95rem;
-        }
-
-        .insight-list li:last-child {
-            border-bottom: none;
-        }
-
-        .insight-bullet {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            margin-top: 0.45rem;
-            background: linear-gradient(135deg, #6366f1, #8b5cf6);
-        }
-
-        .insight-bullet.success {
-            background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: rgba(226, 232, 240, 0.9);
         }
 
         footer {
@@ -635,14 +559,12 @@
                             <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/15 text-sm font-semibold uppercase tracking-wide">
                                 <i class="fas fa-sparkles text-yellow-300"></i> Plataforma integral
                             </span>
-                            <span class="quality-chip" id="quality-score-chip">
-                                <i class="fas fa-chart-line"></i>
-                                <span class="hidden sm:inline">Salud del contenido</span>
-                                <span id="quality-chip-value">--</span>
+                            <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 text-sm font-semibold uppercase tracking-wide">
+                                <i class="fas fa-graduation-cap text-emerald-300"></i> Formación continua
                             </span>
                         </div>
                         <h1 class="text-4xl md:text-6xl font-bold leading-tight">Tu laboratorio digital de psicometría</h1>
-                        <p class="text-lg text-blue-100/90 max-w-xl">Refresca tus competencias con una experiencia inspirada en las principales plataformas de aprendizaje y un monitoreo constante de la calidad de los datos.</p>
+                        <p class="text-lg text-blue-100/90 max-w-xl">Refresca tus competencias con rutas guiadas, videos comentados y evaluaciones interactivas diseñadas para fortalecer la docencia en psicometría.</p>
                         <div class="flex flex-wrap gap-4">
                             <button class="btn-success text-lg px-6 py-3" onclick="showSection('study-guide')">
                                 <i class="fas fa-route mr-2"></i>Iniciar recorrido guiado
@@ -651,32 +573,56 @@
                                 <i class="fas fa-chart-pie mr-2"></i>Ver tablero de progreso
                             </button>
                         </div>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4" id="landing-metrics">
-                            <!-- Métricas cargadas dinámicamente -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
+                            <div class="highlight-card">
+                                <span class="text-3xl">🧭</span>
+                                <h4>Rutas guiadas</h4>
+                                <p>Transita secuencias temáticas con objetivos concretos, actividades sugeridas y evaluaciones formativas.</p>
+                            </div>
+                            <div class="highlight-card">
+                                <span class="text-3xl">🎥</span>
+                                <h4>Recursos multimedia</h4>
+                                <p>Integra masterclasses comentadas, notas sincronizadas y materiales descargables para cada módulo.</p>
+                            </div>
+                            <div class="highlight-card">
+                                <span class="text-3xl">🧠</span>
+                                <h4>Práctica aplicada</h4>
+                                <p>Consolida conceptos mediante flashcards inteligentes, quizzes configurables y simuladores cronometrados.</p>
+                            </div>
+                            <div class="highlight-card">
+                                <span class="text-3xl">🤝</span>
+                                <h4>Acompañamiento docente</h4>
+                                <p>Recomendaciones de seguimiento para aula, proyectos de investigación y evaluación continua.</p>
+                            </div>
                         </div>
                     </div>
                     <div class="hero-illustration">
-                        <div class="glass-card w-full max-w-sm text-center space-y-4">
-                            <div class="quality-label text-blue-100/70">Score de calidad</div>
-                            <div class="quality-score" id="quality-score-value">--</div>
-                            <p class="text-blue-100/80" id="quality-score-label">Analizando contenido en tiempo real...</p>
-                            <div class="flex justify-center gap-6 text-sm text-blue-100/80">
-                                <div>
-                                    <span class="block text-xl font-semibold" id="quality-dupes">--</span>
-                                    <span class="opacity-80">Hallazgos</span>
-                                </div>
-                                <div>
-                                    <span class="block text-xl font-semibold" id="quality-coverage">--</span>
-                                    <span class="opacity-80">Cobertura</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="hero-bubble top text-white">
-                            <h3 class="text-lg font-semibold mb-2">Auditoría automática</h3>
-                            <p class="text-sm text-blue-100/90">Detectamos inconsistencias, brechas de cobertura y referencias faltantes.</p>
-                        </div>
-                        <div class="hero-bubble bottom text-white">
-                            <p class="text-sm text-blue-100/90">Integra notas, flashcards y quizzes con seguimiento progresivo.</p>
+                        <div class="glass-card w-full max-w-sm text-left space-y-6">
+                            <h3 class="text-2xl font-semibold text-white">Recursos integrados</h3>
+                            <p class="text-blue-100/80">Combina bancos de ítems, fichas de repaso y material audiovisual dentro de una sola experiencia.</p>
+                            <ul class="space-y-4 text-blue-100/80">
+                                <li class="flex items-start gap-3">
+                                    <span class="text-2xl">🗂️</span>
+                                    <div>
+                                        <h4 class="text-white font-semibold">Portafolio académico</h4>
+                                        <p class="leading-snug text-blue-100/80">Organiza bancos de reactivos, lecturas y notas de clase por módulo o unidad.</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <span class="text-2xl">📊</span>
+                                    <div>
+                                        <h4 class="text-white font-semibold">Seguimiento del avance</h4>
+                                        <p class="leading-snug text-blue-100/80">Visualiza progreso personal, rachas de estudio y logros desbloqueados en el panel.</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <span class="text-2xl">📝</span>
+                                    <div>
+                                        <h4 class="text-white font-semibold">Evaluaciones listas</h4>
+                                        <p class="leading-snug text-blue-100/80">Configura quizzes y simuladores finales con bancos curados por temática y dificultad.</p>
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -739,30 +685,19 @@
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <div class="glass-card">
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-2xl font-semibold text-slate-800">Estado del contenido</h3>
-                        <span class="inline-flex items-center gap-2 text-sm font-semibold text-blue-600" id="content-topics-count">
-                            <i class="fas fa-database"></i> -- temas
-                        </span>
-                    </div>
-                    <dl class="space-y-3 text-slate-600" id="content-overview-stats">
-                        <!-- Se rellenará dinámicamente -->
-                    </dl>
+                <div class="glass-card space-y-4">
+                    <h3 class="text-2xl font-semibold text-slate-800">Modelo pedagógico</h3>
+                    <p class="text-slate-600 leading-relaxed">Estructuramos las experiencias en momentos de exploración, práctica y evaluación para acompañar la planificación de clases y proyectos de investigación.</p>
                 </div>
 
-                <div class="glass-card">
-                    <h3 class="text-2xl font-semibold text-slate-800 mb-4">Alertas de consistencia</h3>
-                    <ul class="insight-list" id="content-quality-list">
-                        <!-- Se rellenará dinámicamente -->
-                    </ul>
+                <div class="glass-card space-y-4">
+                    <h3 class="text-2xl font-semibold text-slate-800">Integración en el aula</h3>
+                    <p class="text-slate-600 leading-relaxed">Utiliza las rutas como guía de cátedra, enlaza los videos en tus presentaciones y asigna quizzes adaptados a las necesidades de cada cohorte.</p>
                 </div>
 
-                <div class="glass-card">
-                    <h3 class="text-2xl font-semibold text-slate-800 mb-4">Próximos pasos sugeridos</h3>
-                    <p class="text-slate-600 leading-relaxed" id="content-recommendations">
-                        Estamos procesando los datos para ofrecerte mejoras priorizadas.
-                    </p>
+                <div class="glass-card space-y-4">
+                    <h3 class="text-2xl font-semibold text-slate-800">Sobre los recursos</h3>
+                    <p class="text-slate-600 leading-relaxed">Las referencias provienen de múltiples fuentes de trabajo académico y sirven como material de entrenamiento; contrasta siempre con bibliografía oficial antes de tomar decisiones de evaluación.</p>
                 </div>
             </div>
         </section>
@@ -1203,8 +1138,9 @@
     </main>
 
     <footer>
-        <div class="max-w-7xl mx-auto px-6 text-center text-sm">
+        <div class="max-w-7xl mx-auto px-6 text-center text-sm space-y-2">
             <p>© 2024 Centro de Estudio de Psicometría. Diseñado para ofrecer experiencias académicas de alto impacto.</p>
+            <p class="text-gray-500 text-xs">Plataforma desarrollada por el Prof. Enrique Morosini con asistencia de IA.</p>
         </div>
     </footer>
 
@@ -1315,9 +1251,6 @@
                 updateDashboard();
             }
 
-            if (sectionId === 'landing') {
-                refreshContentAnalytics();
-            }
         }
 
         // Carga de datos JSON
@@ -1526,275 +1459,7 @@
             initializeStudyGuide();
             initializeVideos();
             initializeExam();
-            refreshContentAnalytics();
         }
-
-        function refreshContentAnalytics() {
-            const analysis = analyzeContentQuality();
-            renderLandingMetrics(analysis);
-            renderContentInsights(analysis);
-        }
-
-        function analyzeContentQuality() {
-            const summary = {
-                totalTopics: topics.length,
-                topicsWithQuizzes: 0,
-                topicsWithFlashcards: 0,
-                totalQuestions: 0,
-                totalFlashcards: 0,
-                duplicates: [],
-                missingSources: 0,
-                missingExplanations: 0,
-                flashcardsMissingAnswer: 0,
-                topicsWithoutQuestions: [],
-                topicsWithoutFlashcards: [],
-                auditDate: new Date()
-            };
-
-            const questionRegistry = new Map();
-
-            topics.forEach(topic => {
-                const topicQuestions = quizData[topic.id] || [];
-                const topicFlashcards = flashcardData[topic.id] || [];
-
-                if (topicQuestions.length > 0) {
-                    summary.topicsWithQuizzes++;
-                } else {
-                    summary.topicsWithoutQuestions.push(topic);
-                }
-
-                if (topicFlashcards.length > 0) {
-                    summary.topicsWithFlashcards++;
-                } else {
-                    summary.topicsWithoutFlashcards.push(topic);
-                }
-
-                summary.totalQuestions += topicQuestions.length;
-                summary.totalFlashcards += topicFlashcards.length;
-
-                topicQuestions.forEach(question => {
-                    const normalizedQuestion = (question.question || '').trim().toLowerCase();
-                    if (normalizedQuestion) {
-                        if (questionRegistry.has(normalizedQuestion)) {
-                            const existing = questionRegistry.get(normalizedQuestion);
-                            summary.duplicates.push({
-                                question: question.question,
-                                topics: Array.from(new Set([existing.topicName, topic.name]))
-                            });
-                        } else {
-                            questionRegistry.set(normalizedQuestion, { topicName: topic.name });
-                        }
-                    }
-
-                    if (!question.explanation) {
-                        summary.missingExplanations++;
-                    }
-                    if (!question.source) {
-                        summary.missingSources++;
-                    }
-                });
-
-                topicFlashcards.forEach(card => {
-                    if (!card.answer) {
-                        summary.flashcardsMissingAnswer++;
-                    }
-                });
-            });
-
-            summary.averageQuestions = summary.topicsWithQuizzes
-                ? Math.round(summary.totalQuestions / summary.topicsWithQuizzes)
-                : 0;
-
-            summary.averageFlashcards = summary.topicsWithFlashcards
-                ? Math.round(summary.totalFlashcards / summary.topicsWithFlashcards)
-                : 0;
-
-            summary.coverage = summary.totalTopics > 0
-                ? Math.round((summary.topicsWithQuizzes / summary.totalTopics) * 100)
-                : 0;
-
-            const penalty = (summary.duplicates.length * 5)
-                + ((summary.missingSources + summary.missingExplanations + summary.flashcardsMissingAnswer) * 2)
-                + (summary.topicsWithoutQuestions.length * 4);
-
-            summary.qualityScore = Math.min(100, Math.max(45, 100 - penalty));
-            summary.issueCount = summary.duplicates.length
-                + summary.missingSources
-                + summary.missingExplanations
-                + summary.flashcardsMissingAnswer
-                + summary.topicsWithoutQuestions.length;
-
-            if (summary.coverage >= 90) {
-                summary.coverageLabel = 'Cobertura completa de temario';
-            } else if (summary.coverage >= 70) {
-                summary.coverageLabel = 'Cobertura alta con opciones de mejora';
-            } else {
-                summary.coverageLabel = 'Cobertura en progreso: prioriza nuevos reactivos';
-            }
-
-            summary.issues = [];
-            if (summary.duplicates.length > 0) {
-                summary.issues.push(`Se detectaron ${summary.duplicates.length} preguntas duplicadas entre temas.`);
-            }
-            if (summary.missingSources > 0) {
-                summary.issues.push(`${summary.missingSources} reactivos no cuentan con fuente bibliográfica registrada.`);
-            }
-            if (summary.missingExplanations > 0) {
-                summary.issues.push(`${summary.missingExplanations} reactivos necesitan explicación detallada.`);
-            }
-            if (summary.flashcardsMissingAnswer > 0) {
-                summary.issues.push(`${summary.flashcardsMissingAnswer} flashcards requieren completar la respuesta.`);
-            }
-            if (summary.topicsWithoutQuestions.length > 0) {
-                summary.issues.push(`Aún no hay banco de preguntas para ${summary.topicsWithoutQuestions.length} temas.`);
-            }
-            if (summary.issues.length === 0) {
-                summary.issues.push('Sin inconsistencias críticas detectadas en esta auditoría.');
-            }
-
-            summary.recommendations = [];
-            if (summary.missingSources > 0) {
-                summary.recommendations.push('Añade referencias actualizadas a los reactivos sin fuente para asegurar la trazabilidad.');
-            }
-            if (summary.duplicates.length > 0) {
-                const duplicatedExample = summary.duplicates[0]?.question;
-                if (duplicatedExample) {
-                    summary.recommendations.push(`Valida variantes de la pregunta «${duplicatedExample}» para evitar redundancias.`);
-                }
-            }
-            if (summary.coverage < 80) {
-                summary.recommendations.push('Prioriza la creación de nuevos reactivos en los temas con menor cobertura.');
-            }
-            if (summary.topicsWithoutFlashcards.length > 0) {
-                summary.recommendations.push('Crea flashcards introductorias para los temas sin material de repaso.');
-            }
-            if (summary.recommendations.length === 0) {
-                summary.recommendations.push('La base de contenidos está sólida. Agenda una auditoría semanal para mantener la consistencia.');
-            }
-
-            return summary;
-        }
-
-        function renderLandingMetrics(analysis) {
-            const metricsContainer = document.getElementById('landing-metrics');
-            if (metricsContainer) {
-                const metrics = [
-                    { label: 'Preguntas activas', value: analysis.totalQuestions },
-                    { label: 'Flashcards curadas', value: analysis.totalFlashcards },
-                    { label: 'Cobertura de temas', value: `${analysis.coverage}%` },
-                    { label: 'Alertas pendientes', value: analysis.issueCount }
-                ];
-
-                metricsContainer.innerHTML = metrics.map(metric => `
-                    <div class="metric-card text-white">
-                        <p class="text-blue-100/70 text-xs uppercase tracking-wide">${metric.label}</p>
-                        <div class="metric-value">${metric.value}</div>
-                    </div>
-                `).join('');
-            }
-
-            const qualityScoreValue = document.getElementById('quality-score-value');
-            if (qualityScoreValue) {
-                qualityScoreValue.textContent = `${analysis.qualityScore}%`;
-            }
-
-            const qualityLabel = document.getElementById('quality-score-label');
-            if (qualityLabel) {
-                qualityLabel.textContent = analysis.coverageLabel;
-            }
-
-            const qualityChip = document.getElementById('quality-score-chip');
-            if (qualityChip) {
-                qualityChip.classList.remove('warning', 'danger');
-                if (analysis.qualityScore < 70) {
-                    qualityChip.classList.add('danger');
-                } else if (analysis.qualityScore < 85) {
-                    qualityChip.classList.add('warning');
-                }
-            }
-
-            const chipValue = document.getElementById('quality-chip-value');
-            if (chipValue) {
-                chipValue.textContent = `${analysis.qualityScore}%`;
-            }
-
-            const qualityDupes = document.getElementById('quality-dupes');
-            if (qualityDupes) {
-                qualityDupes.textContent = analysis.duplicates.length;
-            }
-
-            const qualityCoverage = document.getElementById('quality-coverage');
-            if (qualityCoverage) {
-                qualityCoverage.textContent = `${analysis.coverage}%`;
-            }
-        }
-
-        function renderContentInsights(analysis) {
-            const topicsCount = document.getElementById('content-topics-count');
-            if (topicsCount) {
-                topicsCount.innerHTML = `<i class="fas fa-database"></i> ${analysis.topicsWithQuizzes}/${analysis.totalTopics} temas`;
-            }
-
-            const overview = document.getElementById('content-overview-stats');
-            if (overview) {
-                const missingTopics = analysis.topicsWithoutQuestions.length
-                    ? analysis.topicsWithoutQuestions.map(topic => topic.name).join(', ')
-                    : 'Todos los temas con banco activo';
-
-                const missingFlashcards = analysis.topicsWithoutFlashcards.length
-                    ? analysis.topicsWithoutFlashcards.map(topic => topic.name).join(', ')
-                    : 'Todos los temas cuentan con tarjetas';
-
-                const auditDate = analysis.auditDate.toLocaleString('es-ES', {
-                    dateStyle: 'medium',
-                    timeStyle: 'short'
-                });
-
-                overview.innerHTML = `
-                    <div class="flex justify-between items-start">
-                        <span class="font-semibold text-slate-700">Preguntas activas</span>
-                        <span class="font-bold text-slate-900">${analysis.totalQuestions}</span>
-                    </div>
-                    <div class="flex justify-between items-start">
-                        <span class="font-semibold text-slate-700">Flashcards disponibles</span>
-                        <span class="font-bold text-slate-900">${analysis.totalFlashcards}</span>
-                    </div>
-                    <div class="flex justify-between items-start">
-                        <span class="text-slate-600">Promedio preguntas por tema</span>
-                        <span class="font-semibold text-slate-800">${analysis.averageQuestions}</span>
-                    </div>
-                    <div class="flex justify-between items-start">
-                        <span class="text-slate-600">Promedio flashcards por tema</span>
-                        <span class="font-semibold text-slate-800">${analysis.averageFlashcards}</span>
-                    </div>
-                    <div class="pt-2 text-sm text-slate-500">
-                        <p><strong>Temas sin banco:</strong> ${missingTopics}</p>
-                        <p><strong>Temas sin flashcards:</strong> ${missingFlashcards}</p>
-                        <p class="mt-2">Última auditoría: ${auditDate}</p>
-                    </div>
-                `;
-            }
-
-            const issuesList = document.getElementById('content-quality-list');
-            if (issuesList) {
-                issuesList.innerHTML = '';
-                analysis.issues.forEach(issue => {
-                    const isPositive = issue.toLowerCase().includes('sin inconsistencias');
-                    issuesList.innerHTML += `
-                        <li>
-                            <span class="insight-bullet${isPositive ? ' success' : ''}"></span>
-                            <span>${issue}</span>
-                        </li>
-                    `;
-                });
-            }
-
-            const recommendations = document.getElementById('content-recommendations');
-            if (recommendations) {
-                recommendations.textContent = analysis.recommendations.join(' ');
-            }
-        }
-
         function populateSelectors() {
             // Llenar selectores de temas
             const deckSelector = document.getElementById('deck-selector');
