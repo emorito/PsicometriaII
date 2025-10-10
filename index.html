@@ -2362,9 +2362,8 @@
         document.addEventListener('DOMContentLoaded', () => {
             const iframe = document.getElementById('current-video');
             if (iframe && iframe.src) {
-                const parts = iframe.src.split('/');
-                const last = parts[parts.length - 1];
-                const videoId = last.split('?')[0];
+                const url = new URL(iframe.src);
+                const videoId = url.pathname.split('/').pop();
                 showHumorForVideo(videoId);
             }
 
