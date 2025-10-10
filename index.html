@@ -1158,6 +1158,7 @@
         let currentQuestionIndex = 0;
         let quizScore = 0;
         let selectedOption = -1;
+        let quizCorrectCount = 0;
         let examActive = false;
         let examTime = 3600;
         let examTimer;
@@ -1531,6 +1532,9 @@
                 videosCompleted: 0,
                 studyDays: 0
             };
+            const videosCompleted = typeof stats.videosCompleted === 'number'
+                ? stats.videosCompleted
+                : (savedProgress.videosWatched ? savedProgress.videosWatched.length : 0);
             
             container.innerHTML = `
                 <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
@@ -1547,7 +1551,7 @@
                 </div>
                 <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
                     <span class="font-medium">Vídeos Completados</span>
-                    <span class="text-orange-600 font-bold">${stats.videosCompleted}/6</span>
+                    <span class="text-orange-600 font-bold">${videosCompleted}/6</span>
                 </div>
                 <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
                     <span class="font-medium">Días de Estudio</span>
@@ -1642,24 +1646,39 @@
 
         // Funciones de videos
         function initializeVideos() {
-            const videos = [
-                { id: 'hriKlRXTF0A', title: 'Teoría Clásica de los Tests', description: 'Fundamentos y aplicaciones básicas', status: 'Completado' },
-                { id: 'aeENe9swI8E', title: 'La Búsqueda de la Consistencia', description: 'Conceptos de confiabilidad', status: 'Completado' },
-                { id: 'vrU6jJ80_UU', title: 'Entendiendo la Validez', description: 'Tipos y evidencia de validez', status: 'Completado' },
-                { id: 'v_pD5lwpISI', title: 'Análisis Factorial - La estructura de la Mente', description: 'Evidencia de la estructura interna', status: 'En Progreso' },
-                { id: 'hl8LNar2oys', title: 'Dándole Sentido a un Puntaje', description: 'Normalización y baremación', status: 'Pendiente' },
-                { id: 'BRCeQo9SmSE', title: 'Teoría de Respuesta a los Ítems', description: 'Modelos modernos de medición', status: 'Pendiente' }
+            const videoCatalog = [
+                { id: 'hriKlRXTF0A', title: 'Teoría Clásica de los Tests', description: 'Fundamentos y aplicaciones básicas' },
+                { id: 'aeENe9swI8E', title: 'La Búsqueda de la Consistencia', description: 'Conceptos de confiabilidad' },
+                { id: 'vrU6jJ80_UU', title: 'Entendiendo la Validez', description: 'Tipos y evidencia de validez' },
+                { id: 'v_pD5lwpISI', title: 'Análisis Factorial - La estructura de la Mente', description: 'Evidencia de la estructura interna' },
+                { id: 'hl8LNar2oys', title: 'Dándole Sentido a un Puntaje', description: 'Normalización y baremación' },
+                { id: 'BRCeQo9SmSE', title: 'Teoría de Respuesta a los Ítems', description: 'Modelos modernos de medición' }
             ];
-            
+
+            const savedProgress = JSON.parse(localStorage.getItem('studyProgress') || '{}');
+            const videosWatched = savedProgress.videosWatched || [];
+            const activeVideoId = savedProgress.lastVideoId || videoCatalog[0].id;
+
             const container = document.getElementById('video-list');
             container.innerHTML = '';
-            
-            videos.forEach(video => {
-                const statusClass = video.status === 'Completado' ? 'green' : 
-                                  video.status === 'En Progreso' ? 'orange' : 'gray';
-                
+
+            videoCatalog.forEach(video => {
+                let status = 'Pendiente';
+
+                if (videosWatched.includes(video.id)) {
+                    status = 'Completado';
+                } else if (activeVideoId === video.id) {
+                    status = 'En Progreso';
+                }
+
+                const statusClass = status === 'Completado' ? 'green'
+                    : status === 'En Progreso' ? 'orange'
+                    : 'gray';
+                const isActive = activeVideoId === video.id;
+                const activeClasses = isActive ? 'border-2 border-blue-500/40' : 'border border-transparent';
+
                 container.innerHTML += `
-                    <div class="card p-4 cursor-pointer hover:bg-gray-50" onclick="changeVideo('${video.id}', '${video.title}')">
+                    <div class="card p-4 cursor-pointer hover:bg-gray-50 ${activeClasses}" onclick="changeVideo('${video.id}', '${video.title}')">
                         <div class="flex items-center space-x-3">
                             <div class="w-16 h-12 bg-red-600 rounded flex items-center justify-center">
                                 <i class="fas fa-play text-white"></i>
@@ -1667,7 +1686,7 @@
                             <div class="flex-1">
                                 <h4 class="font-bold">${video.title}</h4>
                                 <p class="text-sm text-gray-600">${video.description}</p>
-                                <span class="bg-${statusClass}-500 text-white px-2 py-1 rounded-full text-xs font-semibold">${video.status}</span>
+                                <span class="bg-${statusClass}-500 text-white px-2 py-1 rounded-full text-xs font-semibold">${status}</span>
                             </div>
                         </div>
                     </div>
@@ -1678,7 +1697,11 @@
         function changeVideo(videoId, title) {
             const iframe = document.getElementById('current-video');
             iframe.src = `https://www.youtube.com/embed/${videoId}`;
-            
+
+            const savedProgress = JSON.parse(localStorage.getItem('studyProgress') || '{}');
+            savedProgress.lastVideoId = videoId;
+            localStorage.setItem('studyProgress', JSON.stringify(savedProgress));
+
             // Actualizar notas si existen
             const savedNotes = localStorage.getItem(`notes-${videoId}`);
             if (savedNotes) {
@@ -1686,20 +1709,25 @@
             } else {
                 document.getElementById('video-notes').value = '';
             }
-            
+
             // Actualizar progreso
             updateVideoProgress(videoId);
+            initializeVideos();
         }
 
         function updateVideoProgress(videoId) {
             const savedProgress = JSON.parse(localStorage.getItem('studyProgress') || '{}');
             savedProgress.videosWatched = savedProgress.videosWatched || [];
-            
+
             if (!savedProgress.videosWatched.includes(videoId)) {
                 savedProgress.videosWatched.push(videoId);
                 savedProgress.videosCompleted = savedProgress.videosWatched.length;
+                savedProgress.performanceStats = savedProgress.performanceStats || {};
+                savedProgress.performanceStats.videosCompleted = savedProgress.videosWatched.length;
                 localStorage.setItem('studyProgress', JSON.stringify(savedProgress));
                 updatePerformanceStats();
+            } else {
+                localStorage.setItem('studyProgress', JSON.stringify(savedProgress));
             }
         }
 
@@ -1844,30 +1872,38 @@
         function submitAnswer() {
             const quiz = quizData[currentQuizTopic];
             if (!quiz || quiz.length === 0) return;
-            
+
             const question = quiz[currentQuestionIndex % quiz.length];
             let isCorrect = false;
-            
+
             if (question.type === 'multiple-choice') {
                 if (selectedOption === -1) return;
-                isCorrect = selectedOption === question.correct;
+                const selectedAnswerText = question.options[selectedOption] || '';
+
+                if (typeof question.correct === 'number') {
+                    isCorrect = selectedOption === question.correct;
+                } else if (typeof question.answer === 'string') {
+                    isCorrect = selectedAnswerText.trim().toLowerCase() === question.answer.trim().toLowerCase();
+                }
             } else if (question.type === 'fill-in-the-blank') {
                 const answer = document.getElementById('fill-answer').value.trim();
                 isCorrect = answer.toLowerCase() === question.answer.toLowerCase();
             }
-            
+
             // Mostrar retroalimentación
             const feedbackContainer = document.getElementById('feedback-container');
             const feedbackIcon = document.getElementById('feedback-icon');
             const feedbackTitle = document.getElementById('feedback-title');
             const feedbackText = document.getElementById('feedback-text');
             const feedbackExplanation = document.getElementById('feedback-explanation');
-            
+
             if (isCorrect) {
                 feedbackIcon.className = 'fas fa-check-circle text-green-500 text-2xl mr-3';
                 feedbackTitle.textContent = '¡Correcto!';
                 feedbackTitle.className = 'text-lg font-bold text-green-600';
-                quizScore += question.points;
+                const pointsEarned = question.points || 10;
+                quizScore += pointsEarned;
+                quizCorrectCount++;
                 document.getElementById('current-score').textContent = quizScore;
             } else {
                 feedbackIcon.className = 'fas fa-times-circle text-red-500 text-2xl mr-3';
@@ -1882,7 +1918,14 @@
             // Marcar opciones correctas/incorrectas
             if (question.type === 'multiple-choice') {
                 document.querySelectorAll('.quiz-option').forEach((option, index) => {
-                    if (index === question.correct) {
+                    const optionText = option.textContent.trim();
+                    const isOptionCorrect = typeof question.correct === 'number'
+                        ? index === question.correct
+                        : (typeof question.answer === 'string'
+                            ? optionText.toLowerCase() === question.answer.trim().toLowerCase()
+                            : false);
+
+                    if (isOptionCorrect) {
                         option.classList.add('correct');
                     } else if (index === selectedOption && !isCorrect) {
                         option.classList.add('incorrect');
@@ -2185,8 +2228,8 @@
             const totalQuestions = quiz ? quiz.length : 0;
             const maxScore = quiz ? quiz.reduce((sum, q) => sum + (q.points || 10), 0) : totalQuestions * 10;
             const percentage = totalQuestions > 0 ? Math.round((quizScore / maxScore) * 100) : 0;
-            const correctAnswers = quizScore > 0 ? Math.round(quizScore / 10) : 0;
-            
+            const correctAnswers = quizCorrectCount;
+
             document.getElementById('final-score').textContent = percentage + '%';
             document.getElementById('correct-answers').textContent = correctAnswers;
             document.getElementById('total-answers').textContent = totalQuestions;
@@ -2224,8 +2267,9 @@
         function restartQuiz() {
             currentQuestionIndex = 0;
             quizScore = 0;
+            quizCorrectCount = 0;
             selectedOption = -1;
-            
+
             document.getElementById('quiz-container').classList.remove('hidden');
             document.getElementById('quiz-results').classList.add('hidden');
             document.getElementById('current-score').textContent = '0';
