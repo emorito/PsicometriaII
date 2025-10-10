@@ -11,6 +11,6 @@ export async function showHumor(unitSlug, mountSelector = '#prevideo-humor') {
     const pick = frases[Math.floor(Math.random() * frases.length)];
     const mount = document.querySelector(mountSelector);
     if (!mount) return;
-    mount.innerHTML = `<div class="boicoteador">${pick}</div>`;
-  } catch (_) {}
+    mount.innerHTML = `<div class="boicoteador" role="note" aria-label="Humor del sistema">${pick}</div>`;
+  } catch(e) {}
 }
