@@ -12,12 +12,14 @@ export async function renderMiniCaso(unitSlug, mountSelector = '#mini-caso'){
 
     root.innerHTML = `
       <article class="minicaso">
-        <h4 class="mc-title">${it.titulo}</h4>
-        <p class="mc-esc">${it.escenario}</p>
+        <h4 class="mc-title"></h4>
+        <p class="mc-esc"></p>
         <ul class="mc-opts"></ul>
         <div class="mc-retro" hidden></div>
       </article>
     `;
+    root.querySelector('.mc-title').textContent = it.titulo;
+    root.querySelector('.mc-esc').textContent = it.escenario;
 
     const ul = root.querySelector('.mc-opts');
     const retro = root.querySelector('.mc-retro');
