@@ -563,47 +563,41 @@
                                 <i class="fas fa-graduation-cap text-emerald-300"></i> Formación continua
                             </span>
                         </div>
-                        <h1 class="text-5xl md:text-7xl font-bold leading-tight tracking-tight">
-                            <span class="block">Tu laboratorio digital</span>
-                            <span class="block text-white/90">de psicometría aplicada</span>
-                        </h1>
-                        <p class="text-lg md:text-xl text-blue-100/90 max-w-3xl leading-relaxed">
-                            Refresca tus competencias con rutas guiadas, videos comentados y evaluaciones interactivas diseñadas
-                            para fortalecer la docencia en psicometría.
-                        </p>
-                        <div class="flex flex-wrap md:flex-nowrap gap-4 md:gap-6">
-                            <button class="btn-success text-lg px-6 py-3 flex-1 md:flex-none justify-center" onclick="showSection('study-guide')">
+                        <h1 class="text-4xl md:text-6xl font-bold leading-tight">Tu laboratorio digital de psicometría</h1>
+                        <p class="text-lg text-blue-100/90 max-w-xl">Refresca tus competencias con rutas guiadas, videos comentados y evaluaciones interactivas diseñadas para fortalecer la docencia en psicometría.</p>
+                        <div class="flex flex-wrap gap-4">
+                            <button class="btn-success text-lg px-6 py-3" onclick="showSection('study-guide')">
                                 <i class="fas fa-route mr-2"></i>Iniciar recorrido guiado
                             </button>
-                            <button class="btn-primary text-lg px-6 py-3 flex-1 md:flex-none justify-center" onclick="showSection('dashboard')">
+                            <button class="btn-primary text-lg px-6 py-3" onclick="showSection('dashboard')">
                                 <i class="fas fa-chart-pie mr-2"></i>Ver tablero de progreso
                             </button>
                         </div>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 max-w-3xl">
-                            <div class="highlight-card h-full">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
+                            <div class="highlight-card">
                                 <span class="text-3xl">🧭</span>
                                 <h4>Rutas guiadas</h4>
                                 <p>Transita secuencias temáticas con objetivos concretos, actividades sugeridas y evaluaciones formativas.</p>
                             </div>
-                            <div class="highlight-card h-full">
+                            <div class="highlight-card">
                                 <span class="text-3xl">🎥</span>
                                 <h4>Recursos multimedia</h4>
                                 <p>Integra masterclasses comentadas, notas sincronizadas y materiales descargables para cada módulo.</p>
                             </div>
-                            <div class="highlight-card h-full">
+                            <div class="highlight-card">
                                 <span class="text-3xl">🧠</span>
                                 <h4>Práctica aplicada</h4>
                                 <p>Consolida conceptos mediante flashcards inteligentes, quizzes configurables y simuladores cronometrados.</p>
                             </div>
-                            <div class="highlight-card h-full">
+                            <div class="highlight-card">
                                 <span class="text-3xl">🤝</span>
                                 <h4>Acompañamiento docente</h4>
                                 <p>Recomendaciones de seguimiento para aula, proyectos de investigación y evaluación continua.</p>
                             </div>
                         </div>
                     </div>
-                    <div class="hero-illustration h-full">
-                        <div class="glass-card w-full max-w-md text-left space-y-6 h-full flex flex-col justify-between">
+                    <div class="hero-illustration">
+                        <div class="glass-card w-full max-w-sm text-left space-y-6">
                             <h3 class="text-2xl font-semibold text-white">Recursos integrados</h3>
                             <p class="text-blue-100/80">Combina bancos de ítems, fichas de repaso y material audiovisual dentro de una sola experiencia.</p>
                             <ul class="space-y-4 text-blue-100/80">
@@ -1231,7 +1225,7 @@
             });
         }
 
-        function showSection(sectionId, triggerElement = null) {
+        function showSection(sectionId) {
             // Pausar videos al cambiar de sección
             const iframes = document.querySelectorAll('iframe[src*="youtube"]');
             iframes.forEach(iframe => {
