@@ -2280,6 +2280,7 @@
                     grid.appendChild(card);
                 });
             } catch (error) {
+                console.error('Error al cargar los enlaces de NotebookLM:', error);
                 root.innerHTML = '<div class="json-error">No fue posible cargar los enlaces de NotebookLM en este momento.</div>';
             }
 
