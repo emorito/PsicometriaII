@@ -25,7 +25,11 @@ export async function renderMiniCaso(unitSlug, mountSelector = '#mini-caso'){
     const retro = root.querySelector('.mc-retro');
     it.opciones.forEach((txt, idx)=>{
       const li = document.createElement('li');
-      li.innerHTML = `<button class="mc-btn" data-idx="${idx}">${txt}</button>`;
+      const button = document.createElement('button');
+      button.className = 'mc-btn';
+      button.dataset.idx = idx;
+      button.textContent = txt;
+      li.appendChild(button);
       ul.appendChild(li);
     });
     ul.addEventListener('click', (e)=>{
