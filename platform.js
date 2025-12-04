@@ -884,8 +884,97 @@ class PlatformRenderer {
         const progress = ((quizState.currentQuestion + 1) / quizState.questions.length) * 100;
         document.getElementById('quiz-progress-bar').style.width = `${progress}%`;
 
-        // Renderizar la pregunta
+        // Renderizar la pregunta según su tipo
         const contentContainer = document.getElementById('quiz-content');
+        const questionType = question.type || 'multiple-choice';
+        
+        let optionsHTML = '';
+        
+        if (questionType === 'multiple-choice') {
+            if (!question.options || !Array.isArray(question.options)) {
+                optionsHTML = '<p style="color: #ef4444;">Error: Pregunta sin opciones válidas</p>';
+            } else {
+                optionsHTML = `
+                    <div class="answer-options">
+                        ${question.options.map((option, index) => `
+                            <button class="answer-btn" data-answer="${option}">
+                                <div class="answer-option-letter">${String.fromCharCode(65 + index)}</div>
+                                <span>${option}</span>
+                            </button>
+                        `).join('')}
+                    </div>
+                `;
+            }
+        } else if (questionType === 'fill-in-the-blank') {
+            optionsHTML = `
+                <div class="fill-blank-container" style="padding: 1.5rem; background: rgba(255,255,255,0.05); border-radius: 12px;">
+                    <p style="color: #94a3b8; margin-bottom: 1rem; font-size: 0.9rem;">
+                        <svg style="display:inline; width:16px; height:16px; margin-right:4px; vertical-align:middle;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        Escribe la respuesta que complete el enunciado
+                    </p>
+                    <input type="text" id="fill-answer-input" 
+                           style="width: 100%; padding: 1rem; border: 2px solid #334155; border-radius: 8px; background: #1e293b; color: #e2e8f0; font-size: 1rem;"
+                           placeholder="Escribe tu respuesta aquí...">
+                    <button id="submit-fill-btn" class="answer-btn" style="margin-top: 1rem; width: 100%; justify-content: center;"
+                            onclick="window.psychoPlatform.checkFillAnswer()">
+                        <span>Verificar Respuesta</span>
+                    </button>
+                </div>
+            `;
+        } else if (questionType === 'association') {
+            // Convertir formato answer (objeto) a pairs (array) si es necesario
+            let pairs = question.pairs;
+            if (!pairs && question.answer && typeof question.answer === 'object' && !Array.isArray(question.answer)) {
+                pairs = Object.entries(question.answer).map(([key, value]) => ({
+                    left: key,
+                    right: value
+                }));
+            }
+            
+            if (pairs && pairs.length > 0) {
+                const shuffledLeft = [...pairs].sort(() => Math.random() - 0.5);
+                const shuffledRight = [...pairs].sort(() => Math.random() - 0.5);
+                
+                optionsHTML = `
+                    <div class="association-container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; padding: 1rem;">
+                        <div>
+                            <h4 style="margin-bottom: 1rem; color: #94a3b8;">Términos:</h4>
+                            <div id="assoc-left" style="display: flex; flex-direction: column; gap: 0.5rem;">
+                                ${shuffledLeft.map((pair, i) => `
+                                    <div class="assoc-item" draggable="true" data-pair-index="${pairs.findIndex(p => p.left === pair.left)}"
+                                         style="padding: 0.75rem 1rem; background: #3b82f6; color: white; border-radius: 8px; cursor: grab; user-select: none;">
+                                        ${pair.left}
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                        <div>
+                            <h4 style="margin-bottom: 1rem; color: #94a3b8;">Definiciones:</h4>
+                            <div id="assoc-right" style="display: flex; flex-direction: column; gap: 0.5rem;">
+                                ${shuffledRight.map((pair, i) => `
+                                    <div class="assoc-target" data-expected="${pairs.findIndex(p => p.right === pair.right)}"
+                                         style="padding: 0.75rem 1rem; background: #1e293b; border: 2px dashed #475569; border-radius: 8px; min-height: 3rem;">
+                                        <span class="target-text" style="color: #94a3b8;">${pair.right}</span>
+                                        <div class="dropped-item" style="display: none;"></div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                    <button id="check-assoc-btn" class="answer-btn" style="margin-top: 1rem; width: 100%; justify-content: center;"
+                            onclick="window.psychoPlatform.checkAssociationAnswer()">
+                        <span>Verificar Emparejamiento</span>
+                    </button>
+                `;
+            } else {
+                optionsHTML = '<p style="color: #ef4444;">Error: Pregunta de asociación sin pares válidos</p>';
+            }
+        } else {
+            optionsHTML = `<p style="color: #eab308;">Tipo de pregunta no soportado: ${questionType}</p>`;
+        }
+        
         contentContainer.innerHTML = `
             <div class="question-container">
                 <div class="question-text">
@@ -897,43 +986,156 @@ class PlatformRenderer {
                     <div class="difficulty-dot ${question.difficulty === 'medium' ? 'medium' : ''}"></div>
                     <div class="difficulty-dot ${question.difficulty === 'hard' ? 'hard' : ''}"></div>
                 </div>
-                <div class="answer-options">
-                    ${question.options.map((option, index) => `
-                        <button class="answer-btn" data-answer="${option}">
-                            <div class="answer-option-letter">${String.fromCharCode(65 + index)}</div>
-                            <span>${option}</span>
-                        </button>
-                    `).join('')}
-                </div>
+                ${optionsHTML}
             </div>
         `;
 
-        // Agregar event listeners a las opciones
-        contentContainer.querySelectorAll('.answer-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                this.selectAnswer(btn.dataset.answer);
+        // Agregar event listeners según el tipo de pregunta
+        if (questionType === 'multiple-choice') {
+            contentContainer.querySelectorAll('.answer-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    this.selectAnswer(btn.dataset.answer);
+                });
             });
-        });
+        } else if (questionType === 'association') {
+            this.initAssociationDragDrop();
+        }
 
         // Animar entrada
-        anime({
-            targets: '.question-container',
-            opacity: [0, 1],
-            translateY: [30, 0],
-            duration: 600,
-            easing: 'easeOutQuart'
+        if (typeof anime !== 'undefined') {
+            anime({
+                targets: '.question-container',
+                opacity: [0, 1],
+                translateY: [30, 0],
+                duration: 600,
+                easing: 'easeOutQuart'
+            });
+        }
+    }
+    
+    // Método para verificar respuesta de completar
+    checkFillAnswer() {
+        const input = document.getElementById('fill-answer-input');
+        if (!input) return;
+        
+        const userAnswer = input.value.trim();
+        const question = this.state.quizState.questions[this.state.quizState.currentQuestion];
+        const correctAnswer = question.answer;
+        
+        // Comparación flexible (ignorar mayúsculas/minúsculas y espacios extra)
+        const isCorrect = userAnswer.toLowerCase().replace(/\s+/g, ' ') === 
+                          correctAnswer.toLowerCase().replace(/\s+/g, ' ');
+        
+        this.selectAnswer(userAnswer, isCorrect);
+    }
+    
+    // Método para verificar asociaciones
+    checkAssociationAnswer() {
+        const targets = document.querySelectorAll('.assoc-target');
+        let allCorrect = true;
+        let matchedCount = 0;
+        
+        targets.forEach(target => {
+            const droppedItem = target.querySelector('.assoc-item');
+            if (droppedItem) {
+                matchedCount++;
+                const expected = target.dataset.expected;
+                const actual = droppedItem.dataset.pairIndex;
+                if (expected !== actual) {
+                    allCorrect = false;
+                    target.style.borderColor = '#ef4444';
+                    droppedItem.style.background = '#dc2626';
+                } else {
+                    target.style.borderColor = '#22c55e';
+                    droppedItem.style.background = '#16a34a';
+                }
+            }
+        });
+        
+        if (matchedCount < targets.length) {
+            alert('Por favor, empareja todos los elementos antes de verificar.');
+            return;
+        }
+        
+        const question = this.state.quizState.questions[this.state.quizState.currentQuestion];
+        this.selectAnswer(allCorrect ? 'Correcto' : 'Incorrecto', allCorrect);
+    }
+    
+    // Inicializar drag and drop para asociaciones
+    initAssociationDragDrop() {
+        const items = document.querySelectorAll('.assoc-item');
+        const targets = document.querySelectorAll('.assoc-target');
+        
+        items.forEach(item => {
+            item.addEventListener('dragstart', (e) => {
+                e.dataTransfer.setData('text/plain', e.target.dataset.pairIndex);
+                e.target.style.opacity = '0.5';
+            });
+            
+            item.addEventListener('dragend', (e) => {
+                e.target.style.opacity = '1';
+            });
+        });
+        
+        targets.forEach(target => {
+            target.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                target.style.borderColor = '#3b82f6';
+                target.style.borderStyle = 'solid';
+            });
+            
+            target.addEventListener('dragleave', (e) => {
+                target.style.borderColor = '#475569';
+                target.style.borderStyle = 'dashed';
+            });
+            
+            target.addEventListener('drop', (e) => {
+                e.preventDefault();
+                target.style.borderColor = '#475569';
+                target.style.borderStyle = 'dashed';
+                
+                const pairIndex = e.dataTransfer.getData('text/plain');
+                const draggedItem = document.querySelector(`[data-pair-index="${pairIndex}"]`);
+                
+                if (draggedItem) {
+                    // Si ya hay un item en el target, devolverlo
+                    const existingItem = target.querySelector('.assoc-item');
+                    if (existingItem) {
+                        document.getElementById('assoc-left').appendChild(existingItem);
+                    }
+                    
+                    // Mover el item al target
+                    target.appendChild(draggedItem);
+                }
+            });
         });
     }
 
-    selectAnswer(answer) {
+    selectAnswer(answer, isCorrectOverride = null) {
         const quizState = this.state.quizState;
         const question = quizState.questions[quizState.currentQuestion];
-        const isCorrect = answer === question.answer;
+        
+        // Para fill-in-the-blank y association, usar el override si está disponible
+        let isCorrect;
+        if (isCorrectOverride !== null) {
+            isCorrect = isCorrectOverride;
+        } else {
+            isCorrect = answer === question.answer;
+        }
+
+        // Determinar la respuesta correcta para mostrar en el feedback
+        let correctAnswerText = question.answer;
+        if (typeof question.answer === 'object' && !Array.isArray(question.answer)) {
+            // Para asociaciones, mostrar los pares
+            correctAnswerText = Object.entries(question.answer)
+                .map(([k, v]) => `${k} → ${v}`)
+                .join(', ');
+        }
 
         quizState.answers.push({
             question: question.question,
             userAnswer: answer,
-            correctAnswer: question.answer,
+            correctAnswer: correctAnswerText,
             isCorrect: isCorrect,
             explanation: question.explanation,
             difficulty: question.difficulty
@@ -953,21 +1155,45 @@ class PlatformRenderer {
     }
 
     showAnswerFeedback(isCorrect, question) {
-        // Marcar la respuesta correcta
-        document.querySelectorAll('.answer-btn').forEach(btn => {
-            if (btn.dataset.answer === question.answer) {
-                btn.classList.add('correct');
-            } else if (btn.dataset.answer !== question.answer && !isCorrect) {
-                btn.classList.add('wrong');
+        const questionType = question.type || 'multiple-choice';
+        
+        // Marcar la respuesta correcta solo para multiple-choice
+        if (questionType === 'multiple-choice') {
+            document.querySelectorAll('.answer-btn').forEach(btn => {
+                if (btn.dataset.answer === question.answer) {
+                    btn.classList.add('correct');
+                } else if (btn.dataset.answer !== question.answer && !isCorrect) {
+                    btn.classList.add('wrong');
+                }
+                btn.disabled = true;
+            });
+        } else if (questionType === 'fill-in-the-blank') {
+            // Mostrar la respuesta correcta si fue incorrecta
+            const input = document.getElementById('fill-answer-input');
+            const submitBtn = document.getElementById('submit-fill-btn');
+            if (input) {
+                input.disabled = true;
+                input.style.borderColor = isCorrect ? '#22c55e' : '#ef4444';
+                if (!isCorrect) {
+                    input.value = `Tu respuesta: "${input.value}" | Correcta: "${question.answer}"`;
+                }
             }
-        });
+            if (submitBtn) submitBtn.disabled = true;
+        } else if (questionType === 'association') {
+            const checkBtn = document.getElementById('check-assoc-btn');
+            if (checkBtn) checkBtn.disabled = true;
+        }
 
         // Mostrar explicación
         const feedback = document.createElement('div');
         feedback.className = 'feedback-container show';
         feedback.innerHTML = `
             <div class="feedback-header">
-                <i class="fas fa-${isCorrect ? 'check-circle' : 'times-circle'}" style="color: var(--${isCorrect ? 'success' : 'danger'}-color);"></i>
+                <svg style="width:24px;height:24px;margin-right:8px;" fill="${isCorrect ? '#22c55e' : '#ef4444'}" viewBox="0 0 24 24">
+                    ${isCorrect 
+                        ? '<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>'
+                        : '<path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"/>'}
+                </svg>
                 <strong>${isCorrect ? '¡Correcto!' : 'Incorrecto'}</strong>
             </div>
             <div class="feedback-content">${question.explanation}</div>
@@ -1530,3 +1756,11 @@ window.platformData = platformData;
 window.questionBanks = questionBanks;
 window.flashcardData = flashcardData;
 window.PlatformController = PlatformController;
+
+// Inicializar la plataforma cuando el DOM esté listo
+document.addEventListener('DOMContentLoaded', () => {
+    // Solo inicializar si existe el contenedor de la plataforma
+    if (document.querySelector('.platform-container') || document.getElementById('unit-view')) {
+        window.psychoPlatform = new PlatformController();
+    }
+});
