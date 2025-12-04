@@ -695,6 +695,9 @@
                     <p class="text-slate-600 leading-relaxed">Las referencias provienen de múltiples fuentes de trabajo académico y sirven como material de entrenamiento; contrasta siempre con bibliografía oficial antes de tomar decisiones de evaluación.</p>
                 </div>
             </div>
+
+            <!-- Sección NotebookLM dentro de Landing -->
+            <section id="notebooklm" class="container mt-12"></section>
         </section>
         
         <!-- Dashboard Section -->
@@ -1121,7 +1124,6 @@
                 </div>
             </div>
         </section>
-        <section id="notebooklm" class="section container"></section>
     </main>
 
     <footer>
@@ -2743,10 +2745,6 @@
                 root.innerHTML = '<div class="json-error">No fue posible cargar los enlaces de NotebookLM en este momento.</div>';
             }
 
-            const landing = document.getElementById('landing');
-            if (landing && landing.classList.contains('active')) {
-                root.classList.add('active');
-            }
         }
 
         function loadLandingPage() {
