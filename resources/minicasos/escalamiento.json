@@ -1,0 +1,19 @@
+{
+  "unidad": "teoria_escalamiento",
+  "items": [
+    {
+      "id": "esc-01",
+      "titulo": "Eligiendo el método adecuado",
+      "escenario": "Un investigador necesita evaluar la actitud hacia el reciclaje en una muestra grande de 1000 personas. Tiene poco tiempo y presupuesto, y no cuenta con expertos para valorar los ítems. Le interesa comparar a los sujetos, no analizar la estructura de los estímulos.",
+      "opciones": [
+        "Usar el método de Comparaciones Apareadas de Thurstone.",
+        "Usar el método de Intervalos Aparentemente Iguales.",
+        "Usar una escala tipo Likert.",
+        "Usar un método de Estimación de Magnitudes (Psicofísico)."
+      ],
+      "correcta": 2,
+      [cite_start]"retro": "Likert es ideal aquí: es un método 'centrado en el sujeto', no requiere jueces (ahorro de tiempo/dinero) y ofrece buena confiabilidad sin calibración previa de ítems[cite: 431, 434].",
+      "referencias": ["Likert (1932)", "Torgerson (1958)"]
+    }
+  ]
+}

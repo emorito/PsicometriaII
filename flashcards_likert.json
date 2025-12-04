@@ -1,0 +1,66 @@
+[
+  {
+    "front": "Objetivo del Método Likert",
+    "back": "Desarrollar un método de medición de actitudes más sencillo que el de Thurstone, sin necesidad de jueces, centrado en medir las diferencias individuales de los sujetos.",
+    "difficulty": "easy",
+    "icon": "🎯",
+    "topic": "Introducción",
+    "points": 10
+  },
+  {
+    "front": "Escalas Sumativas",
+    "back": "Nombre que reciben los cuestionarios Likert porque la puntuación total del sujeto se obtiene sumando o promediando los valores de las respuestas a cada ítem.",
+    "difficulty": "easy",
+    "icon": "➕",
+    "topic": "Definición",
+    "points": 10
+  },
+  {
+    "front": "Supuesto de Monotonicidad",
+    "back": "Asume que existe una relación continua y creciente entre el ítem y la actitud: a mayor puntuación en el ítem, mayor nivel de actitud favorable (y viceversa).",
+    "difficulty": "medium",
+    "icon": "📈",
+    "topic": "Supuestos",
+    "points": 20
+  },
+  {
+    "front": "Ítems Invertidos",
+    "back": "Ítems redactados en sentido desfavorable a la actitud medida. Sus puntuaciones deben transformarse (invertirse) antes de sumarse al total para mantener la coherencia direccional.",
+    "difficulty": "medium",
+    "icon": "🔄",
+    "topic": "Construcción",
+    "points": 20
+  },
+  {
+    "front": "Índice de Homogeneidad Corregido (IHc)",
+    "back": "Correlación entre un ítem y el total del test excluyendo la contribución de ese ítem. Se usa para detectar ítems indiferenciadores. El punto de corte usual es 0.20.",
+    "difficulty": "hard",
+    "icon": "📉",
+    "topic": "Análisis de Ítems",
+    "points": 30
+  },
+  {
+    "front": "Criterio de Consistencia Interna",
+    "back": "Método de análisis donde se comparan las medias del ítem entre dos grupos extremos (altos vs. bajos en el test) mediante una prueba t-Student para ver si el ítem discrimina.",
+    "difficulty": "hard",
+    "icon": "⚖️",
+    "topic": "Análisis de Ítems",
+    "points": 30
+  },
+  {
+    "front": "Problema de la Categoría Central",
+    "back": "Existe debate sobre incluir opciones como 'Indeciso'. Estudios sugieren que muchos sujetos la eligen por razones distintas a tener una actitud neutra, lo que cuestiona su utilidad.",
+    "difficulty": "medium",
+    "icon": "🤷",
+    "topic": "Construcción",
+    "points": 20
+  },
+  {
+    "front": "Interpretación de Puntuaciones",
+    "back": "No es absoluta. Las puntuaciones Likert se interpretan de forma normativa (relativa al grupo), usando puntuaciones típicas (Z) o centiles.",
+    "difficulty": "hard",
+    "icon": "📊",
+    "topic": "Interpretación",
+    "points": 30
+  }
+]

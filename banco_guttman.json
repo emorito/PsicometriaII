@@ -1,0 +1,90 @@
+[
+  {
+    "type": "multiple-choice",
+    "question": "Según Torgerson, ¿cómo se clasifica el método de Guttman en función de la variabilidad de las respuestas?",
+    "options": [
+      "Método centrado en el sujeto",
+      "Método centrado en el estímulo",
+      "Método de respuesta",
+      "Método de juicio"
+    ],
+    "answer": "Método de respuesta",
+    [cite_start]"explanation": "Se asume que la variabilidad se debe tanto a diferencias individuales (sujetos) como a diferencias entre los estímulos (ítems). [cite: 12]",
+    "difficulty": "easy",
+    "icon": "category",
+    "topic": "Clasificación",
+    "points": 10
+  },
+  {
+    "type": "multiple-choice",
+    "question": "¿Cuál es el valor mínimo aceptable para el Coeficiente de Reproductibilidad (CR) según Guttman?",
+    "options": [
+      "0.60",
+      "0.80",
+      "0.90",
+      "0.95"
+    ],
+    "answer": "0.90",
+    [cite_start]"explanation": "Una escala con un CR inferior a 0.90 no se considera una aproximación efectiva a una escala perfecta. [cite: 152]",
+    "difficulty": "medium",
+    "icon": "check_circle",
+    "topic": "Coeficientes",
+    "points": 20
+  },
+  {
+    "type": "multiple-choice",
+    "question": "En el modelo determinista de Guttman, ¿cómo es la Curva Característica del Ítem (CCI)?",
+    "options": [
+      "Una función lineal creciente",
+      "Una curva sigmoidea (S)",
+      "Una función en escalón (salta de 0 a 1)",
+      "Una distribución normal"
+    ],
+    "answer": "Una función en escalón (salta de 0 a 1)",
+    [cite_start]"explanation": "La probabilidad es 0 hasta alcanzar la dificultad del ítem, y 1 inmediatamente después. [cite: 60, 66]",
+    "difficulty": "hard",
+    "icon": "show_chart",
+    "topic": "Supuestos",
+    "points": 30
+  },
+  {
+    "type": "fill-in-the-blank",
+    "question": "El método de conteo del error de ________ compara el patrón observado con el patrón ideal.",
+    "answer": "Goodenough",
+    [cite_start]"explanation": "Goodenough (1944) y Edwards propusieron este método para evaluar las desviaciones respecto a la escala perfecta. [cite: 78]",
+    "difficulty": "medium",
+    "icon": "calculate",
+    "topic": "Método de Error",
+    "points": 20
+  },
+  {
+    "type": "association",
+    "question": "Relaciona el coeficiente con su criterio de aceptación o definición.",
+    "answer": {
+      "Coeficiente de Reproductibilidad (CR)": "Debe ser ≥ 0.90",
+      "Coeficiente de Escalabilidad (CS)": "Debe ser ≥ 0.60",
+      "Reproductibilidad Marginal Mínima (RMM)": "Media de las categorías modales",
+      "Número de errores": "Suma de desviaciones del patrón perfecto"
+    },
+    [cite_start]"explanation": "Cada métrica tiene un umbral o definición específica para valorar la calidad del escalograma. [cite: 152, 218, 226]",
+    "difficulty": "medium",
+    "icon": "link",
+    "topic": "Coeficientes",
+    "points": 20
+  },
+  {
+    "type": "association",
+    "question": "Ordena los pasos del análisis de errores de Goodenough.",
+    "answer": {
+      "Paso 1": "Ordenar sujetos por puntuación total",
+      "Paso 2": "Ordenar ítems por popularidad (dificultad)",
+      "Paso 3": "Determinar la escala tipo perfecta para cada puntaje",
+      "Paso 4": "Contar desviaciones (errores) entre observado y perfecto"
+    },
+    [cite_start]"explanation": "Este procedimiento organiza la matriz de datos para visualizar el patrón triangular o de escalograma. [cite: 98, 105]",
+    "difficulty": "hard",
+    "icon": "list_alt",
+    "topic": "Procedimiento",
+    "points": 30
+  }
+]

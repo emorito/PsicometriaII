@@ -1,0 +1,19 @@
+{
+  "unidad": "guttman",
+  "items": [
+    {
+      "id": "gut-01",
+      "titulo": "El ítem problemático",
+      "escenario": "Has aplicado una escala de 6 ítems a 12 sujetos. El Coeficiente de Reproductibilidad (CR) global es 0.72. Al revisar los CR individuales por ítem, encuentras uno con CR = 0.50.",
+      "opciones": [
+        "Aceptar la escala tal cual, 0.72 es cercano a 0.90.",
+        "Eliminar el ítem con CR = 0.50 y recalcular.",
+        "Aumentar el número de sujetos para diluir el error.",
+        "Convertir la escala a tipo Likert sin eliminar nada."
+      ],
+      "correcta": 1,
+      "retro": "Un CR de 0.50 indica que el ítem genera tantos errores como aciertos aleatorios. [cite_start]Eliminarlo suele mejorar sensiblemente el ajuste global de la escala Guttman. [cite: 157, 166]",
+      "referencias": ["González Romá (2017), p. 223"]
+    }
+  ]
+}

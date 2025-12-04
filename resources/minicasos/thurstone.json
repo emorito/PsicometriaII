@@ -1,0 +1,19 @@
+{
+  "unidad": "thurstone",
+  "items": [
+    {
+      "id": "thur-01",
+      "titulo": "El dilema del 100%",
+      "escenario": "Al analizar los datos de comparación entre 'Teatro' y 'Aula', encuentras que el 100% de los 50 sujetos prefirió 'Teatro'. La proporción es 1.00.",
+      "opciones": [
+        "Usar 1.00 y buscar su Z correspondiente (infinito).",
+        "Reducir la proporción a 0.98 para poder calcular el valor Z.",
+        "Eliminar ese par de estímulos del análisis.",
+        "Asignar arbitrariamente un valor Z de 0."
+      ],
+      "correcta": 1,
+      "retro": "Las proporciones extremas (como 1.00 o 0.00) generan valores Z infinitos que rompen la escala. [cite_start]Se deben ajustar a 0.98 (o 0.02) para evitar distorsiones extremas[cite: 138, 140].",
+      "referencias": ["González Romá (2017), p. 203"]
+    }
+  ]
+}

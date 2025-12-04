@@ -1,0 +1,58 @@
+[
+  {
+    "front": "Ley del Juicio Comparativo",
+    [cite_start]"back": "Conjunto de ecuaciones que relacionan la proporción de veces que un estímulo es juzgado superior a otro con los valores escalares y dispersiones de dichos estímulos[cite: 15, 203].",
+    "difficulty": "medium",
+    "icon": "⚖️",
+    "topic": "Conceptos Fundamentales",
+    "points": 20
+  },
+  {
+    "front": "Proceso Discriminatorio Modal",
+    "back": "Es la respuesta o reacción que ocurre con mayor frecuencia ante un estímulo. [cite_start]Thurstone asume que equivale a la media de la distribución normal de respuestas y define el valor escalar del estímulo[cite: 27, 34].",
+    "difficulty": "hard",
+    "icon": "📊",
+    "topic": "Conceptos Fundamentales",
+    "points": 30
+  },
+  {
+    "front": "Dispersión Discriminal",
+    "back": "Es la desviación típica de la distribución de las respuestas evocadas por un estímulo. [cite_start]Indica cuánto varían los juicios subjetivos en torno a la moda[cite: 34].",
+    "difficulty": "hard",
+    "icon": "vibration",
+    "topic": "Conceptos Fundamentales",
+    "points": 30
+  },
+  {
+    "front": "Supuestos del Caso V",
+    [cite_start]"back": "Asume que las dispersiones discriminales (varianzas) son iguales para todos los estímulos y que no existe correlación entre los juicios (r=0)[cite: 83, 143].",
+    "difficulty": "medium",
+    "icon": "5️⃣",
+    "topic": "Método Comparaciones Apareadas",
+    "points": 20
+  },
+  {
+    "front": "Método de Comparaciones Apareadas",
+    "back": "Procedimiento donde se presentan todos los pares posibles de objetos (n(n-1)/2) y el sujeto elige uno. [cite_start]Permite construir una matriz de frecuencias de elección[cite: 21, 88].",
+    "difficulty": "easy",
+    "icon": "🆚",
+    "topic": "Métodos de Escalamiento",
+    "points": 10
+  },
+  {
+    "front": "Tratamiento de proporciones extremas",
+    [cite_start]"back": "Las proporciones > 0.98 o < 0.02 se ajustan a esos límites porque sus puntuaciones Z extremas distorsionarían los valores de la escala[cite: 138, 140].",
+    "difficulty": "medium",
+    "icon": "✂️",
+    "topic": "Procedimiento Matemático",
+    "points": 20
+  },
+  {
+    "front": "Índice de Escabilidad (Desviación Media)",
+    "back": "Medida de fiabilidad que compara las proporciones originales con las reproducidas a partir de los valores de escala obtenidos. [cite_start]Se busca que la diferencia sea mínima[cite: 150].",
+    "difficulty": "hard",
+    "icon": "ruler",
+    "topic": "Fiabilidad",
+    "points": 30
+  }
+]

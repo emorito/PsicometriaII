@@ -1,0 +1,90 @@
+[
+  {
+    "type": "multiple-choice",
+    "question": "Según la Teoría Representacional, ¿qué es una escala de medida?",
+    "options": [
+      "Un instrumento físico calibrado",
+      "Una terna formada por un sistema empírico, uno numérico y un homomorfismo",
+      "La suma de las propiedades de los objetos",
+      "Un conjunto de reglas arbitrarias definidas por expertos"
+    ],
+    "answer": "Una terna formada por un sistema empírico, uno numérico y un homomorfismo",
+    "explanation": "La escala se define formalmente como <Empírico, Numérico, Homomorfismo>, garantizando que los números representen relaciones reales.",
+    "difficulty": "medium",
+    "icon": "⚖️",
+    "topic": "Teoría Representacional",
+    "points": 20
+  },
+  {
+    "type": "multiple-choice",
+    "question": "¿Cuál fue el aporte principal de S.S. Stevens (1946) a la medición?",
+    "options": [
+      "La invención del cero absoluto",
+      "La ley del juicio comparativo",
+      "La definición de medición como asignación de números según reglas y la clasificación de escalas",
+      "La demostración de que la psicología no puede medir nada"
+    ],
+    "answer": "La definición de medición como asignación de números según reglas y la clasificación de escalas",
+    "explanation": "Stevens rompió con el idealismo platónico y propuso que medir no requiere aditividad física, sino consistencia en las reglas de asignación.",
+    "difficulty": "easy",
+    "icon": "📜",
+    "topic": "Historia de la Medición",
+    "points": 10
+  },
+  {
+    "type": "multiple-choice",
+    "question": "Un enunciado es 'formalmente válido' o tiene sentido si...",
+    "options": [
+      "Los números son muy precisos",
+      "Su valor de verdad no cambia al aplicar una transformación admisible a los datos",
+      "Se ha calculado utilizando una escala de razón exclusivamente",
+      "Está basado en la opinión de expertos"
+    ],
+    "answer": "Su valor de verdad no cambia al aplicar una transformación admisible a los datos",
+    "explanation": "El problema de la significación establece que las conclusiones no deben depender de la elección arbitraria de la unidad o el origen de la escala.",
+    "difficulty": "hard",
+    "icon": "🛡️",
+    "topic": "Problema de la Significación",
+    "points": 30
+  },
+  {
+    "type": "fill-in-the-blank",
+    "question": "En una escala ________, la única transformación admisible es la identidad (o multiplicación por 1).",
+    "answer": "absoluta",
+    "explanation": "La escala absoluta (ej. contar objetos) no permite cambios de unidad ni de origen; los números son recuentos exactos.",
+    "difficulty": "medium",
+    "icon": "🔢",
+    "topic": "Escalas de Medida",
+    "points": 20
+  },
+  {
+    "type": "association",
+    "question": "Relaciona el tipo de escala con su transformación admisible característica.",
+    "answer": {
+      "Nominal": "Cualquier función inyectiva (biunívoca)",
+      "Ordinal": "Funciones crecientes (monótonas)",
+      "Intervalo": "Función lineal positiva (y = ax + b)",
+      "Razón": "Función de semejanza (y = ax)"
+    },
+    "explanation": "Cada escala permite diferentes niveles de manipulación matemática sin perder su significado (problema de unicidad).",
+    "difficulty": "hard",
+    "icon": "🔗",
+    "topic": "Escalas de Medida",
+    "points": 30
+  },
+  {
+    "type": "association",
+    "question": "Vincula el autor histórico con su contribución.",
+    "answer": {
+      "Fechner": "Psicofísica y umbrales",
+      "Thurstone": "Ley del Juicio Comparativo",
+      "Stevens": "Niveles de medición (Nominal, Ordinal, etc.)",
+      "Campbell": "Crítica a la medición psicológica por falta de aditividad"
+    },
+    "explanation": "Desde el idealismo platónico hasta la teoría representacional, estos autores definieron cómo entendemos la medida hoy.",
+    "difficulty": "medium",
+    "icon": "🏛️",
+    "topic": "Historia de la Medición",
+    "points": 20
+  }
+]

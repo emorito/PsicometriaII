@@ -1,0 +1,19 @@
+{
+  "unidad": "teoria_medicion",
+  "items": [
+    {
+      "id": "med-01",
+      "titulo": "El error del doble de inteligencia",
+      "escenario": "Un evaluador reporta: 'Pedro obtuvo 140 de CI y Javier 70. Por lo tanto, se concluye que Pedro posee el doble de capacidad intelectual que Javier'.",
+      "opciones": [
+        "La conclusión es correcta porque 140 es 2 x 70.",
+        "La conclusión es incorrecta; el CI es una escala ordinal y no permite operaciones.",
+        "La conclusión es incorrecta; el CI es una escala de intervalo, el cero es arbitrario y no admite proporciones.",
+        "La conclusión sería válida si se usaran puntuaciones Z."
+      ],
+      "correcta": 2,
+      "retro": "En escalas de intervalo (como el CI o la temperatura Celsius), no existe un cero absoluto. Una transformación admisible (sumar una constante) cambiaría la proporción, haciendo el enunciado 'sin sentido' (meaningless).",
+      "referencias": ["Jáñez (1989), Problema de la Significación"]
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+[
+  {
+    "front": "Ley de Fechner (1860)",
+    [cite_start]"back": "Establece una relación logarítmica entre el estímulo físico y la sensación (S = K log E). Asume que los incrementos aritméticos en sensación requieren incrementos geométricos en estimulación[cite: 385, 386].",
+    "difficulty": "medium",
+    "icon": "🪵",
+    "topic": "Psicofísica Clásica",
+    "points": 20
+  },
+  {
+    "front": "Ley de Stevens (Nueva Psicofísica)",
+    "back": "Propone una función potencial (R = k E^c). [cite_start]Basada en la 'estimación de magnitudes' donde el sujeto asigna números directamente a su sensación, a diferencia de la discriminación de Fechner[cite: 394, 395].",
+    "difficulty": "medium",
+    "icon": "⚡",
+    "topic": "Psicofísica Moderna",
+    "points": 20
+  },
+  {
+    "front": "Métodos centrados en el Sujeto (Torgerson)",
+    "back": "Atribuyen la variabilidad de las respuestas a las diferencias individuales. Su objetivo es medir a las personas. [cite_start]Ejemplo clásico: Escalas Likert[cite: 458, 459].",
+    "difficulty": "easy",
+    "icon": "👤",
+    "topic": "Clasificación de Métodos",
+    "points": 10
+  },
+  {
+    "front": "Métodos centrados en el Estímulo (Torgerson)",
+    "back": "Atribuyen la variabilidad a las diferencias entre los estímulos. Su objetivo es escalar los objetos o estímulos. [cite_start]Ejemplo clásico: Comparaciones apareadas de Thurstone[cite: 460, 461].",
+    "difficulty": "easy",
+    "icon": "📦",
+    "topic": "Clasificación de Métodos",
+    "points": 10
+  },
+  {
+    "front": "Métodos de Respuesta (Torgerson)",
+    "back": "Atribuyen la variabilidad tanto a los sujetos como a los estímulos. Permiten escalar a ambos simultáneamente. [cite_start]Ejemplo: Escalamiento acumulativo de Guttman[cite: 462, 463].",
+    "difficulty": "medium",
+    "icon": "🔄",
+    "topic": "Clasificación de Métodos",
+    "points": 20
+  },
+  {
+    "front": "Modelo Determinista (Guttman)",
+    "back": "Asume que la respuesta está totalmente determinada por la posición del sujeto y el ítem. [cite_start]En un caso ideal, sabiendo el puntaje total se pueden reproducir todas las respuestas[cite: 443, 444].",
+    "difficulty": "hard",
+    "icon": "🎯",
+    "topic": "Escalamiento Acumulativo",
+    "points": 30
+  },
+  {
+    "front": "Ventaja práctica de Likert sobre Thurstone",
+    [cite_start]"back": "Likert no requiere un grupo de jueces para calibrar los ítems previamente, lo que ahorra tiempo y trabajo, manteniendo una fiabilidad alta[cite: 431, 434].",
+    "difficulty": "medium",
+    "icon": "✅",
+    "topic": "Escalas Sumativas",
+    "points": 20
+  },
+  {
+    "front": "Ley del Juicio Comparativo (Thurstone)",
+    [cite_start]"back": "Modelo que permite ubicar estímulos psicológicos (sin correlato físico) en un continuo, asumiendo que la discriminabilidad depende de la distancia entre ellos en el atributo[cite: 414, 416].",
+    "difficulty": "hard",
+    "icon": "⚖️",
+    "topic": "Escalamiento Psicológico",
+    "points": 30
+  }
+]

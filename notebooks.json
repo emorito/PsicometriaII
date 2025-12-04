@@ -1,0 +1,98 @@
+[
+  {
+    "id": "teoria_medicion",
+    "title": "Teoría de la Medición",
+    "flashcards": "flashcards_teoriademedicion.json",
+    "quiz": "banco_teoriademedicion.json",
+    "video": "https://www.youtube.com/watch?v=gQcafPrTs-c",
+    "icon": "📏"
+  },
+  {
+    "id": "teoria_escalamiento",
+    "title": "Teoría del Escalamiento Psicofísico",
+    "flashcards": "flashcards_escalamiento.json",
+    "quiz": "banco_escalamiento.json",
+    "video": "https://www.youtube.com/watch?v=KgsgMuA97pg",
+    "icon": "📐"
+  },
+  {
+    "id": "esc_psicologico",
+    "title": "Escalamiento Psicológico",
+    "flashcards": "",
+    "quiz": "",
+    "video": "https://www.youtube.com/watch?v=SfqoJBwTsM8",
+    "icon": "🧠"
+  },
+  {
+    "id": "thurstone",
+    "title": "Escalamiento Tipo Thurstone",
+    "flashcards": "flashcards_thurstone.json",
+    "quiz": "banco_thurstone.json",
+    "video": "https://www.youtube.com/watch?v=em2iGUXI1qk",
+    "icon": "⚖️"
+  },
+  {
+    "id": "likert",
+    "title": "Escalamiento Tipo Likert",
+    "flashcards": "flashcards_likert.json",
+    "quiz": "banco_likert.json",
+    "video": "https://www.youtube.com/watch?v=oE8LCJ5ehLA",
+    "icon": "📊"
+  },
+  {
+    "id": "guttman",
+    "title": "Escalamiento Tipo Guttman",
+    "flashcards": "flashcards_guttman.json",
+    "quiz": "banco_guttman.json",
+    "video": "https://www.youtube.com/watch?v=xtXbFBPf0n4",
+    "icon": "🧩"
+  },
+  {
+    "id": "tct",
+    "title": "Teoría Clásica de los Tests",
+    "flashcards": "flashcards_tct.json",
+    "quiz": "banco_tct.json",
+    "video": "https://www.youtube.com/watch?v=hriKlRXTF0A",
+    "icon": "🧮"
+  },
+  {
+    "id": "confiabilidad",
+    "title": "Confiabilidad",
+    "flashcards": "flashcards_confiabilidad.json",
+    "quiz": "banco_confiabilidad.json",
+    "video": "https://www.youtube.com/watch?v=aeENe9swI8E",
+    "icon": "🎯"
+  },
+  {
+    "id": "validez",
+    "title": "Validez",
+    "flashcards": "flashcards_validez.json",
+    "quiz": "banco_validez.json",
+    "video": "https://www.youtube.com/watch?v=vrU6jJ80_UU",
+    "icon": "✅"
+  },
+  {
+    "id": "factorial",
+    "title": "Análisis Factorial",
+    "flashcards": "flashcards_factorial.json",
+    "quiz": "banco_factorial.json",
+    "video": "https://www.youtube.com/watch?v=v_pD5lwpISI",
+    "icon": "🔍"
+  },
+  {
+    "id": "baremacion",
+    "title": "Normalización y Baremación",
+    "flashcards": "flashcards_baremacion.json",
+    "quiz": "banco_baremacion.json",
+    "video": "https://www.youtube.com/watch?v=hl8LNar2oys",
+    "icon": "📈"
+  },
+  {
+    "id": "tri",
+    "title": "Teoría de Respuesta a los Ítems",
+    "flashcards": "flashcards_tri.json",
+    "quiz": "banco_tri.json",
+    "video": "https://www.youtube.com/watch?v=BRCeQo9SmSE",
+    "icon": "🧮"
+  }
+]

@@ -1,0 +1,66 @@
+[
+  {
+    "front": "Definición de Medición (S.S. Stevens)",
+    "back": "Asignar numerales a objetos o sucesos de acuerdo con una regla consistente. Los números no representan cantidades, sino relaciones.",
+    "difficulty": "easy",
+    "icon": "📏",
+    "topic": "Historia de la Medición",
+    "points": 10
+  },
+  {
+    "front": "Crítica de Campbell (1940)",
+    "back": "Sostuvo que las variables psicológicas no podían medirse porque carecían de aditividad física (concatenación), a diferencia de la longitud o el peso.",
+    "difficulty": "medium",
+    "icon": "🚫",
+    "topic": "Historia de la Medición",
+    "points": 20
+  },
+  {
+    "front": "¿Qué es un Sistema Relacional?",
+    "back": "Un par ordenado formado por un conjunto base (elementos empíricos o números) y una o más relaciones definidas entre ellos.",
+    "difficulty": "medium",
+    "icon": "🔗",
+    "topic": "Teoría Representacional",
+    "points": 20
+  },
+  {
+    "front": "Homomorfismo",
+    "back": "Una aplicación entre dos sistemas relacionales que conserva la estructura: si los objetos están relacionados empíricamente, sus números deben estarlo numéricamente.",
+    "difficulty": "hard",
+    "icon": "🔄",
+    "topic": "Teoría Representacional",
+    "points": 30
+  },
+  {
+    "front": "Problema de la Representación",
+    "back": "Determinar si existe un sistema relacional numérico y un homomorfismo que pueda representar fielmente al sistema relacional empírico.",
+    "difficulty": "hard",
+    "icon": "🧩",
+    "topic": "Problemas de la Medición",
+    "points": 30
+  },
+  {
+    "front": "Problema de la Unicidad",
+    "back": "Pregunta si la asignación numérica es única o si existen otras asignaciones válidas (transformaciones admisibles) que mantengan el homomorfismo.",
+    "difficulty": "hard",
+    "icon": "1️⃣",
+    "topic": "Problemas de la Medición",
+    "points": 30
+  },
+  {
+    "front": "Transformación Admisible",
+    "back": "Una regla matemática aplicada a los puntajes de una escala que genera nuevos puntajes sin romper el homomorfismo (la validez de la escala).",
+    "difficulty": "medium",
+    "icon": "🧮",
+    "topic": "Escalas de Medida",
+    "points": 20
+  },
+  {
+    "front": "Problema de la Significación",
+    "back": "Analiza si la verdad o falsedad de una inferencia (conclusión) estadística se mantiene inalterable tras aplicar transformaciones admisibles a los datos.",
+    "difficulty": "hard",
+    "icon": "✅",
+    "topic": "Problemas de la Medición",
+    "points": 30
+  }
+]

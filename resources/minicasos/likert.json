@@ -1,0 +1,19 @@
+{
+  "unidad": "likert",
+  "items": [
+    {
+      "id": "lik-01",
+      "titulo": "El ítem indiferenciador",
+      "escenario": "Al analizar tu escala de actitud hacia la lectura, encuentras que el ítem 'Leer es una actividad' tiene una correlación ítem-total corregida de 0.05.",
+      "opciones": [
+        "Mantenerlo, ya que toda lectura es una actividad.",
+        "Eliminarlo, es un enunciado de hecho que no discrimina actitudes.",
+        "Invertirlo, seguramente es un ítem negativo.",
+        "Dejarlo, pero no sumarlo al total."
+      ],
+      "correcta": 1,
+      "retro": "Un IHc de 0.05 es bajísimo (<< 0.20). Probablemente es un enunciado de hecho con el que todos están de acuerdo, por lo que no sirve para medir diferencias individuales.",
+      "referencias": ["González Romá (2017), p. 209"]
+    }
+  ]
+}

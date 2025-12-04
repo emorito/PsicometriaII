@@ -1,0 +1,9 @@
+{
+  "unidad": "likert",
+  "activar_en": "pre-video",
+  "frases": [
+    "😐 ¿Indeciso? Marcar el 3 en una escala Likert es la forma científica de decir 'ni fu ni fa'.",
+    "🔄 Ítems invertidos: Comprobando si estás prestando atención o solo marcando '5' como un robot.",
+    "📊 Likert: Donde tu compleja personalidad se reduce a la suma de números enteros del 1 al 5."
+  ]
+}

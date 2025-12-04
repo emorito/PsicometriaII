@@ -1,0 +1,19 @@
+{
+  "unidad": "validez",
+  "items": [
+    {
+      "id": "val-01",
+      "titulo": "Evidencias desbalanceadas",
+      "escenario": "Un nuevo instrumento de motivación académica solo cuenta con correlaciones altas con rendimiento en matemáticas.",
+      "opciones": [
+        "Basta con esa correlación para hablar de validez completa",
+        "Planificar recogida de evidencias de contenido y estructura antes de concluir",
+        "Descartar el test inmediatamente",
+        "Usar el instrumento solo con estudiantes de matemáticas"
+      ],
+      "correcta": 1,
+      "retro": "La validez es argumentativa y necesita evidencias múltiples. Solo tener relaciones con un criterio específico es insuficiente.",
+      "referencias": []
+    }
+  ]
+}

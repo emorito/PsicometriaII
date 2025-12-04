@@ -1,0 +1,2830 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>' 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Psicometría Inmersiva — Edición 2025</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #34495e;
+            --accent: #27ae60;
+            --background: #ecf0f1;
+            --text: #2c3e50;
+            --white: #ffffff;
+            --muted: #5f6b7a;
+            --line: rgba(44, 62, 80, 0.2);
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(180deg, #f6f8fb 0%, #eef2f7 100%);
+            color: var(--text);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, rgba(44, 62, 80, 0.92), rgba(52, 73, 94, 0.92));
+            box-shadow: 0 12px 40px rgba(15, 23, 42, 0.18);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            backdrop-filter: blur(18px);
+        }
+        
+        .nav-item {
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+        }
+        
+        .nav-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .nav-item.active {
+            background-color: var(--accent);
+            color: white;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(44, 62, 80, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(44, 62, 80, 0.15);
+        }
+        
+        .progress-bar {
+            background: linear-gradient(90deg, var(--accent), #2ecc71);
+            border-radius: 10px;
+            height: 12px;
+            transition: width 0.8s ease;
+        }
+        
+        .progress-bg {
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            height: 12px;
+        }
+        
+        .flip-card {
+            background-color: transparent;
+            perspective: 1000px;
+            height: 300px;
+        }
+        
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+        
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        
+        .flip-card-front {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+        
+        .flip-card-back {
+            background: linear-gradient(135deg, var(--accent), #2ecc71);
+            color: white;
+            transform: rotateY(180deg);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(44, 62, 80, 0.3);
+        }
+        
+        .btn-success {
+            background: linear-gradient(135deg, var(--accent), #2ecc71);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(39, 174, 96, 0.3);
+        }
+        
+        .badge {
+            background: linear-gradient(135deg, var(--accent), #2ecc71);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, white, #f8f9fa);
+            border-left: 4px solid var(--accent);
+        }
+        
+        .topic-item {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .topic-item:hover {
+            background-color: #f8f9fa;
+            transform: translateX(8px);
+        }
+        
+        .topic-completed {
+            background-color: rgba(39, 174, 96, 0.1);
+            border-left: 4px solid var(--accent);
+        }
+        
+        .quiz-option {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .quiz-option:hover {
+            background-color: #f8f9fa;
+            transform: translateX(4px);
+        }
+        
+        .quiz-option.selected {
+            background-color: rgba(39, 174, 96, 0.1);
+            border-color: var(--accent);
+        }
+        
+        .quiz-option.correct {
+            background-color: rgba(39, 174, 96, 0.2);
+            border-color: var(--accent);
+        }
+        
+        .quiz-option.incorrect {
+            background-color: rgba(231, 76, 60, 0.2);
+            border-color: #e74c3c;
+        }
+        
+        .timer {
+            font-family: 'Courier New', monospace;
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--accent);
+        }
+        
+        .youtube-player {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(44, 62, 80, 0.15);
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-top: 56.25%;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .section {
+            display: none;
+        }
+        
+        .section.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .achievement-badge {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            color: white;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin: 0 auto;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .floating-animation {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--accent);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .json-error {
+            background-color: #fee;
+            border: 1px solid #fcc;
+            color: #c33;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+
+        /* Estilos para reactivos de asociación */
+        .association-item {
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 0.5rem;
+            cursor: move;
+            transition: all 0.3s ease;
+        }
+
+        .association-item:hover {
+            border-color: var(--accent);
+            transform: scale(1.02);
+        }
+
+        .association-item.dragging {
+            opacity: 0.5;
+        }
+
+        .association-target {
+            background: #f8f9fa;
+            border: 2px dashed #ddd;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 0.5rem;
+            min-height: 60px;
+            transition: all 0.3s ease;
+        }
+
+        .association-target.drag-over {
+            background: #e3f2fd;
+            border-color: #2196f3;
+        }
+
+        .association-target.correct {
+            background: #e8f5e8;
+            border-color: #4caf50;
+        }
+
+        .association-target.incorrect {
+            background: #ffeaea;
+            border-color: #f44336;
+        }
+
+        /* Estilos para fill-in-the-blank */
+        .fill-input {
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            padding: 0.5rem;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .fill-input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .fill-input.correct {
+            border-color: #4caf50;
+            background-color: #e8f5e8;
+        }
+
+        .fill-input.incorrect {
+            border-color: #f44336;
+            background-color: #ffeaea;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .nav-tag {
+            background: rgba(255, 255, 255, 0.18);
+            color: #f5f9ff;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .nav-cta {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: white;
+            padding: 0.6rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 12px 25px rgba(34, 197, 94, 0.25);
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 16px 40px rgba(34, 197, 94, 0.35);
+        }
+
+        main {
+            max-width: 1200px;
+        }
+
+        .section {
+            margin-top: 4rem;
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, #0f172a, #1d4ed8);
+            color: white;
+            border-radius: 32px;
+            padding: 4rem 3rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 24px 70px rgba(15, 23, 42, 0.35);
+        }
+
+        .hero-gradient::before,
+        .hero-gradient::after {
+            content: '';
+            position: absolute;
+            width: 320px;
+            height: 320px;
+            background: radial-gradient(circle at center, rgba(59, 130, 246, 0.55), transparent 70%);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .hero-gradient::before {
+            top: -120px;
+            right: -60px;
+        }
+
+        .hero-gradient::after {
+            bottom: -140px;
+            left: -80px;
+        }
+
+        .hero-content,
+        .hero-illustration {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-illustration {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-illustration .glass-card {
+            background: rgba(15, 23, 42, 0.55);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.92);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 50px rgba(15, 23, 42, 0.1);
+            border: 1px solid rgba(148, 163, 184, 0.25);
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 30px 60px rgba(15, 23, 42, 0.16);
+        }
+
+        .portal-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 12px 40px rgba(15, 23, 42, 0.1);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
+            cursor: pointer;
+        }
+
+        .portal-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 22px 55px rgba(15, 23, 42, 0.14);
+        }
+
+        .highlight-card {
+            background: rgba(15, 23, 42, 0.35);
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            border-radius: 18px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .highlight-card h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #f8fafc;
+        }
+
+        .highlight-card p {
+            font-size: 0.95rem;
+            color: rgba(226, 232, 240, 0.9);
+        }
+
+        footer {
+            margin-top: 6rem;
+            padding: 3rem 0 2rem;
+            color: #475569;
+        }
+
+        @media (max-width: 768px) {
+            .hero-gradient {
+                padding: 3rem 1.75rem;
+            }
+
+            .portal-card,
+            .glass-card {
+                padding: 1.5rem;
+            }
+
+            .nav-cta {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar p-4">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex items-center justify-between gap-6">
+                <div class="nav-brand">
+                    <div class="relative">
+                        <i class="fas fa-brain text-4xl text-white floating-animation"></i>
+                    </div>
+                    <div>
+                        <div class="nav-tag mb-1">Edición 2025</div>
+                        <h1 class="text-2xl font-bold text-white leading-tight">Centro de Estudio de Psicometría</h1>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center gap-3">
+                    <div class="flex items-center gap-2" id="main-navigation">
+                        <!-- Navegación se generará dinámicamente -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto p-6">
+        
+        <!-- Landing Page -->
+        <section id="landing" class="section active space-y-16">
+            <div class="hero-gradient">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div class="hero-content space-y-6">
+                        <div class="flex flex-wrap items-center gap-3">
+                            <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/15 text-sm font-semibold uppercase tracking-wide">
+                                <i class="fas fa-sparkles text-yellow-300"></i> Plataforma integral
+                            </span>
+                            <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 text-sm font-semibold uppercase tracking-wide">
+                                <i class="fas fa-graduation-cap text-emerald-300"></i> Formación continua
+                            </span>
+                        </div>
+                        <h1 class="text-4xl md:text-6xl font-bold leading-tight">Tu laboratorio digital de psicometría</h1>
+                        <p class="text-lg text-blue-100/90 max-w-xl">Refresca tus competencias con rutas guiadas, videos comentados y evaluaciones interactivas diseñadas para fortalecer la docencia en psicometría.</p>
+                        <div class="flex flex-wrap gap-4">
+                            <button class="btn-primary text-lg px-6 py-3" onclick="showSection('dashboard')">
+                                <i class="fas fa-chart-pie mr-2"></i>Ver tablero de progreso
+                            </button>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
+                            <div class="highlight-card">
+                                <span class="text-3xl">🧭</span>
+                                <h4>Rutas guiadas</h4>
+                                <p>Transita secuencias temáticas con objetivos concretos, actividades sugeridas y evaluaciones formativas.</p>
+                            </div>
+                            <div class="highlight-card">
+                                <span class="text-3xl">🎥</span>
+                                <h4>Recursos multimedia</h4>
+                                <p>Integra masterclasses comentadas, notas sincronizadas y materiales descargables para cada módulo.</p>
+                            </div>
+                            <div class="highlight-card">
+                                <span class="text-3xl">🧠</span>
+                                <h4>Práctica aplicada</h4>
+                                <p>Consolida conceptos mediante flashcards inteligentes, quizzes configurables y simuladores cronometrados.</p>
+                            </div>
+                            <div class="highlight-card">
+                                <span class="text-3xl">🤝</span>
+                                <h4>Acompañamiento docente</h4>
+                                <p>Recomendaciones de seguimiento para aula, proyectos de investigación y evaluación continua.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hero-illustration">
+                        <div class="glass-card w-full max-w-sm text-left space-y-6">
+                            <h3 class="text-2xl font-semibold text-white">Recursos integrados</h3>
+                            <p class="text-blue-100/80">Combina bancos de ítems, fichas de repaso y material audiovisual dentro de una sola experiencia.</p>
+                            <ul class="space-y-4 text-blue-100/80">
+                                <li class="flex items-start gap-3">
+                                    <span class="text-2xl">🗂️</span>
+                                    <div>
+                                        <h4 class="text-white font-semibold">Portafolio académico</h4>
+                                        <p class="leading-snug text-blue-100/80">Organiza bancos de reactivos, lecturas y notas de clase por módulo o unidad.</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <span class="text-2xl">📊</span>
+                                    <div>
+                                        <h4 class="text-white font-semibold">Seguimiento del avance</h4>
+                                        <p class="leading-snug text-blue-100/80">Visualiza progreso personal, rachas de estudio y logros desbloqueados en el panel.</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <span class="text-2xl">📝</span>
+                                    <div>
+                                        <h4 class="text-white font-semibold">Evaluaciones listas</h4>
+                                        <p class="leading-snug text-blue-100/80">Configura quizzes y simuladores finales con bancos curados por temática y dificultad.</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                <div class="portal-card card" onclick="showSection('videos')">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-3xl">🎥</span>
+                        <span class="text-sm font-semibold text-blue-600 flex items-center gap-1"><i class="fas fa-arrow-up-right-from-square"></i>Acceder</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Zona de videos</h3>
+                    <p class="text-gray-600">Masterclasses comentadas y espacio de notas sincronizadas para cada lección.</p>
+                </div>
+
+                <div class="portal-card card" onclick="showSection('flashcards')">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-3xl">🧠</span>
+                        <span class="text-sm font-semibold text-blue-600 flex items-center gap-1"><i class="fas fa-arrow-up-right-from-square"></i>Acceder</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Flashcards inteligentes</h3>
+                    <p class="text-gray-600">Curaduría interactiva con seguimiento de tarjetas dominadas por temática.</p>
+                </div>
+
+                <div class="portal-card card" onclick="showSection('quiz')">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-3xl">📝</span>
+                        <span class="text-sm font-semibold text-blue-600 flex items-center gap-1"><i class="fas fa-arrow-up-right-from-square"></i>Acceder</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Práctica adaptativa</h3>
+                    <p class="text-gray-600">Bancos de preguntas filtrables por dificultad, tipo de reactivo y objetivo.</p>
+                </div>
+
+                <div class="portal-card card" onclick="showSection('exam')">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-3xl">🎓</span>
+                        <span class="text-sm font-semibold text-blue-600 flex items-center gap-1"><i class="fas fa-arrow-up-right-from-square"></i>Acceder</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Simulador final</h3>
+                    <p class="text-gray-600">Experiencia cronometrada con métricas de dominio y retroalimentación inmediata.</p>
+                </div>
+
+                <div class="portal-card card" onclick="showSection('dashboard')">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-3xl">📊</span>
+                        <span class="text-sm font-semibold text-blue-600 flex items-center gap-1"><i class="fas fa-arrow-up-right-from-square"></i>Acceder</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Panel de progreso</h3>
+                    <p class="text-gray-600">Visualiza rachas, desempeño por tema y recomendaciones personalizadas.</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="glass-card space-y-4">
+                    <h3 class="text-2xl font-semibold text-slate-800">Modelo pedagógico</h3>
+                    <p class="text-slate-600 leading-relaxed">Estructuramos las experiencias en momentos de exploración, práctica y evaluación para acompañar la planificación de clases y proyectos de investigación.</p>
+                </div>
+
+                <div class="glass-card space-y-4">
+                    <h3 class="text-2xl font-semibold text-slate-800">Integración en el aula</h3>
+                    <p class="text-slate-600 leading-relaxed">Utiliza las rutas como guía de cátedra, enlaza los videos en tus presentaciones y asigna quizzes adaptados a las necesidades de cada cohorte.</p>
+                </div>
+
+                <div class="glass-card space-y-4">
+                    <h3 class="text-2xl font-semibold text-slate-800">Sobre los recursos</h3>
+                    <p class="text-slate-600 leading-relaxed">Las referencias provienen de múltiples fuentes de trabajo académico y sirven como material de entrenamiento; contrasta siempre con bibliografía oficial antes de tomar decisiones de evaluación.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="section">
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold mb-2">Tu Progreso de Estudio</h2>
+                <p class="text-gray-600">¡Sigue así! Estás haciendo un excelente progreso en tu aprendizaje de psicometría.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div class="card stat-card p-6">
+                    <div class="flex items-center">
+                        <div class="flex-1">
+                            <h3 class="text-lg font-semibold text-gray-700">Temas Completados</h3>
+                            <p class="text-3xl font-bold text-green-600" id="completed-topics">0</p>
+                        </div>
+                        <div class="achievement-badge">
+                            <i class="fas fa-check"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card stat-card p-6">
+                    <div class="flex items-center">
+                        <div class="flex-1">
+                            <h3 class="text-lg font-semibold text-gray-700">Racha Actual</h3>
+                            <p class="text-3xl font-bold text-orange-500" id="current-streak">0</p>
+                            <p class="text-sm text-gray-500">días consecutivos</p>
+                        </div>
+                        <div class="achievement-badge">
+                            <i class="fas fa-fire"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card stat-card p-6">
+                    <div class="flex items-center">
+                        <div class="flex-1">
+                            <h3 class="text-lg font-semibold text-gray-700">Dominio General</h3>
+                            <p class="text-3xl font-bold text-blue-600" id="overall-mastery">0</p>
+                            <p class="text-sm text-gray-500">porcentaje</p>
+                        </div>
+                        <div class="achievement-badge">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card stat-card p-6">
+                    <div class="flex items-center">
+                        <div class="flex-1">
+                            <h3 class="text-lg font-semibold text-gray-700">Próximo Desafío</h3>
+                            <p class="text-lg font-bold text-purple-600" id="next-challenge">Teoría Clásica de los Tests</p>
+                            <div class="badge mt-2">Por Comenzar</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="card p-6">
+                    <h3 class="text-xl font-bold mb-4">Progreso por Tema</h3>
+                    <div class="space-y-4" id="topic-progress">
+                        <!-- Progreso se cargará dinámicamente -->
+                    </div>
+                </div>
+                
+                <div class="card p-6">
+                    <h3 class="text-xl font-bold mb-4">Estadísticas de Rendimiento</h3>
+                    <div class="space-y-4" id="performance-stats">
+                        <!-- Estadísticas se cargarán dinámicamente -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Videos Section -->
+        <section id="videos" class="section">
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold mb-2">Lecciones en Video</h2>
+                <p class="text-gray-600">Aprende con nuestra colección de videos educativos explicados por expertos.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div>
+                    <div class="youtube-player mb-4" id="video-container-wrapper" style="position:relative;">
+                        <iframe width="100%" height="400" src="https://www.youtube.com/embed/gQcafPrTs-c"
+                                frameborder="0" allowfullscreen id="current-video"></iframe>
+                    </div>
+
+                    <div class="card p-6">
+                        <h3 class="text-xl font-bold mb-4">Notas del Video</h3>
+                        <div class="space-y-3">
+                            <textarea class="w-full h-32 p-3 border rounded-lg resize-none" 
+                                      placeholder="Toma notas mientras ves el video..." id="video-notes"></textarea>
+                            <button class="btn-success" onclick="saveNotes()">
+                                <i class="fas fa-save mr-2"></i>Guardar Notas
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Lista de Videos Disponibles</h3>
+                    <div class="space-y-3" id="video-list">
+                        <!-- Videos se cargarán dinámicamente -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Flashcards Section -->
+        <section id="flashcards" class="section">
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold mb-2">Tarjetas de Estudio</h2>
+                <p class="text-gray-600">Refuerza tu aprendizaje con flashcards interactivas. Voltea las cartas para ver la respuesta.</p>
+            </div>
+            
+            <div id="flashcards-loading" class="text-center py-8">
+                <div class="loading-spinner"></div>
+                <p class="mt-4 text-gray-600">Cargando flashcards...</p>
+            </div>
+
+            <div id="flashcards-content" class="hidden max-w-2xl mx-auto">
+                <div id="flashcard-video" class="mb-6 hidden"></div>
+                <div class="flip-card mb-6" id="flashcard">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <div class="text-center">
+                                <div class="text-4xl mb-4" id="card-icon">🧠</div>
+                                <h3 class="text-2xl font-bold mb-4" id="card-question">Cargando...</h3>
+                                <p class="text-lg">Haz clic en "Voltear" para ver la respuesta</p>
+                            </div>
+                        </div>
+                        <div class="flip-card-back">
+                            <div class="text-center">
+                                <h3 class="text-xl font-bold mb-4">Respuesta</h3>
+                                <p id="card-answer">Cargando...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <div class="text-lg font-semibold">
+                            <span id="current-card">1</span> de <span id="total-cards">0</span>
+                        </div>
+                        <div class="text-lg font-semibold text-green-600">
+                            <span id="known-cards">0</span> conocidas
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-3 justify-center">
+                        <button class="btn-primary" onclick="flipCard()">
+                            <i class="fas fa-sync-alt mr-2"></i>Voltear
+                        </button>
+                        <button class="btn-success" onclick="nextCard()">
+                            <i class="fas fa-arrow-right mr-2"></i>Siguiente
+                        </button>
+                        <button class="btn-primary" onclick="shuffleCards()">
+                            <i class="fas fa-random mr-2"></i>Mezclar
+                        </button>
+                        <button class="btn-success" onclick="markAsKnown()">
+                            <i class="fas fa-check mr-2"></i>Conocida
+                        </button>
+                    </div>
+                    
+                    <div class="mt-6">
+                        <div class="progress-bg">
+                            <div class="progress-bar" id="flashcard-progress" style="width: 0%"></div>
+                        </div>
+                        <p class="text-center mt-2 text-sm text-gray-600">Progreso en este mazo</p>
+                    </div>
+                    
+                    <div class="mt-4 text-center">
+                        <select class="p-2 border rounded-lg" onchange="changeDeck()" id="deck-selector">
+                            <option value="">Selecciona un tema...</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="mini-caso" class="section container"></section>
+
+        <!-- Quiz Section -->
+        <section id="quiz" class="section">
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold mb-2">Práctica de Evaluación</h2>
+                <p class="text-gray-600">Pon a prueba tus conocimientos con preguntas de opción múltiple y ejercicios prácticos.</p>
+            </div>
+            
+            <div id="quiz-loading" class="text-center py-8">
+                <div class="loading-spinner"></div>
+                <p class="mt-4 text-gray-600">Cargando preguntas...</p>
+            </div>
+            
+            <div id="quiz-content" class="hidden max-w-4xl mx-auto">
+                <div class="card p-6 mb-6" id="quiz-container">
+                    <div class="mb-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-xl font-bold">Pregunta <span id="question-number">1</span> de <span id="total-questions">0</span></h3>
+                            <div class="text-right">
+                                <div class="text-lg font-bold text-green-600">Puntos: <span id="current-score">0</span></div>
+                                <div class="text-sm text-gray-600">Pregunta: <span id="question-points">0</span> puntos</div>
+                            </div>
+                        </div>
+                        
+                        <div class="progress-bg mb-6">
+                            <div class="progress-bar" id="quiz-progress" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    
+                    <div id="question-content">
+                        <div class="flex items-center mb-4">
+                            <span class="text-2xl mr-3" id="question-icon">🧠</span>
+                            <h4 class="text-lg font-semibold" id="question-text">
+                                Cargando pregunta...
+                            </h4>
+                        </div>
+                        
+                        <div class="space-y-3" id="options-container">
+                            <!-- Opciones generadas dinámicamente -->
+                        </div>
+                        
+                        <div class="mt-6 flex justify-between">
+                            <button class="btn-primary" onclick="previousQuestion()" id="prev-btn" disabled>
+                                <i class="fas fa-arrow-left mr-2"></i>Anterior
+                            </button>
+                            <button class="btn-success" onclick="submitAnswer()" id="submit-btn">
+                                <i class="fas fa-check mr-2"></i>Enviar Respuesta
+                            </button>
+                            <button class="btn-primary" onclick="nextQuestion()" id="next-btn" style="display: none;">
+                                <i class="fas fa-arrow-right mr-2"></i>Siguiente
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div id="feedback-container" class="hidden mt-6 p-4 rounded-lg">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-check-circle text-green-500 text-2xl mr-3" id="feedback-icon"></i>
+                            <h4 class="text-lg font-bold" id="feedback-title">¡Correcto!</h4>
+                        </div>
+                        <p class="text-gray-700" id="feedback-text">
+                            Esperando respuesta...
+                        </p>
+                        <div class="mt-4 p-3 bg-blue-50 rounded-lg">
+                            <p class="text-sm text-blue-800">
+                                <strong>Explicación detallada:</strong> <span id="feedback-explanation"></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card p-6 text-center hidden" id="quiz-results">
+                    <h3 class="text-2xl font-bold mb-4">¡Quiz Completado!</h3>
+                    <div class="text-6xl mb-4" id="results-emoji">🎉</div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <div class="card p-4">
+                            <h4 class="font-bold mb-2">Puntaje Final</h4>
+                            <div class="text-4xl font-bold text-green-600" id="final-score">0%</div>
+                        </div>
+                        <div class="card p-4">
+                            <h4 class="font-bold mb-2">Preguntas Correctas</h4>
+                            <div class="text-3xl font-bold text-blue-600">
+                                <span id="correct-answers">0</span> / <span id="total-answers">0</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="space-x-3">
+                        <button class="btn-primary" onclick="restartQuiz()">
+                            <i class="fas fa-redo mr-2"></i>Reintentar
+                        </button>
+                        <button class="btn-success" onclick="showSection('dashboard')">
+                            <i class="fas fa-home mr-2"></i>Volver al Panel
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+                    <div class="card p-4 text-center">
+                        <h4 class="font-bold mb-2">Selecciona un Tema</h4>
+                        <select class="w-full p-2 border rounded-lg" onchange="changeQuizTopic()" id="quiz-topic">
+                            <option value="">Selecciona un tema...</option>
+                        </select>
+                    </div>
+                    
+                    <div class="card p-4 text-center">
+                        <h4 class="font-bold mb-2">Dificultad</h4>
+                        <select class="w-full p-2 border rounded-lg" onchange="changeDifficulty()" id="quiz-difficulty">
+                            <option value="all">Todas las dificultades</option>
+                            <option value="easy">Básico</option>
+                            <option value="medium">Intermedio</option>
+                            <option value="hard">Avanzado</option>
+                        </select>
+                    </div>
+                    
+                    <div class="card p-4 text-center">
+                        <h4 class="font-bold mb-2">Número de Preguntas</h4>
+                        <select class="w-full p-2 border rounded-lg" onchange="changeQuestionCount()" id="question-count">
+                            <option value="5">5 preguntas</option>
+                            <option value="10" selected>10 preguntas</option>
+                            <option value="15">15 preguntas</option>
+                            <option value="20">20 preguntas</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Exam Simulator Section -->
+        <section id="exam" class="section">
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold mb-2">Examen de Simulación</h2>
+                <p class="text-gray-600">Prepárate para el examen final con una simulación completa de todos los temas.</p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="card p-8 text-center" id="exam-start">
+                    <div class="mb-6">
+                        <i class="fas fa-graduation-cap text-6xl text-blue-600 mb-4"></i>
+                        <h3 class="text-2xl font-bold mb-4">Examen Final de Psicometría</h3>
+                        <p class="text-gray-600 mb-6">
+                            Este examen simula las condiciones reales del examen final. Tendrás 60 minutos para completar 50 preguntas de todos los temas del curso.
+                        </p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <div class="card p-4">
+                            <h4 class="font-bold mb-2">Duración</h4>
+                            <p class="text-2xl font-bold text-blue-600">60 minutos</p>
+                        </div>
+                        <div class="card p-4">
+                            <h4 class="font-bold mb-2">Preguntas</h4>
+                            <p class="text-2xl font-bold text-green-600">50 preguntas</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <h4 class="font-bold mb-3">Distribución de Temas</h4>
+                        <div class="space-y-2" id="exam-distribution">
+                            <!-- Distribución se cargará dinámicamente -->
+                        </div>
+                    </div>
+                    
+                    <button class="btn-success text-xl px-8 py-4" onclick="startExam()">
+                        <i class="fas fa-play mr-2"></i>Comenzar Examen
+                    </button>
+                </div>
+                
+                <div class="hidden" id="exam-active">
+                    <div class="card p-6 mb-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-xl font-bold">Examen en Progreso</h3>
+                            <div class="timer" id="exam-timer">60:00</div>
+                        </div>
+                        
+                        <div class="flex justify-between items-center mb-4">
+                            <div>Pregunta <span id="exam-question-number">1</span> de 50</div>
+                            <div class="text-green-600 font-bold">Puntaje: <span id="exam-score">0</span></div>
+                        </div>
+                        
+                        <div class="progress-bg mb-6">
+                            <div class="progress-bar" id="exam-progress" style="width: 2%"></div>
+                        </div>
+                        
+                        <div id="exam-question">
+                            <div class="flex items-center mb-4">
+                                <span class="text-2xl mr-3" id="exam-question-icon">🧠</span>
+                                <h4 class="text-lg font-semibold" id="exam-question-text">
+                                    Pregunta del examen aquí...
+                                </h4>
+                            </div>
+                            
+                            <div class="space-y-3" id="exam-options">
+                                <!-- Opciones generadas dinámicamente -->
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 flex justify-between">
+                            <button class="btn-primary" onclick="previousExamQuestion()" id="exam-prev-btn" disabled>
+                                <i class="fas fa-arrow-left mr-2"></i>Anterior
+                            </button>
+                            <button class="btn-success" onclick="submitExamAnswer()" id="exam-submit-btn">
+                                <i class="fas fa-check mr-2"></i>Siguiente Pregunta
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card p-8 text-center hidden" id="exam-results">
+                    <h3 class="text-2xl font-bold mb-4">¡Examen Completado!</h3>
+                    <div class="text-6xl mb-4" id="exam-emoji">🎓</div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <div class="card p-4">
+                            <h4 class="font-bold mb-2">Puntaje Final</h4>
+                            <div class="text-4xl font-bold text-green-600" id="exam-final-score">0%</div>
+                        </div>
+                        <div class="card p-4">
+                            <h4 class="font-bold mb-2">Tiempo Utilizado</h4>
+                            <div class="text-2xl font-bold text-blue-600" id="exam-time-used">00:00</div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <h4 class="font-bold mb-3">Desglose por Temas</h4>
+                        <div class="space-y-2" id="exam-breakdown">
+                            <!-- Desglose generado dinámicamente -->
+                        </div>
+                    </div>
+                    
+                    <div class="space-x-3">
+                        <button class="btn-primary" onclick="restartExam()">
+                            <i class="fas fa-redo mr-2"></i>Reintentar Examen
+                        </button>
+                        <button class="btn-success" onclick="showSection('dashboard')">
+                            <i class="fas fa-home mr-2"></i>Volver al Panel
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="notebooklm" class="section container"></section>
+    </main>
+
+    <footer>
+        <div class="max-w-7xl mx-auto px-6 text-center text-sm space-y-2">
+            <p>© 2025 Centro de Estudio de Psicometría. Diseñado para ofrecer experiencias académicas de alto impacto.</p>
+            <p class="text-gray-500 text-xs">Plataforma desarrollada por el Prof. Enrique Morosini con asistencia de IA.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Variables globales
+        let flashcardData = {};
+        let quizData = {};
+        let dataLoaded = false;
+        let currentSection = 'landing';
+        let currentFlashcardDeck = '';
+        let currentFlashcardIndex = 0;
+        let knownFlashcards = 0;
+        let isCardFlipped = false;
+        let currentQuizTopic = '';
+        let currentQuestionIndex = 0;
+        let quizScore = 0;
+        let selectedOption = -1;
+        let quizCorrectCount = 0;
+        let examActive = false;
+        let examTime = 3600;
+        let examTimer;
+        let examScore = 0;
+        let examQuestionIndex = 0;
+        let currentVideoNotebookId = '';
+        let notebooksIndex = [];
+        let topics = [];
+        const topicOrder = [
+            'teoria_medicion',
+            'teoria_escalamiento',
+            'esc_psicologico',
+            'thurstone',
+            'likert',
+            'guttman',
+            'tct',
+            'confiabilidad',
+            'validez',
+            'factorial',
+            'baremacion',
+            'tri'
+        ];
+
+        function setFallbackTopics() {
+            notebooksIndex = [
+                { id: 'teoria_medicion', title: 'Teoría de la Medición', flashcards: 'flashcards_teoriademedicion.json', quiz: 'banco_teoriademedicion.json', video: 'https://www.youtube.com/watch?v=gQcafPrTs-c', icon: '📏' },
+                { id: 'teoria_escalamiento', title: 'Teoría del Escalamiento Psicofísico', flashcards: 'flashcards_escalamiento.json', quiz: 'banco_escalamiento.json', video: 'https://www.youtube.com/watch?v=KgsgMuA97pg', icon: '📐' },
+                { id: 'esc_psicologico', title: 'Escalamiento Psicológico', flashcards: '', quiz: '', video: 'https://www.youtube.com/watch?v=SfqoJBwTsM8', icon: '🧠' },
+                { id: 'thurstone', title: 'Escalamiento Tipo Thurstone', flashcards: 'flashcards_thurstone.json', quiz: 'banco_thurstone.json', video: 'https://www.youtube.com/watch?v=em2iGUXI1qk', icon: '⚖️' },
+                { id: 'likert', title: 'Escalamiento Tipo Likert', flashcards: 'flashcards_likert.json', quiz: 'banco_likert.json', video: 'https://www.youtube.com/watch?v=oE8LCJ5ehLA', icon: '📊' },
+                { id: 'guttman', title: 'Escalamiento Tipo Guttman', flashcards: 'flashcards_guttman.json', quiz: 'banco_guttman.json', video: 'https://www.youtube.com/watch?v=xtXbFBPf0n4', icon: '🧩' },
+                { id: 'tct', title: 'Teoría Clásica de los Tests', flashcards: 'flashcards_tct.json', quiz: 'banco_tct.json', video: 'https://www.youtube.com/watch?v=hriKlRXTF0A', icon: '🧮' },
+                { id: 'confiabilidad', title: 'Confiabilidad', flashcards: 'flashcards_confiabilidad.json', quiz: 'banco_confiabilidad.json', video: 'https://www.youtube.com/watch?v=aeENe9swI8E', icon: '🎯' },
+                { id: 'validez', title: 'Validez', flashcards: 'flashcards_validez.json', quiz: 'banco_validez.json', video: 'https://www.youtube.com/watch?v=vrU6jJ80_UU', icon: '✅' },
+                { id: 'factorial', title: 'Análisis Factorial', flashcards: 'flashcards_factorial.json', quiz: 'banco_factorial.json', video: 'https://www.youtube.com/watch?v=v_pD5lwpISI', icon: '🔍' },
+                { id: 'baremacion', title: 'Normalización y Baremación', flashcards: 'flashcards_baremacion.json', quiz: 'banco_baremacion.json', video: 'https://www.youtube.com/watch?v=hl8LNar2oys', icon: '📈' },
+                { id: 'tri', title: 'Teoría de Respuesta a los Ítems', flashcards: 'flashcards_tri.json', quiz: 'banco_tri.json', video: 'https://www.youtube.com/watch?v=BRCeQo9SmSE', icon: '🧮' }
+            ];
+            notebooksIndex = orderNotebooks(notebooksIndex);
+            topics = notebooksIndex.map(mapNotebookToTopic);
+        }
+
+        // Orden de navegación
+        const navigationOrder = [
+            { id: 'landing', title: 'Inicio', icon: 'fas fa-home' },
+            { id: 'videos', title: 'Zona de Videos', icon: 'fas fa-video' },
+            { id: 'flashcards', title: 'Flashcards', icon: 'fas fa-layer-group' },
+            { id: 'quiz', title: 'Cuestionario', icon: 'fas fa-question-circle' },
+            { id: 'exam', title: 'Simulador', icon: 'fas fa-graduation-cap' },
+            { id: 'dashboard', title: 'Panel de Progreso', icon: 'fas fa-tachometer-alt' }
+        ];
+
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', async function() {
+            createNavigation();
+            await loadJSONData();
+            initializeDashboard();
+            loadLandingPage();
+            setupEventListeners();
+            renderNotebookLMSection();
+        });
+
+        // Funciones de navegación
+        function createNavigation() {
+            const navContainer = document.getElementById('main-navigation');
+            if (!navContainer) return;
+            navContainer.innerHTML = '';
+
+            navigationOrder.forEach((item, index) => {
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.className = `nav-item text-white ${index === 0 ? 'active' : ''}`;
+                button.dataset.sectionId = item.id;
+                button.setAttribute('aria-controls', item.id);
+                button.innerHTML = `
+                    <i class="${item.icon} mr-2"></i>${item.title}
+                `;
+                button.addEventListener('click', () => showSection(item.id, button));
+                navContainer.appendChild(button);
+            });
+        }
+
+        function setActiveNavigation(sectionId) {
+            document.querySelectorAll('.nav-item').forEach(item => {
+                if (item.dataset.sectionId === sectionId) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+        }
+
+        function showSection(sectionId) {
+            // Pausar videos al cambiar de sección
+            const iframes = document.querySelectorAll('iframe[src*="youtube"]');
+            iframes.forEach(iframe => {
+                const src = iframe.src;
+                iframe.src = '';
+                iframe.src = src;
+            });
+            
+            // Ocultar todas las secciones
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Mostrar la sección seleccionada
+            document.getElementById(sectionId).classList.add('active');
+
+            // Actualizar navegación activa
+            setActiveNavigation(sectionId);
+
+            currentSection = sectionId;
+
+            // Actualizar progreso si es necesario
+            if (sectionId === 'dashboard') {
+                updateDashboard();
+            }
+
+        }
+
+        function mapNotebookToTopic(notebook) {
+            return {
+                id: notebook.id,
+                name: notebook.title,
+                icon: notebook.icon || '📘',
+                color: 'blue',
+                video: notebook.video || ''
+            };
+        }
+
+        function orderNotebooks(list) {
+            const orderMap = new Map(topicOrder.map((id, index) => [id, index]));
+            return [...list].sort((a, b) => {
+                const aIndex = orderMap.has(a.id) ? orderMap.get(a.id) : topicOrder.length;
+                const bIndex = orderMap.has(b.id) ? orderMap.get(b.id) : topicOrder.length;
+                return aIndex - bIndex;
+            });
+        }
+
+        function getNotebookById(id) {
+            return notebooksIndex.find(notebook => notebook.id === id);
+        }
+
+        function getVideoEmbedUrl(url) {
+            if (!url) return '';
+            const shortMatch = url.match(/youtu\.be\/([\w-]+)/);
+            const longMatch = url.match(/[?&]v=([\w-]+)/);
+            const videoId = shortMatch ? shortMatch[1] : longMatch ? longMatch[1] : '';
+
+            if (videoId) {
+                return `https://www.youtube.com/embed/${videoId}`;
+            }
+
+            return url;
+        }
+
+        // Carga de datos JSON
+        async function loadJSONData() {
+            try {
+                const notebooksResponse = await fetch('./notebooks.json', { cache: 'no-store' });
+                if (notebooksResponse.ok) {
+                    const data = await notebooksResponse.json();
+                    notebooksIndex = orderNotebooks(Array.isArray(data) ? data : []);
+                    if (notebooksIndex.length === 0) {
+                        setFallbackTopics();
+                    } else {
+                        topics = notebooksIndex.map(mapNotebookToTopic);
+                    }
+                } else {
+                    console.warn('Archivo notebooks.json no encontrado, usando configuración por defecto.');
+                    setFallbackTopics();
+                }
+            } catch (error) {
+                console.error('Error al cargar notebooks.json:', error);
+                setFallbackTopics();
+            }
+
+            for (const notebook of notebooksIndex) {
+                if (!notebook.quiz) continue;
+                try {
+                    const response = await fetch(`./${notebook.quiz}`);
+                    if (response.ok) {
+                        quizData[notebook.id] = await response.json();
+                    } else {
+                        console.warn(`Archivo no encontrado: ${notebook.quiz}`);
+                    }
+                } catch (error) {
+                    console.error(`Error al cargar ${notebook.quiz}:`, error);
+                }
+            }
+
+            for (const notebook of notebooksIndex) {
+                if (!notebook.flashcards) continue;
+                try {
+                    const response = await fetch(`./${notebook.flashcards}`);
+                    if (response.ok) {
+                        const data = await response.json();
+                        flashcardData[notebook.id] = data.map(card => ({
+                            question: card.front,
+                            answer: card.back,
+                            icon: card.icon || '🧠',
+                            topic: card.topic || 'General',
+                            difficulty: card.difficulty || 'medium',
+                            points: card.points || 10
+                        }));
+                    } else {
+                        console.warn(`Archivo no encontrado: ${notebook.flashcards}`);
+                    }
+                } catch (error) {
+                    console.error(`Error al cargar ${notebook.flashcards}:`, error);
+                }
+            }
+
+            if (Object.keys(quizData).length === 0 && Object.keys(flashcardData).length === 0) {
+                loadSampleData();
+            }
+
+            dataLoaded = true;
+            hideLoadingSpinners();
+            initializeContent();
+        }
+
+        function loadSampleData() {
+            // Datos de muestra para flashcards
+            flashcardData = {
+                tct: [
+                    {question: "¿Qué es la Teoría Clásica de los Tests?", answer: "Modelo que postula que la puntuación observada (X) es la suma de la puntuación verdadera (T) más el error de medición (E): X = T + E", icon: "🧮", topic: "TCT", difficulty: "easy", points: 10},
+                    {question: "¿Cuáles son los supuestos básicos de la TCT?", answer: "1) El error tiene media cero, 2) El error no se correlaciona con la puntuación verdadera, 3) Los errores de diferentes mediciones no se correlacionan", icon: "📊", topic: "Supuestos TCT", difficulty: "medium", points: 20}
+                ],
+                confiabilidad: [
+                    {question: "¿Qué es la confiabilidad?", answer: "Grado en que las puntuaciones de un test son consistentes, estables y libres de error de medición", icon: "🔄", topic: "Confiabilidad", difficulty: "easy", points: 10}
+                ],
+                validez: [
+                    {question: "¿Qué es la validez?", answer: "Grado en que las interpretaciones y usos de las puntuaciones de un test son apropiadas y precisas", icon: "🎯", topic: "Validez", difficulty: "easy", points: 10}
+                ],
+                factorial: [
+                    {question: "¿Qué es el análisis factorial?", answer: "Técnica estadística para identificar las dimensiones o factores subyacentes en un conjunto de variables", icon: "🔍", topic: "Análisis Factorial", difficulty: "easy", points: 10}
+                ],
+                baremacion: [
+                    {question: "¿Qué es la baremación?", answer: "Proceso que convierte puntajes brutos en puntajes normados, comparando al individuo con una muestra normativa", icon: "📊", topic: "Baremación", difficulty: "easy", points: 10}
+                ],
+                tri: [
+                    {question: "¿Qué es la Teoría de Respuesta a los Ítems?", answer: "Modelo que relaciona la probabilidad de responder correctamente con las características del ítem y la habilidad del examinado", icon: "📈", topic: "TRI", difficulty: "medium", points: 20}
+                ]
+            };
+
+            // Datos de muestra para quizzes
+            quizData = {
+                tct: [
+                    {
+                        type: "multiple-choice",
+                        question: "¿Cuál de las siguientes fórmulas representa correctamente la Teoría Clásica de los Tests?",
+                        options: ["X = T × E", "X = T + E", "X = T - E", "X = T ÷ E"],
+                        answer: "X = T + E",
+                        correct: 1,
+                        explanation: "La fórmula correcta es X = T + E, donde X es la puntuación observada, T es la puntuación verdadera y E es el error de medición.",
+                        difficulty: "easy",
+                        icon: "🧮",
+                        topic: "TCT",
+                        points: 10
+                    },
+                    {
+                        type: "fill-in-the-blank",
+                        question: "La proporción de varianza de una variable explicada por los factores comunes se llama ________.",
+                        answer: "comunalidad",
+                        explanation: "La comunalidad refleja cuánta varianza de una variable está asociada con los factores comunes.",
+                        difficulty: "medium",
+                        icon: "⚙️",
+                        topic: "Comunalidad",
+                        points: 20
+                    }
+                ],
+                confiabilidad: [
+                    {
+                        type: "multiple-choice",
+                        question: "¿Qué coeficiente de confiabilidad se considera aceptable para decisiones educativas?",
+                        options: ["0.60", "0.70", "0.80", "0.90"],
+                        answer: "0.80",
+                        correct: 2,
+                        explanation: "Para decisiones educativas importantes, se recomienda un coeficiente de confiabilidad de al menos 0.80.",
+                        difficulty: "easy",
+                        icon: "📈",
+                        topic: "Confiabilidad",
+                        points: 10
+                    }
+                ],
+                validez: [
+                    {
+                        type: "multiple-choice",
+                        question: "¿Cuál es el tipo de validez más importante para un test de inteligencia?",
+                        options: ["Validez de contenido", "Validez de criterio", "Validez de constructo", "Validez facial"],
+                        answer: "Validez de constructo",
+                        correct: 2,
+                        explanation: "La validez de constructo es fundamental para tests de inteligencia porque evalúa si realmente está midiendo el constructo teórico de inteligencia.",
+                        difficulty: "medium",
+                        icon: "🎯",
+                        topic: "Validez de Constructo",
+                        points: 20
+                    }
+                ],
+                factorial: [
+                    {
+                        type: "association",
+                        question: "Empareja los conceptos con sus definiciones:",
+                        pairs: [
+                            { left: "Factor G", right: "Factor general de inteligencia propuesto por Spearman" },
+                            { left: "Análisis Factorial Exploratorio", right: "Técnica para identificar factores subyacentes sin hipótesis previas" },
+                            { left: "Carga Factorial", right: "Correlación entre una variable y un factor" },
+                            { left: "Comunalidad", right: "Proporción de varianza explicada por los factores comunes" }
+                        ],
+                        explanation: "Estos conceptos son fundamentales para entender el análisis factorial.",
+                        difficulty: "medium",
+                        icon: "🔍",
+                        topic: "Conceptos Factoriales",
+                        points: 30
+                    }
+                ],
+                baremacion: [
+                    {
+                        type: "multiple-choice",
+                        question: "¿Qué transformación convierte una puntuación X en una puntuación Z?",
+                        options: ["Z = (X - μ) / σ", "Z = X + μ - σ", "Z = X × μ ÷ σ", "Z = X - μ + σ"],
+                        answer: "Z = (X - μ) / σ",
+                        correct: 0,
+                        explanation: "La puntuación Z indica cuántas desviaciones estándar está un puntaje sobre o bajo la media.",
+                        difficulty: "medium",
+                        icon: "🧮",
+                        topic: "Puntuación Z",
+                        points: 20
+                    }
+                ],
+                tri: [
+                    {
+                        type: "multiple-choice",
+                        question: "¿Qué ventaja principal tiene TRI sobre TCT?",
+                        options: ["Es más simple", "No requiere cálculos", "Invarianza de parámetros", "Menor costo"],
+                        answer: "Invarianza de parámetros",
+                        correct: 2,
+                        explanation: "La invarianza de parámetros en TRI permite que las características del ítem sean independientes de la muestra utilizada.",
+                        difficulty: "hard",
+                        icon: "🔬",
+                        topic: "TRI",
+                        points: 30
+                    }
+                ]
+            };
+        }
+
+        function hideLoadingSpinners() {
+            document.getElementById('flashcards-loading').style.display = 'none';
+            document.getElementById('quiz-loading').style.display = 'none';
+            document.getElementById('flashcards-content').classList.remove('hidden');
+            document.getElementById('quiz-content').classList.remove('hidden');
+        }
+
+        function initializeContent() {
+            populateSelectors();
+            if (currentFlashcardDeck) {
+                renderFlashcardVideo(currentFlashcardDeck);
+            }
+            updateFlashcard();
+            loadQuestion();
+            initializeVideos();
+            initializeExam();
+        }
+        function populateSelectors() {
+            // Llenar selectores de temas
+            const deckSelector = document.getElementById('deck-selector');
+            const quizTopicSelector = document.getElementById('quiz-topic');
+
+            deckSelector.innerHTML = '<option value="">Selecciona un tema...</option>';
+            quizTopicSelector.innerHTML = '<option value="">Selecciona un tema...</option>';
+
+            let firstDeck = '';
+            let firstQuiz = '';
+
+            topics.forEach(topic => {
+                if (flashcardData[topic.id]) {
+                    deckSelector.innerHTML += `<option value="${topic.id}">${topic.name}</option>`;
+                    if (!firstDeck) firstDeck = topic.id;
+                }
+                if (quizData[topic.id]) {
+                    quizTopicSelector.innerHTML += `<option value="${topic.id}">${topic.name}</option>`;
+                    if (!firstQuiz) firstQuiz = topic.id;
+                }
+            });
+
+            if (!currentFlashcardDeck && firstDeck) {
+                currentFlashcardDeck = firstDeck;
+                deckSelector.value = firstDeck;
+                renderFlashcardVideo(firstDeck);
+            }
+
+            if (!currentQuizTopic && firstQuiz) {
+                currentQuizTopic = firstQuiz;
+                quizTopicSelector.value = firstQuiz;
+            }
+        }
+
+        // Funciones del dashboard
+        function initializeDashboard() {
+            const savedProgress = JSON.parse(localStorage.getItem('studyProgress') || '{}');
+            
+            // Inicializar con valores en 0 si no hay datos guardados
+            document.getElementById('completed-topics').textContent = savedProgress.completedTopics || 0;
+            document.getElementById('current-streak').textContent = savedProgress.currentStreak || 0;
+            document.getElementById('overall-mastery').textContent = savedProgress.overallMastery || 0;
+            
+            updateTopicProgress();
+            updatePerformanceStats();
+        }
+
+        function updateDashboard() {
+            const savedProgress = JSON.parse(localStorage.getItem('studyProgress') || '{}');
+            initializeDashboard();
+        }
+
+        function updateTopicProgress() {
+            const container = document.getElementById('topic-progress');
+            const savedProgress = JSON.parse(localStorage.getItem('studyProgress') || '{}');
+            const topicProgress = savedProgress.topicProgress || {};
+            
+            container.innerHTML = '';
+            
+            topics.forEach(topic => {
+                const progress = topicProgress[topic.id] || 0;
+                const isCompleted = progress >= 80;
+                
+                container.innerHTML += `
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium">${topic.icon} ${topic.name}</span>
+                            <span class="font-bold ${isCompleted ? 'text-green-600' : progress > 0 ? 'text-orange-600' : 'text-red-600'}">${progress}%</span>
+                        </div>
+                        <div class="progress-bg">
+                            <div class="progress-bar" style="width: ${progress}%"></div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function updatePerformanceStats() {
+            const container = document.getElementById('performance-stats');
+            const savedProgress = JSON.parse(localStorage.getItem('studyProgress') || '{}');
+            const stats = savedProgress.performanceStats || {
+                correctAnswers: 0,
+                averageTime: 0,
+                bestFlashcardScore: 0,
+                videosCompleted: 0,
+                studyDays: 0
+            };
+            const totalVideos = notebooksIndex.filter(notebook => notebook.video).length;
+            const videosCompleted = typeof stats.videosCompleted === 'number'
+                ? stats.videosCompleted
+                : (savedProgress.videosWatched ? savedProgress.videosWatched.length : 0);
+            
+            container.innerHTML = `
+                <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                    <span class="font-medium">Respuestas Correctas</span>
+                    <span class="text-green-600 font-bold">${stats.correctAnswers}%</span>
+                </div>
+                <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                    <span class="font-medium">Tiempo Promedio por Quiz</span>
+                    <span class="text-blue-600 font-bold">${stats.averageTime} min</span>
+                </div>
+                <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                    <span class="font-medium">Mejor Puntaje Flashcards</span>
+                    <span class="text-purple-600 font-bold">${stats.bestFlashcardScore}%</span>
+                </div>
+                <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                    <span class="font-medium">Vídeos Completados</span>
+                    <span class="text-orange-600 font-bold">${videosCompleted}/${totalVideos || videosCompleted || 0}</span>
+                </div>
+                <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                    <span class="font-medium">Días de Estudio</span>
+                    <span class="text-red-600 font-bold">${stats.studyDays}/30</span>
+                </div>
+            `;
+        }
+
+        // Funciones de la guía de estudio
+        function initializeStudyGuide() {
+            const container = document.getElementById('study-topics');
+            if (!container) return;
+            const savedProgress = JSON.parse(localStorage.getItem('studyProgress') || '{}');
+            const topicProgress = savedProgress.topicProgress || {};
+            
+            container.innerHTML = '';
+            
+            topics.forEach((topic, index) => {
+                const progress = topicProgress[topic.id] || 0;
+                const isCompleted = progress >= 80;
+                const isInProgress = progress > 0 && progress < 80;
+                
+                let statusBadge, statusColor, statusIcon;
+                
+                if (isCompleted) {
+                    statusBadge = 'Completado';
+                    statusColor = 'green';
+                    statusIcon = 'check';
+                } else if (isInProgress) {
+                    statusBadge = 'En Progreso';
+                    statusColor = 'orange';
+                    statusIcon = 'clock';
+                } else {
+                    statusBadge = 'Pendiente';
+                    statusColor = 'gray';
+                    statusIcon = 'clock';
+                }
+                
+                container.innerHTML += `
+                    <div class="card topic-item ${isCompleted ? 'topic-completed' : ''} p-6 cursor-pointer" onclick="toggleTopic('${topic.id}')">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 bg-${statusColor}-500 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-${statusIcon} text-white text-xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold">${index + 1}. ${topic.name}</h3>
+                                    <p class="text-gray-600">Conceptos fundamentales de ${topic.name.toLowerCase()}</p>
+                                    <div class="flex items-center mt-2">
+                                        <span class="bg-${statusColor}-500 text-white px-3 py-1 rounded-full text-sm font-semibold">${statusBadge}</span>
+                                        <span class="ml-2 text-sm text-gray-500">Progreso: ${progress}%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <i class="fas fa-chevron-down text-gray-400"></i>
+                        </div>
+                        <div class="mt-4 hidden" id="${topic.id}-content">
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <h4 class="font-bold mb-2">Contenido del tema:</h4>
+                                <div class="progress-bg mb-4">
+                                    <div class="progress-bar" style="width: ${progress}%"></div>
+                                </div>
+                                <p class="text-sm text-gray-600 mb-3">Has completado el ${progress}% de este tema</p>
+                                <button class="btn-primary" onclick="startTopic('${topic.id}')">
+                                    ${isCompleted ? 'Revisar' : isInProgress ? 'Continuar' : 'Comenzar'}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function toggleTopic(topicId) {
+            const content = document.getElementById(topicId + '-content');
+            const icon = event.currentTarget.querySelector('.fa-chevron-down');
+            
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                icon.style.transform = 'rotate(180deg)';
+            } else {
+                content.classList.add('hidden');
+                icon.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        function startTopic(topicId) {
+            // Guardar progreso y redirigir al quiz correspondiente
+            showSection('quiz');
+            document.getElementById('quiz-topic').value = topicId;
+            changeQuizTopic();
+        }
+
+        // Funciones de videos
+        function initializeVideos() {
+            const videoCatalog = notebooksIndex
+                .filter(notebook => notebook.video)
+                .map(notebook => ({
+                    id: notebook.id,
+                    title: notebook.title,
+                    description: notebook.description || '',
+                    embedUrl: getVideoEmbedUrl(notebook.video)
+                }));
+
+            const savedProgress = JSON.parse(localStorage.getItem('studyProgress') || '{}');
+            const videosWatched = savedProgress.videosWatched || [];
+            const container = document.getElementById('video-list');
+            const iframe = document.getElementById('current-video');
+
+            container.innerHTML = '';
+
+            if (videoCatalog.length === 0) {
+                if (iframe) {
+                    iframe.src = '';
+                }
+                container.innerHTML = '<p class="text-gray-600">No hay videos configurados para estos temas.</p>';
+                return;
+            }
+
+            const activeVideoId = videoCatalog.find(video => video.id === savedProgress.lastVideoId)?.id
+                || videoCatalog[0].id;
+
+            currentVideoNotebookId = activeVideoId;
+
+            if (iframe) {
+                const activeVideo = videoCatalog.find(video => video.id === activeVideoId) || videoCatalog[0];
+                iframe.src = activeVideo.embedUrl;
+                iframe.title = activeVideo.title;
+            }
+
+            videoCatalog.forEach(video => {
+                let status = 'Pendiente';
+
+                if (videosWatched.includes(video.id)) {
+                    status = 'Completado';
+                } else if (activeVideoId === video.id) {
+                    status = 'En Progreso';
+                }
+
+                const statusClass = status === 'Completado' ? 'green'
+                    : status === 'En Progreso' ? 'orange'
+                    : 'gray';
+                const isActive = activeVideoId === video.id;
+                const activeClasses = isActive ? 'border-2 border-blue-500/40' : 'border border-transparent';
+
+                container.innerHTML += `
+                    <div class="card p-4 cursor-pointer hover:bg-gray-50 ${activeClasses}" onclick="changeVideo('${video.id}', '${video.title}')">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-16 h-12 bg-red-600 rounded flex items-center justify-center">
+                                <i class="fas fa-play text-white"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="font-bold">${video.title}</h4>
+                                <p class="text-sm text-gray-600">${video.description}</p>
+                                <span class="bg-${statusClass}-500 text-white px-2 py-1 rounded-full text-xs font-semibold">${status}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            if (!savedProgress.lastVideoId && activeVideoId) {
+                savedProgress.lastVideoId = activeVideoId;
+                localStorage.setItem('studyProgress', JSON.stringify(savedProgress));
+            }
+        }
+
+        function changeVideo(notebookId, title) {
+            const notebook = getNotebookById(notebookId);
+            const embedUrl = notebook && notebook.video ? getVideoEmbedUrl(notebook.video) : '';
+            const iframe = document.getElementById('current-video');
+            const container = document.getElementById('video-container-wrapper');
+
+            // Función para cargar el video
+            const loadVideo = () => {
+                if (iframe && embedUrl) {
+                    iframe.src = embedUrl;
+                    iframe.title = title || (notebook ? notebook.title : 'Video');
+                }
+            };
+
+            // Intentar mostrar humor antes del video
+            if (container && window.PsicometriaHumor && window.PsicometriaHumor.showHumor) {
+                window.PsicometriaHumor.showHumor(notebookId, '#video-container-wrapper', loadVideo);
+            } else {
+                // Cargar módulo de humor dinámicamente
+                import('./assets/js/humor.js')
+                    .then(module => {
+                        window.PsicometriaHumor = module;
+                        module.showHumor(notebookId, '#video-container-wrapper', loadVideo);
+                    })
+                    .catch(() => {
+                        loadVideo();
+                    });
+            }
+
+            const savedProgress = JSON.parse(localStorage.getItem('studyProgress') || '{}');
+            savedProgress.lastVideoId = notebookId;
+            localStorage.setItem('studyProgress', JSON.stringify(savedProgress));
+
+            currentVideoNotebookId = notebookId;
+
+            const savedNotes = localStorage.getItem(`notes-${notebookId}`);
+            if (savedNotes) {
+                document.getElementById('video-notes').value = savedNotes;
+            } else {
+                document.getElementById('video-notes').value = '';
+            }
+
+            updateVideoProgress(notebookId);
+            initializeVideos();
+        }
+
+        function updateVideoProgress(notebookId) {
+            const savedProgress = JSON.parse(localStorage.getItem('studyProgress') || '{}');
+            savedProgress.videosWatched = savedProgress.videosWatched || [];
+
+            if (!savedProgress.videosWatched.includes(notebookId)) {
+                savedProgress.videosWatched.push(notebookId);
+                savedProgress.videosCompleted = savedProgress.videosWatched.length;
+                savedProgress.performanceStats = savedProgress.performanceStats || {};
+                savedProgress.performanceStats.videosCompleted = savedProgress.videosWatched.length;
+            }
+
+            localStorage.setItem('studyProgress', JSON.stringify(savedProgress));
+            updatePerformanceStats();
+        }
+
+        function saveNotes() {
+            const notes = document.getElementById('video-notes').value;
+            const savedProgress = JSON.parse(localStorage.getItem('studyProgress') || '{}');
+            const videoKey = currentVideoNotebookId || savedProgress.lastVideoId;
+            if (!videoKey) return;
+            localStorage.setItem(`notes-${videoKey}`, notes);
+
+            // Mostrar mensaje de confirmación
+            const button = event.target;
+            const originalText = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-check mr-2"></i>¡Guardado!';
+            button.classList.remove('btn-success');
+            button.classList.add('btn-primary');
+            
+            setTimeout(() => {
+                button.innerHTML = originalText;
+                button.classList.remove('btn-primary');
+                button.classList.add('btn-success');
+            }, 2000);
+        }
+
+        // Funciones de flashcards
+        function flipCard() {
+            const card = document.getElementById('flashcard');
+            card.classList.toggle('flipped');
+            isCardFlipped = !isCardFlipped;
+        }
+
+        function nextCard() {
+            const deck = flashcardData[currentFlashcardDeck];
+            if (!deck || deck.length === 0) return;
+            
+            currentFlashcardIndex = (currentFlashcardIndex + 1) % deck.length;
+            updateFlashcard();
+            
+            // Desvoltear la carta
+            const card = document.getElementById('flashcard');
+            card.classList.remove('flipped');
+            isCardFlipped = false;
+        }
+
+        function shuffleCards() {
+            const deck = [...flashcardData[currentFlashcardDeck]];
+            if (!deck || deck.length === 0) return;
+            
+            for (let i = deck.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [deck[i], deck[j]] = [deck[j], deck[i]];
+            }
+            flashcardData[currentFlashcardDeck] = deck;
+            currentFlashcardIndex = 0;
+            updateFlashcard();
+            
+            // Desvoltear la carta
+            const card = document.getElementById('flashcard');
+            card.classList.remove('flipped');
+            isCardFlipped = false;
+        }
+
+        function markAsKnown() {
+            knownFlashcards++;
+            document.getElementById('known-cards').textContent = knownFlashcards;
+
+            // Actualizar progreso
+            updateFlashcardProgress();
+            nextCard();
+        }
+
+        function renderFlashcardVideo(deckId) {
+            const container = document.getElementById('flashcard-video');
+            if (!container) return;
+
+            const notebook = getNotebookById(deckId);
+            const embedUrl = notebook && notebook.video ? getVideoEmbedUrl(notebook.video) : '';
+
+            if (embedUrl) {
+                container.classList.remove('hidden');
+                container.innerHTML = `
+                    <div class="card youtube-player">
+                        <div class="video-wrapper">
+                            <iframe src="${embedUrl}" title="${notebook.title}" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                `;
+            } else {
+                container.classList.add('hidden');
+                container.innerHTML = '';
+            }
+        }
+
+        function changeDeck() {
+            const selector = document.getElementById('deck-selector');
+            currentFlashcardDeck = selector.value;
+            currentFlashcardIndex = 0;
+            knownFlashcards = 0;
+            updateFlashcard();
+            renderFlashcardVideo(currentFlashcardDeck);
+
+            // Desvoltear la carta
+            const card = document.getElementById('flashcard');
+            card.classList.remove('flipped');
+            isCardFlipped = false;
+        }
+
+        function updateFlashcard() {
+            const deck = flashcardData[currentFlashcardDeck];
+            if (!deck || deck.length === 0) {
+                document.getElementById('card-question').textContent = 'Selecciona un tema para comenzar';
+                document.getElementById('card-answer').textContent = 'Elige un mazo de flashcards del menú desplegable';
+                document.getElementById('current-card').textContent = '0';
+                document.getElementById('total-cards').textContent = '0';
+                document.getElementById('flashcard-progress').style.width = '0%';
+                return;
+            }
+            
+            const card = deck[currentFlashcardIndex];
+            
+            document.getElementById('card-icon').textContent = card.icon || '🧠';
+            document.getElementById('card-question').textContent = card.question;
+            document.getElementById('card-answer').textContent = card.answer;
+            document.getElementById('current-card').textContent = currentFlashcardIndex + 1;
+            document.getElementById('total-cards').textContent = deck.length;
+            document.getElementById('known-cards').textContent = knownFlashcards;
+            
+            const progress = ((currentFlashcardIndex + 1) / deck.length) * 100;
+            document.getElementById('flashcard-progress').style.width = progress + '%';
+        }
+
+        function updateFlashcardProgress() {
+            const savedProgress = JSON.parse(localStorage.getItem('studyProgress') || '{}');
+            const deck = flashcardData[currentFlashcardDeck];
+            
+            if (deck && deck.length > 0) {
+                const progress = (knownFlashcards / deck.length) * 100;
+                savedProgress.flashcardProgress = savedProgress.flashcardProgress || {};
+                savedProgress.flashcardProgress[currentFlashcardDeck] = progress;
+                
+                // Actualizar mejor puntaje
+                savedProgress.performanceStats = savedProgress.performanceStats || {};
+                savedProgress.performanceStats.bestFlashcardScore = Math.max(
+                    savedProgress.performanceStats.bestFlashcardScore || 0,
+                    progress
+                );
+                
+                localStorage.setItem('studyProgress', JSON.stringify(savedProgress));
+            }
+        }
+
+        // Funciones del quiz
+        function selectOption(index) {
+            // Limpiar selecciones previas
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            // Marcar opción seleccionada
+            document.querySelectorAll('.quiz-option')[index].classList.add('selected');
+            selectedOption = index;
+            
+            // Habilitar botón de envío
+            document.getElementById('submit-btn').disabled = false;
+        }
+
+        function submitAnswer() {
+            const quiz = quizData[currentQuizTopic];
+            if (!quiz || quiz.length === 0) return;
+
+            const question = quiz[currentQuestionIndex % quiz.length];
+            let isCorrect = false;
+
+            if (question.type === 'multiple-choice') {
+                if (selectedOption === -1) return;
+                const selectedAnswerText = question.options[selectedOption] || '';
+
+                if (typeof question.correct === 'number') {
+                    isCorrect = selectedOption === question.correct;
+                } else if (typeof question.answer === 'string') {
+                    isCorrect = selectedAnswerText.trim().toLowerCase() === question.answer.trim().toLowerCase();
+                }
+            } else if (question.type === 'fill-in-the-blank') {
+                const answer = document.getElementById('fill-answer').value.trim();
+                isCorrect = answer.toLowerCase() === question.answer.toLowerCase();
+            }
+
+            // Mostrar retroalimentación
+            const feedbackContainer = document.getElementById('feedback-container');
+            const feedbackIcon = document.getElementById('feedback-icon');
+            const feedbackTitle = document.getElementById('feedback-title');
+            const feedbackText = document.getElementById('feedback-text');
+            const feedbackExplanation = document.getElementById('feedback-explanation');
+
+            if (isCorrect) {
+                feedbackIcon.className = 'fas fa-check-circle text-green-500 text-2xl mr-3';
+                feedbackTitle.textContent = '¡Correcto!';
+                feedbackTitle.className = 'text-lg font-bold text-green-600';
+                const pointsEarned = question.points || 10;
+                quizScore += pointsEarned;
+                quizCorrectCount++;
+                document.getElementById('current-score').textContent = quizScore;
+            } else {
+                feedbackIcon.className = 'fas fa-times-circle text-red-500 text-2xl mr-3';
+                feedbackTitle.textContent = 'Incorrecto';
+                feedbackTitle.className = 'text-lg font-bold text-red-600';
+            }
+            
+            feedbackText.textContent = isCorrect ? '¡Buen trabajo!' : 'Sigue practicando.';
+            feedbackExplanation.textContent = question.explanation;
+            feedbackContainer.classList.remove('hidden');
+            
+            // Marcar opciones correctas/incorrectas
+            if (question.type === 'multiple-choice') {
+                document.querySelectorAll('.quiz-option').forEach((option, index) => {
+                    const optionText = option.textContent.trim();
+                    const isOptionCorrect = typeof question.correct === 'number'
+                        ? index === question.correct
+                        : (typeof question.answer === 'string'
+                            ? optionText.toLowerCase() === question.answer.trim().toLowerCase()
+                            : false);
+
+                    if (isOptionCorrect) {
+                        option.classList.add('correct');
+                    } else if (index === selectedOption && !isCorrect) {
+                        option.classList.add('incorrect');
+                    }
+                });
+            }
+            
+            // Actualizar botones
+            document.getElementById('submit-btn').style.display = 'none';
+            document.getElementById('next-btn').style.display = 'inline-block';
+            
+            // Actualizar estadísticas
+            updateQuizStats(isCorrect);
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            
+            const quiz = quizData[currentQuizTopic];
+            if (!quiz || currentQuestionIndex >= quiz.length) {
+                showQuizResults();
+                return;
+            }
+            
+            loadQuestion();
+            
+            // Ocultar retroalimentación
+            document.getElementById('feedback-container').classList.add('hidden');
+            document.getElementById('submit-btn').style.display = 'inline-block';
+            document.getElementById('next-btn').style.display = 'none';
+            
+            selectedOption = -1;
+        }
+
+        function loadQuestion() {
+            const quiz = quizData[currentQuizTopic];
+            if (!quiz || quiz.length === 0) {
+                document.getElementById('question-text').textContent = 'Selecciona un tema para comenzar';
+                return;
+            }
+            
+            const question = quiz[currentQuestionIndex % quiz.length];
+            
+            document.getElementById('question-icon').textContent = question.icon || '🧠';
+            document.getElementById('question-number').textContent = currentQuestionIndex + 1;
+            document.getElementById('question-text').textContent = question.question;
+            document.getElementById('question-points').textContent = question.points || 10;
+            
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = '';
+            
+            if (question.type === 'multiple-choice') {
+                question.options.forEach((option, index) => {
+                    const optionDiv = document.createElement('div');
+                    optionDiv.className = 'quiz-option p-4 border rounded-lg cursor-pointer';
+                    optionDiv.onclick = () => selectOption(index);
+                    
+                    optionDiv.innerHTML = `
+                        <label class="flex items-center cursor-pointer">
+                            <input type="radio" name="quiz-option" class="mr-3">
+                            <span>${option}</span>
+                        </label>
+                    `;
+                    
+                    optionsContainer.appendChild(optionDiv);
+                });
+            } else if (question.type === 'fill-in-the-blank') {
+                optionsContainer.innerHTML = `
+                    <div class="p-4 border rounded-lg">
+                        <input type="text" id="fill-answer" class="w-full p-3 border rounded-lg fill-input" 
+                               placeholder="Escribe tu respuesta aquí..." 
+                               onkeyup="checkFillAnswer()">
+                        <div id="fill-feedback" class="hidden mt-3 p-3 rounded-lg"></div>
+                    </div>
+                `;
+            } else if (question.type === 'association') {
+                createAssociationQuestion(question.pairs);
+            }
+            
+            const progress = ((currentQuestionIndex + 1) / quiz.length) * 100;
+            document.getElementById('quiz-progress').style.width = progress + '%';
+            document.getElementById('total-questions').textContent = quiz.length;
+            
+            // Deshabilitar botón de envío inicialmente
+            document.getElementById('submit-btn').disabled = true;
+        }
+
+        function checkFillAnswer() {
+            const answer = document.getElementById('fill-answer').value.trim();
+            const quiz = quizData[currentQuizTopic];
+            const question = quiz[currentQuestionIndex % quiz.length];
+            const feedback = document.getElementById('fill-feedback');
+            
+            if (answer.length > 0) {
+                feedback.classList.remove('hidden');
+                
+                if (answer.toLowerCase() === question.answer.toLowerCase()) {
+                    feedback.className = 'mt-3 p-3 rounded-lg bg-green-100 text-green-800';
+                    feedback.innerHTML = '<i class="fas fa-check mr-2"></i>¡Respuesta correcta!';
+                    document.getElementById('submit-btn').disabled = false;
+                    document.getElementById('fill-answer').classList.add('correct');
+                    document.getElementById('fill-answer').classList.remove('incorrect');
+                } else {
+                    feedback.className = 'mt-3 p-3 rounded-lg bg-red-100 text-red-800';
+                    feedback.innerHTML = '<i class="fas fa-times mr-2"></i>Respuesta incorrecta. Inténtalo de nuevo.';
+                    document.getElementById('submit-btn').disabled = true;
+                    document.getElementById('fill-answer').classList.add('incorrect');
+                    document.getElementById('fill-answer').classList.remove('correct');
+                }
+            } else {
+                feedback.classList.add('hidden');
+                document.getElementById('submit-btn').disabled = true;
+                document.getElementById('fill-answer').classList.remove('correct', 'incorrect');
+            }
+        }
+
+        function createAssociationQuestion(pairs) {
+            const container = document.getElementById('options-container');
+            
+            // Mezclar las opciones
+            const shuffledPairs = [...pairs].sort(() => Math.random() - 0.5);
+            const shuffledRights = [...pairs].sort(() => Math.random() - 0.5);
+            
+            let leftItems = '';
+            let rightItems = '';
+            
+            shuffledPairs.forEach((pair, index) => {
+                leftItems += `
+                    <div class="association-item" draggable="true" data-id="${pairs.findIndex(p => p.left === pair.left)}">
+                        ${pair.left}
+                    </div>
+                `;
+            });
+            
+            shuffledRights.forEach((pair, index) => {
+                rightItems += `
+                    <div class="association-target" data-match="${pairs.findIndex(p => p.right === pair.right)}">
+                        <div class="target-label">${pair.right}</div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = `
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="font-bold mb-4">Arrastra desde aquí:</h4>
+                        <div class="space-y-2" id="left-items">${leftItems}</div>
+                    </div>
+                    <div>
+                        <h4 class="font-bold mb-4">Empareja aquí:</h4>
+                        <div class="space-y-2" id="right-items">${rightItems}</div>
+                    </div>
+                </div>
+                <button class="btn-success mt-4" onclick="checkAssociations()">
+                    <i class="fas fa-check mr-2"></i>Verificar Emparejamiento
+                </button>
+                <div id="association-feedback" class="hidden mt-3 p-3 rounded-lg"></div>
+            `;
+            
+            initializeDragAndDrop();
+        }
+
+        function initializeDragAndDrop() {
+            const items = document.querySelectorAll('.association-item');
+            const targets = document.querySelectorAll('.association-target');
+            
+            items.forEach(item => {
+                item.addEventListener('dragstart', (e) => {
+                    e.dataTransfer.setData('text/plain', e.target.dataset.id);
+                    e.target.classList.add('dragging');
+                });
+                
+                item.addEventListener('dragend', (e) => {
+                    e.target.classList.remove('dragging');
+                });
+            });
+            
+            targets.forEach(target => {
+                target.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    target.classList.add('drag-over');
+                });
+                
+                target.addEventListener('dragleave', (e) => {
+                    target.classList.remove('drag-over');
+                });
+                
+                target.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    target.classList.remove('drag-over');
+                    
+                    const itemId = e.dataTransfer.getData('text/plain');
+                    const draggedItem = document.querySelector(`[data-id="${itemId}"]`);
+                    
+                    // Verificar si ya hay un elemento en el target
+                    const existingItem = target.querySelector('.association-item');
+                    if (existingItem && existingItem !== draggedItem) {
+                        // Mover el elemento existente de vuelta a la lista izquierda
+                        document.getElementById('left-items').appendChild(existingItem);
+                    }
+                    
+                    // Mover el nuevo elemento al target
+                    target.appendChild(draggedItem);
+                    
+                    // Verificar si es correcto
+                    if (target.dataset.match === itemId) {
+                        draggedItem.classList.add('bg-green-100');
+                        draggedItem.classList.remove('bg-red-100');
+                        target.classList.add('correct');
+                        target.classList.remove('incorrect');
+                    } else {
+                        draggedItem.classList.add('bg-red-100');
+                        draggedItem.classList.remove('bg-green-100');
+                        target.classList.add('incorrect');
+                        target.classList.remove('correct');
+                    }
+                    
+                    checkAllAssociations();
+                });
+            });
+        }
+
+        function checkAllAssociations() {
+            const targets = document.querySelectorAll('.association-target');
+            const total = targets.length;
+            let correct = 0;
+            
+            targets.forEach(target => {
+                const item = target.querySelector('.association-item');
+                if (item && target.dataset.match === item.dataset.id) {
+                    correct++;
+                }
+            });
+            
+            const feedback = document.getElementById('association-feedback');
+            if (feedback) {
+                if (correct === total) {
+                    feedback.className = 'hidden mt-3 p-3 rounded-lg bg-green-100 text-green-800';
+                    feedback.innerHTML = '<i class="fas fa-check mr-2"></i>¡Todas las asociaciones son correctas!';
+                    document.getElementById('submit-btn').disabled = false;
+                } else {
+                    feedback.className = 'hidden mt-3 p-3 rounded-lg bg-blue-100 text-blue-800';
+                    feedback.innerHTML = `<i class="fas fa-info mr-2"></i>Llevas ${correct} de ${total} correctas.`;
+                }
+            }
+        }
+
+        function checkAssociations() {
+            const targets = document.querySelectorAll('.association-target');
+            const total = targets.length;
+            let correct = 0;
+            
+            targets.forEach(target => {
+                const item = target.querySelector('.association-item');
+                if (item && target.dataset.match === item.dataset.id) {
+                    correct++;
+                }
+            });
+            
+            const feedback = document.getElementById('association-feedback');
+            feedback.classList.remove('hidden');
+            
+            if (correct === total) {
+                feedback.className = 'mt-3 p-3 rounded-lg bg-green-100 text-green-800';
+                feedback.innerHTML = '<i class="fas fa-check mr-2"></i>¡Excelente! Todas las asociaciones son correctas.';
+                document.getElementById('submit-btn').disabled = false;
+            } else {
+                feedback.className = 'mt-3 p-3 rounded-lg bg-orange-100 text-orange-800';
+                feedback.innerHTML = `<i class="fas fa-exclamation mr-2"></i>Tienes ${correct} de ${total} correctas. Revisa tus respuestas.`;
+                document.getElementById('submit-btn').disabled = true;
+            }
+        }
+
+        function updateQuizStats(isCorrect) {
+            const savedProgress = JSON.parse(localStorage.getItem('studyProgress') || '{}');
+            savedProgress.quizStats = savedProgress.quizStats || {
+                totalQuestions: 0,
+                correctAnswers: 0,
+                totalTime: 0
+            };
+            
+            savedProgress.quizStats.totalQuestions++;
+            if (isCorrect) savedProgress.quizStats.correctAnswers++;
+            
+            // Calcular porcentaje de respuestas correctas
+            const correctPercentage = Math.round((savedProgress.quizStats.correctAnswers / savedProgress.quizStats.totalQuestions) * 100);
+            
+            savedProgress.performanceStats = savedProgress.performanceStats || {};
+            savedProgress.performanceStats.correctAnswers = correctPercentage;
+            
+            localStorage.setItem('studyProgress', JSON.stringify(savedProgress));
+            updatePerformanceStats();
+        }
+
+        function showQuizResults() {
+            document.getElementById('quiz-container').classList.add('hidden');
+            document.getElementById('quiz-results').classList.remove('hidden');
+            
+            const quiz = quizData[currentQuizTopic];
+            const totalQuestions = quiz ? quiz.length : 0;
+            const maxScore = quiz ? quiz.reduce((sum, q) => sum + (q.points || 10), 0) : totalQuestions * 10;
+            const percentage = totalQuestions > 0 ? Math.round((quizScore / maxScore) * 100) : 0;
+            const correctAnswers = quizCorrectCount;
+
+            document.getElementById('final-score').textContent = percentage + '%';
+            document.getElementById('correct-answers').textContent = correctAnswers;
+            document.getElementById('total-answers').textContent = totalQuestions;
+            
+            // Actualizar progreso del tema
+            updateTopicProgressFromQuiz(percentage);
+            
+            // Actualizar estadísticas del dashboard
+            const savedProgress = JSON.parse(localStorage.getItem('studyProgress') || '{}');
+            const currentMastery = savedProgress.overallMastery || 0;
+            const newMastery = Math.min(100, currentMastery + Math.floor(percentage / 10));
+            
+            savedProgress.overallMastery = newMastery;
+            savedProgress.topicProgress = savedProgress.topicProgress || {};
+            savedProgress.topicProgress[currentQuizTopic] = percentage;
+            
+            // Incrementar temas completados si el puntaje es alto
+            if (percentage >= 80) {
+                savedProgress.completedTopics = (savedProgress.completedTopics || 0) + 1;
+            }
+            
+            localStorage.setItem('studyProgress', JSON.stringify(savedProgress));
+            initializeDashboard();
+        }
+
+        function updateTopicProgressFromQuiz(percentage) {
+            const savedProgress = JSON.parse(localStorage.getItem('studyProgress') || '{}');
+            savedProgress.topicProgress = savedProgress.topicProgress || {};
+            savedProgress.topicProgress[currentQuizTopic] = percentage;
+            
+            localStorage.setItem('studyProgress', JSON.stringify(savedProgress));
+            updateTopicProgress();
+        }
+
+        function restartQuiz() {
+            currentQuestionIndex = 0;
+            quizScore = 0;
+            quizCorrectCount = 0;
+            selectedOption = -1;
+
+            document.getElementById('quiz-container').classList.remove('hidden');
+            document.getElementById('quiz-results').classList.add('hidden');
+            document.getElementById('current-score').textContent = '0';
+            
+            loadQuestion();
+            document.getElementById('feedback-container').classList.add('hidden');
+            document.getElementById('submit-btn').style.display = 'inline-block';
+            document.getElementById('next-btn').style.display = 'none';
+        }
+
+        function changeQuizTopic() {
+            const selector = document.getElementById('quiz-topic');
+            currentQuizTopic = selector.value;
+            restartQuiz();
+        }
+
+        function changeDifficulty() {
+            // Implementar filtro por dificultad
+            restartQuiz();
+        }
+
+        function changeQuestionCount() {
+            // Implementar cambio de número de preguntas
+            restartQuiz();
+        }
+
+        function previousQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                loadQuestion();
+                
+                document.getElementById('feedback-container').classList.add('hidden');
+                document.getElementById('submit-btn').style.display = 'inline-block';
+                document.getElementById('next-btn').style.display = 'none';
+                selectedOption = -1;
+            }
+        }
+
+        // Funciones del examen
+        function initializeExam() {
+            const container = document.getElementById('exam-distribution');
+            container.innerHTML = '';
+
+            const availableTopics = topics.filter(topic => quizData[topic.id]);
+
+            availableTopics.forEach(topic => {
+                const count = topic.id === 'factorial' || topic.id === 'tri' ? 9 : 8;
+                container.innerHTML += `
+                    <div class="flex justify-between">
+                        <span>${topic.icon} ${topic.name}</span>
+                        <span class="font-bold">${count} preguntas</span>
+                    </div>
+                `;
+            });
+        }
+
+        function startExam() {
+            document.getElementById('exam-start').classList.add('hidden');
+            document.getElementById('exam-active').classList.remove('hidden');
+            
+            examActive = true;
+            examQuestionIndex = 0;
+            examScore = 0;
+            examTime = 3600;
+            
+            startExamTimer();
+            loadExamQuestion();
+        }
+
+        function startExamTimer() {
+            examTimer = setInterval(() => {
+                examTime--;
+                
+                const minutes = Math.floor(examTime / 60);
+                const seconds = examTime % 60;
+                document.getElementById('exam-timer').textContent = 
+                    `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                
+                if (examTime <= 0) {
+                    finishExam();
+                }
+            }, 1000);
+        }
+
+        function loadExamQuestion() {
+            // Seleccionar pregunta aleatoria de todos los temas
+            const availableTopics = Object.keys(quizData).filter(topic => quizData[topic].length > 0);
+            if (availableTopics.length === 0) return;
+            
+            const randomTopic = availableTopics[Math.floor(Math.random() * availableTopics.length)];
+            const topicQuestions = quizData[randomTopic];
+            const randomQuestion = topicQuestions[Math.floor(Math.random() * topicQuestions.length)];
+            
+            // Clonar la pregunta para evitar modificar el original
+            const question = JSON.parse(JSON.stringify(randomQuestion));
+            
+            document.getElementById('exam-question-icon').textContent = question.icon || '🧠';
+            document.getElementById('exam-question-number').textContent = examQuestionIndex + 1;
+            document.getElementById('exam-question-text').textContent = question.question;
+            
+            const optionsContainer = document.getElementById('exam-options');
+            optionsContainer.innerHTML = '';
+            
+            if (question.type === 'multiple-choice' && question.options) {
+                // Mezclar opciones para el examen
+                const shuffledOptions = [...question.options].sort(() => Math.random() - 0.5);
+                const originalCorrectIndex = question.correct;
+                const correctAnswer = question.options[originalCorrectIndex];
+                question.correct = shuffledOptions.indexOf(correctAnswer);
+                
+                shuffledOptions.forEach((option, index) => {
+                    const optionDiv = document.createElement('div');
+                    optionDiv.className = 'quiz-option p-4 border rounded-lg cursor-pointer';
+                    optionDiv.onclick = () => selectExamOption(index);
+                    
+                    optionDiv.innerHTML = `
+                        <label class="flex items-center cursor-pointer">
+                            <input type="radio" name="exam-option" class="mr-3">
+                            <span>${option}</span>
+                        </label>
+                    `;
+                    
+                    optionsContainer.appendChild(optionDiv);
+                });
+            }
+            
+            const progress = ((examQuestionIndex + 1) / 50) * 100;
+            document.getElementById('exam-progress').style.width = progress + '%';
+        }
+
+        function selectExamOption(index) {
+            document.querySelectorAll('#exam-options .quiz-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            document.querySelectorAll('#exam-options .quiz-option')[index].classList.add('selected');
+        }
+
+        function submitExamAnswer() {
+            // Calcular puntaje (simulación)
+            const isCorrect = Math.random() > 0.3; // 70% de probabilidad de acierto
+            if (isCorrect) examScore += 2; // 2 puntos por pregunta correcta
+            
+            examQuestionIndex++;
+            
+            if (examQuestionIndex >= 50) {
+                finishExam();
+                return;
+            }
+            
+            loadExamQuestion();
+        }
+
+        function finishExam() {
+            clearInterval(examTimer);
+            
+            document.getElementById('exam-active').classList.add('hidden');
+            document.getElementById('exam-results').classList.remove('hidden');
+            
+            // Calcular resultados
+            const percentage = Math.round((examScore / 100) * 100); // Máximo 100 puntos
+            const timeUsed = 3600 - examTime;
+            const minutes = Math.floor(timeUsed / 60);
+            const seconds = timeUsed % 60;
+            
+            document.getElementById('exam-final-score').textContent = percentage + '%';
+            document.getElementById('exam-time-used').textContent = 
+                `${minutes}:${seconds.toString().padStart(2, '0')}`;
+            
+            // Actualizar estadísticas del dashboard
+            const savedProgress = JSON.parse(localStorage.getItem('studyProgress') || '{}');
+            const currentMastery = savedProgress.overallMastery || 0;
+            const newMastery = Math.min(100, currentMastery + Math.floor(percentage / 5));
+            
+            savedProgress.overallMastery = newMastery;
+            savedProgress.examAttempts = (savedProgress.examAttempts || 0) + 1;
+            savedProgress.bestExamScore = Math.max(savedProgress.bestExamScore || 0, percentage);
+            
+            // Incrementar temas completados si el puntaje es alto
+            if (percentage >= 70) {
+                savedProgress.completedTopics = Math.min(topics.length, (savedProgress.completedTopics || 0) + 1);
+            }
+            
+            localStorage.setItem('studyProgress', JSON.stringify(savedProgress));
+            initializeDashboard();
+            
+            // Generar desglose por temas
+            generateExamBreakdown();
+        }
+
+        function generateExamBreakdown() {
+            const container = document.getElementById('exam-breakdown');
+            const topicList = topics.filter(topic => quizData[topic.id]);
+            const breakdownTopics = topicList.length ? topicList : topics;
+
+            container.innerHTML = '';
+
+            breakdownTopics.forEach(topic => {
+                const score = Math.floor(Math.random() * 30) + 70; // Simulación: 70-100%
+                const status = score >= 80 ? 'text-green-600' : score >= 60 ? 'text-orange-600' : 'text-red-600';
+
+                container.innerHTML += `
+                    <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                        <span class="font-medium">${topic.name}</span>
+                        <span class="font-bold ${status}">${score}%</span>
+                    </div>
+                `;
+            });
+        }
+
+        function restartExam() {
+            document.getElementById('exam-results').classList.add('hidden');
+            document.getElementById('exam-start').classList.remove('hidden');
+        }
+
+        function previousExamQuestion() {
+            if (examQuestionIndex > 0) {
+                examQuestionIndex--;
+                loadExamQuestion();
+            }
+        }
+
+        // Funciones de utilidad
+        function setupEventListeners() {
+            // Guardar progreso al salir
+            window.addEventListener('beforeunload', function() {
+                const progress = JSON.parse(localStorage.getItem('studyProgress') || '{}');
+                progress.lastVisit = Date.now();
+                localStorage.setItem('studyProgress', JSON.stringify(progress));
+            });
+            
+            // Actualizar racha diaria
+            updateDailyStreak();
+        }
+
+        function updateDailyStreak() {
+            const savedProgress = JSON.parse(localStorage.getItem('studyProgress') || '{}');
+            const lastVisit = savedProgress.lastVisit || 0;
+            const today = new Date().toDateString();
+            const lastVisitDate = new Date(lastVisit).toDateString();
+            
+            if (today !== lastVisitDate) {
+                const yesterday = new Date();
+                yesterday.setDate(yesterday.getDate() - 1);
+                
+                if (lastVisitDate === yesterday.toDateString() || lastVisit === 0) {
+                    // Continuar racha
+                    savedProgress.currentStreak = (savedProgress.currentStreak || 0) + 1;
+                } else {
+                    // Reiniciar racha
+                    savedProgress.currentStreak = 1;
+                }
+                
+                savedProgress.lastVisit = Date.now();
+                savedProgress.studyDays = (savedProgress.studyDays || 0) + 1;
+                
+                localStorage.setItem('studyProgress', JSON.stringify(savedProgress));
+                document.getElementById('current-streak').textContent = savedProgress.currentStreak;
+            }
+        }
+
+        async function renderNotebookLMSection() {
+            const root = document.getElementById('notebooklm');
+            if (!root) return;
+            const description = 'NotebookLM es un entorno de estudio de Google con materiales curados por tema. Cada notebook está actualizado y funciona como un mini-centro de aprendizaje para profundizar antes del cuestionario o cuando necesites repasar con más contexto.';
+
+            root.innerHTML = `
+                <div class="py-12">
+                    <h2 class="text-3xl font-bold mb-4 text-center md:text-left">Material ampliado (NotebookLM)</h2>
+                    <p class="text-gray-600 max-w-3xl mb-6">${description}</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="notebooklm-grid"></div>
+                </div>
+            `;
+
+            const grid = root.querySelector('#notebooklm-grid');
+
+            try {
+                const response = await fetch('resources/notebooklm-links.json', { cache: 'no-store' });
+                if (!response.ok) {
+                    throw new Error('No se pudo cargar');
+                }
+                const data = await response.json();
+                data.forEach(item => {
+                    const card = document.createElement('div');
+                    card.className = 'card p-5 flex flex-col justify-between gap-3';
+                    card.innerHTML = `
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2"></h3>
+                            <p class="text-gray-600 text-sm"></p>
+                        </div>
+                        <a class="btn-primary inline-block text-center" target="_blank" rel="noopener">Abrir Notebook</a>
+                    `;
+                    card.querySelector('h3').textContent = item.titulo;
+                    card.querySelector('p').textContent = item.descripcion || '';
+                    card.querySelector('a').href = item.url;
+                    grid.appendChild(card);
+                });
+            } catch (error) {
+                console.error('Error al cargar los enlaces de NotebookLM:', error);
+                root.innerHTML = '<div class="json-error">No fue posible cargar los enlaces de NotebookLM en este momento.</div>';
+            }
+
+            const landing = document.getElementById('landing');
+            if (landing && landing.classList.contains('active')) {
+                root.classList.add('active');
+            }
+        }
+
+        function loadLandingPage() {
+            // Animaciones de entrada
+            setTimeout(() => {
+                const hero = document.querySelector('#landing .hero-gradient');
+                if (hero) {
+                    hero.style.opacity = '0';
+                    hero.style.transform = 'translateY(30px)';
+                    requestAnimationFrame(() => {
+                        hero.style.transition = 'all 0.6s ease';
+                        hero.style.opacity = '1';
+                        hero.style.transform = 'translateY(0)';
+                    });
+                }
+
+                const elements = document.querySelectorAll('#landing .portal-card, #landing .glass-card');
+                elements.forEach((element, index) => {
+                    element.style.opacity = '0';
+                    element.style.transform = 'translateY(24px)';
+
+                    setTimeout(() => {
+                        element.style.transition = 'all 0.6s ease';
+                        element.style.opacity = '1';
+                        element.style.transform = 'translateY(0)';
+                    }, index * 120);
+                });
+            }, 100);
+        }
+    </script>
+    <!-- Core Scripts -->
+    <script src="./platform.js"></script>
+    <script src="./assets/js/main.js"></script>
+    
+    <script type="module">
+        import { showHumor } from './assets/js/humor.js';
+        import { renderMiniCaso } from './assets/js/minicaso.js';
+
+        const videoUnitMap = {
+            'teoria_medicion': 'teoria_medicion',
+            'teoria_escalamiento': 'teoria_escalamiento',
+            'esc_psicologico': 'esc_psicologico',
+            'thurstone': 'thurstone',
+            'likert': 'likert',
+            'guttman': 'guttman',
+            'tct': 'tct',
+            'confiabilidad': 'confiabilidad',
+            'validez': 'validez',
+            'factorial': 'factorial',
+            'baremacion': 'baremacion',
+            'tri': 'tri'
+        };
+
+        const humorMount = '#prevideo-humor';
+        const miniCasoMount = '#mini-caso';
+
+        const showHumorForVideo = (videoId) => {
+            const slug = videoUnitMap[videoId] || 'tct';
+            showHumor(slug, humorMount);
+        };
+
+        const clearMiniCaso = () => {
+            const mount = document.querySelector(miniCasoMount);
+            if (mount) {
+                mount.innerHTML = '';
+            }
+        };
+
+        const renderMiniCasoForDeck = (slug) => {
+            if (!slug) {
+                clearMiniCaso();
+                return;
+            }
+            renderMiniCaso(slug, miniCasoMount);
+        };
+
+        const originalChangeVideo = window.changeVideo;
+        window.changeVideo = function(videoId, title) {
+            if (typeof originalChangeVideo === 'function') {
+                originalChangeVideo.apply(this, arguments);
+            }
+            showHumorForVideo(videoId);
+        };
+
+        const originalChangeDeck = window.changeDeck;
+        window.changeDeck = function() {
+            if (typeof originalChangeDeck === 'function') {
+                originalChangeDeck.apply(this, arguments);
+            }
+            const selector = document.getElementById('deck-selector');
+            renderMiniCasoForDeck(selector ? selector.value : '');
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedProgress = JSON.parse(localStorage.getItem('studyProgress') || '{}');
+            const videoId = savedProgress.lastVideoId;
+            if (videoId) {
+                showHumorForVideo(videoId);
+            }
+
+            const selector = document.getElementById('deck-selector');
+            if (selector && selector.value) {
+                renderMiniCasoForDeck(selector.value);
+            } else {
+                clearMiniCaso();
+            }
+        });
+    </script>
+</body>
+</html>

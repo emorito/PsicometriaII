@@ -1,0 +1,90 @@
+[
+  {
+    "type": "multiple-choice",
+    "question": "¿Cuál es el supuesto fundamental de la Ley del Juicio Comparativo sobre la discriminación?",
+    "options": [
+      "La discriminación es aleatoria",
+      "La discriminabilidad es función directa de la diferencia percibida entre estímulos",
+      "Los estímulos físicos no pueden ser discriminados psicológicamente",
+      "La discriminación depende exclusivamente de la varianza de error"
+    ],
+    "answer": "La discriminabilidad es función directa de la diferencia percibida entre estímulos",
+    [cite_start]"explanation": "Thurstone postula que a mayor distancia en el continuo psicológico entre dos estímulos, más fácil es discriminarlos (mayor acuerdo en los juicios)[cite: 41, 46].",
+    "difficulty": "medium",
+    "icon": "eye",
+    "topic": "Ley del Juicio Comparativo",
+    "points": 20
+  },
+  {
+    "type": "multiple-choice",
+    "question": "¿Qué simplificación matemática define al 'Caso V' de Thurstone?",
+    "options": [
+      "Las correlaciones son perfectas (r=1)",
+      "Las distribuciones no son normales",
+      "Las varianzas de respuesta son iguales y la correlación es cero",
+      "Se eliminan los valores extremos"
+    ],
+    "answer": "Las varianzas de respuesta son iguales y la correlación es cero",
+    [cite_start]"explanation": "Esto permite que el término de dispersión en la fórmula se convierta en una constante (generalmente 1), simplificando enormemente el cálculo[cite: 83, 84].",
+    "difficulty": "hard",
+    "icon": "🧮",
+    "topic": "Caso V",
+    "points": 30
+  },
+  {
+    "type": "multiple-choice",
+    "question": "En el proceso de cálculo, ¿qué hacemos con la matriz de frecuencias inicial?",
+    "options": [
+      "La convertimos directamente a valores de escala",
+      "La transformamos en una matriz de proporciones y luego a puntuaciones Z",
+      "Restamos las medias de las filas",
+      "Eliminamos los sujetos inconsistentes"
+    ],
+    "answer": "La transformamos en una matriz de proporciones y luego a puntuaciones Z",
+    [cite_start]"explanation": "Las frecuencias se pasan a proporciones (p) y estas se buscan en la tabla de la curva normal para obtener puntuaciones típicas (z)[cite: 103, 120].",
+    "difficulty": "medium",
+    "icon": "🔄",
+    "topic": "Procedimiento",
+    "points": 20
+  },
+  {
+    "type": "fill-in-the-blank",
+    "question": "La respuesta modal equivale a la ________ de la distribución de respuestas evocadas.",
+    "answer": "media",
+    [cite_start]"explanation": "En una distribución normal, que es la asumida por Thurstone, la media, la mediana y la moda coinciden[cite: 33, 34].",
+    "difficulty": "easy",
+    "icon": "target",
+    "topic": "Estadística Básica",
+    "points": 10
+  },
+  {
+    "type": "association",
+    "question": "Ordena la secuencia de matrices en el método de Comparaciones Apareadas.",
+    "answer": {
+      "Paso 1": "Matriz de Frecuencias",
+      "Paso 2": "Matriz de Proporciones",
+      "Paso 3": "Matriz de Puntuaciones Típicas (Z)",
+      "Paso 4": "Matriz de Diferencias entre columnas"
+    },
+    [cite_start]"explanation": "Es la secuencia operativa estandarizada para obtener los valores escalares finales[cite: 104, 114, 121, 125].",
+    "difficulty": "medium",
+    "icon": "list",
+    "topic": "Procedimiento",
+    "points": 20
+  },
+  {
+    "type": "association",
+    "question": "Relaciona los conceptos con su definición en el modelo.",
+    "answer": {
+      "Estímulo Psicológico": "Objeto que provoca reacción sensorial (ej. prestigio, actitud)",
+      "Continuo Psicológico": "Dimensión latente donde se ordenan los estímulos",
+      "Valor Escalar": "Ubicación del estímulo en el continuo (Media/Moda)",
+      "Puntuación Z": "Medida de distancia basada en la desviación normal"
+    },
+    [cite_start]"explanation": "Thurstone adapta la medición física a construcciones psicológicas usando estas definiciones[cite: 11, 26, 34, 62].",
+    "difficulty": "easy",
+    "icon": "abc",
+    "topic": "Conceptos",
+    "points": 10
+  }
+]

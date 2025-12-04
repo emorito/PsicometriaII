@@ -1,0 +1,90 @@
+[
+  {
+    "type": "multiple-choice",
+    "question": "¿Cuál fue la principal motivación de Likert para crear su método en 1932?",
+    "options": [
+      "Crear un modelo matemático determinista complejo",
+      "Superar la necesidad de usar jueces y simplificar la medición de actitudes",
+      "Medir estímulos físicos con precisión logarítmica",
+      "Garantizar la unidimensionalidad mediante análisis factorial confirmatorio"
+    ],
+    "answer": "Superar la necesidad de usar jueces y simplificar la medición de actitudes",
+    "explanation": "Likert buscaba un procedimiento más sencillo y menos costoso que el de los intervalos aparentemente iguales de Thurstone, obteniendo fiabilidades similares.",
+    "difficulty": "easy",
+    "icon": "history",
+    "topic": "Introducción",
+    "points": 10
+  },
+  {
+    "type": "multiple-choice",
+    "question": "Si un ítem tiene una escala de 1 a 5 y un sujeto responde con un 2, ¿cuál es su puntuación transformada si el ítem es invertido?",
+    "options": [
+      "2",
+      "3",
+      "4",
+      "5"
+    ],
+    "answer": "4",
+    "explanation": "Aplicando la fórmula: P_i = (P_max + 1) - P_orig. Es decir: (5 + 1) - 2 = 4.",
+    "difficulty": "medium",
+    "icon": "calculate",
+    "topic": "Puntuación",
+    "points": 20
+  },
+  {
+    "type": "multiple-choice",
+    "question": "Un ítem se considera 'indiferenciador' y debe eliminarse si...",
+    "options": [
+      "Su desviación típica es alta",
+      "Su Índice de Homogeneidad Corregido (IHc) es inferior a 0.20",
+      "La media del grupo alto es significativamente mayor que la del grupo bajo",
+      "Es un enunciado de valor y no de hecho"
+    ],
+    "answer": "Su Índice de Homogeneidad Corregido (IHc) es inferior a 0.20",
+    "explanation": "Un IHc bajo indica que el ítem no mide lo mismo que el resto de la escala, aportando poca información útil.",
+    "difficulty": "hard",
+    "icon": "filter_list",
+    "topic": "Análisis de Ítems",
+    "points": 30
+  },
+  {
+    "type": "fill-in-the-blank",
+    "question": "El método de Likert se clasifica como un método centrado en ________.",
+    "answer": "los sujetos",
+    "explanation": "El objetivo es escalar a las personas (diferencias individuales) y no calibrar los estímulos, considerándolos réplicas unos de otros.",
+    "difficulty": "medium",
+    "icon": "person",
+    "topic": "Supuestos",
+    "points": 20
+  },
+  {
+    "type": "association",
+    "question": "Relaciona el concepto con su función en la construcción de la escala.",
+    "answer": {
+      "Ítems Invertidos": "Evitar la aquiescencia o respuestas estereotipadas",
+      "Alfa de Cronbach": "Evaluar la fiabilidad del cuestionario total",
+      "Prueba t de Student": "Analizar la discriminación del ítem entre grupos extremos",
+      "Puntuación Z": "Interpretar la puntuación del sujeto respecto al grupo"
+    },
+    "explanation": "Cada herramienta estadística cumple una función específica en las fases de construcción, análisis y valoración.",
+    "difficulty": "medium",
+    "icon": "link",
+    "topic": "Metodología",
+    "points": 20
+  },
+  {
+    "type": "association",
+    "question": "Clasifica los siguientes enunciados según criterios de redacción de Likert.",
+    "answer": {
+      "Enunciado de hecho": "Inadecuado (ej: 'La pena de muerte mata')",
+      "Enunciado de valor": "Adecuado (ej: 'La pena de muerte es un crimen')",
+      "Frase con doble negación": "Inadecuado (genera confusión)",
+      "Lenguaje sencillo": "Adecuado (comprensible para todos)"
+    },
+    "explanation": "Likert estableció criterios claros para redactar ítems que permitan discriminar actitudes eficazmente.",
+    "difficulty": "easy",
+    "icon": "edit",
+    "topic": "Redacción de Ítems",
+    "points": 10
+  }
+]

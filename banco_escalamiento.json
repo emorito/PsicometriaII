@@ -1,0 +1,89 @@
+[
+  {
+    "type": "multiple-choice",
+    "question": "¿Cuál es la diferencia fundamental en el procedimiento experimental entre Fechner y Stevens?",
+    "options": [
+      "Fechner usaba jueces y Stevens no",
+      "Fechner media discriminación (DAP) y Stevens estimación de magnitudes",
+      "Fechner usaba funciones potenciales y Stevens logarítmicas",
+      "No había diferencia, solo cambió la fórmula matemática"
+    ],
+    "answer": "Fechner media discriminación (DAP) y Stevens estimación de magnitudes",
+    [cite_start]"explanation": "Fechner construía escalas sumando diferencias apenas perceptibles, mientras que Stevens pedía a los sujetos asignar números directamente a la intensidad percibida[cite: 392].",
+    "difficulty": "medium",
+    "icon": "lab",
+    "topic": "Psicofísica",
+    "points": 20
+  },
+  {
+    "type": "multiple-choice",
+    "question": "Según la clasificación de Torgerson (1958), el método de Likert es un método...",
+    "options": [
+      "Centrado en el estímulo",
+      "De respuesta",
+      "Centrado en el sujeto",
+      "De juicio cuantitativo"
+    ],
+    "answer": "Centrado en el sujeto",
+    [cite_start]"explanation": "En Likert, la variabilidad se atribuye a las diferencias entre las personas; el objetivo es medir la actitud del sujeto, no escalar los ítems[cite: 458, 459].",
+    "difficulty": "easy",
+    "icon": "👤",
+    "topic": "Clasificación de Métodos",
+    "points": 10
+  },
+  {
+    "type": "multiple-choice",
+    "question": "¿Qué característica define al modelo de Guttman como 'determinista'?",
+    "options": [
+      "Considera la varianza de error",
+      "El puntaje total permite reproducir exactamente el patrón de respuestas",
+      "Utiliza jueces para determinar los valores escalares",
+      "Se basa en la Ley de Weber"
+    ],
+    "answer": "El puntaje total permite reproducir exactamente el patrón de respuestas",
+    [cite_start]"explanation": "En el modelo ideal de Guttman, si un sujeto supera un ítem difícil, necesariamente debió superar los anteriores más fáciles[cite: 443, 444].",
+    "difficulty": "hard",
+    "icon": "📈",
+    "topic": "Escalamiento Acumulativo",
+    "points": 30
+  },
+  {
+    "type": "fill-in-the-blank",
+    "question": "Thurstone postuló la Ley del Juicio ________ para medir atributos sin correlato físico.",
+    "answer": "Comparativo",
+    [cite_start]"explanation": "Esta ley permite escalar estímulos psicológicos basándose en la proporción de veces que un estímulo es juzgado superior a otro[cite: 414].",
+    "difficulty": "medium",
+    "icon": "⚖️",
+    "topic": "Escalamiento Psicológico",
+    "points": 20
+  },
+  {
+    "type": "association",
+    "question": "Relaciona el autor con su contribución principal al escalamiento.",
+    "answer": {
+      "Fechner": "Relación Logarítmica (Umbrales)",
+      "Stevens": "Relación Potencial (Estimación de magnitud)",
+      "Likert": "Escalas sumativas sin jueces",
+      "Guttman": "Escalograma acumulativo determinista"
+    },
+    [cite_start]"explanation": "Cada autor definió una era o enfoque distinto: psicofísica clásica, nueva psicofísica, medición de actitudes simple y medición acumulativa[cite: 385, 395, 431, 442].",
+    "difficulty": "medium",
+    "icon": "🔗",
+    "topic": "Historia",
+    "points": 20
+  },
+  {
+    "type": "association",
+    "question": "Clasifica los métodos según el origen de la variabilidad (Torgerson).",
+    "answer": {
+      "Centrado en Sujeto": "Mide personas (ej. Actitudes)",
+      "Centrado en Estímulo": "Mide objetos (ej. Juicio de jueces)",
+      "De Respuesta": "Mide ambos (Interacción sujeto-ítem)"
+    },
+    [cite_start]"explanation": "Esta tríada de Torgerson es el criterio clásico para organizar la metodología psicométrica[cite: 457, 458, 460, 462].",
+    "difficulty": "easy",
+    "icon": "🗂️",
+    "topic": "Clasificación de Métodos",
+    "points": 10
+  }
+]

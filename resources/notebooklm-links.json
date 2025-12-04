@@ -1,0 +1,86 @@
+[
+   {
+    "id": "teoria_medicion",
+    "titulo": "Teoría de la Medición",
+    "unidad": "fundamentos",
+    "url": "https://notebooklm.google.com/notebook/9184c622-bc8d-4441-8f1f-1220548f6152",
+    "descripcion": "Historia (Fechner, Stevens), Teoría Representacional, homomorfismos y problemas de unicidad/significación."
+  },
+  {
+    "id": "teoria_escalamiento",
+    "titulo": "Teoría del Escalamiento",
+    "unidad": "escalamiento",
+    "url": "https://notebooklm.google.com/notebook/54ebd7e3-7c9d-4ac8-9db3-05f7b2a2fdd7",
+    "descripcion": "Psicofísica clásica vs moderna, clasificación de métodos (Torgerson) y enfoques de respuesta."
+  },
+  {
+    "id": "esc_psicologico",
+    "titulo": "Escalamiento Psicológico",
+    "unidad": "escalamiento",
+    "url": "https://notebooklm.google.com/notebook/f67a1ec3-1e9e-43e2-b1c4-da5e02af057c",
+    "descripcion": "Métodos para medir atributos sin correlato físico y fundamentos del juicio comparativo."
+  },
+  {
+    "id": "thurstone",
+    "titulo": "Escalamiento Thurstone",
+    "unidad": "escalamiento",
+    "url": "https://notebooklm.google.com/notebook/854fd2c3-4424-439e-80fa-cce8e17e1b94",
+    "descripcion": "Método de Comparaciones Apareadas (Caso V), transformación de proporciones a puntajes Z."
+  },
+  {
+    "id": "likert",
+    "titulo": "Escalamiento Likert",
+    "unidad": "escalamiento",
+    "url": "https://notebooklm.google.com/notebook/fdde53ef-3fd0-4845-8374-c470a4c5b705",
+    "descripcion": "Escalas sumativas, construcción de ítems, monotonicidad y análisis de discriminación."
+  },
+  {
+    "id": "guttman",
+    "titulo": "Escalamiento Guttman",
+    "unidad": "escalamiento",
+    "url": "https://notebooklm.google.com/notebook/f67a1ec3-1e9e-43e2-b1c4-da5e02af057c",
+    "descripcion": "Modelo determinista, escalograma, patrones de error y coeficiente de reproductibilidad."
+  },
+  {
+    "id": "tct",
+    "titulo": "Teoría Clásica de los Tests",
+    "unidad": "tct",
+    "url": "https://notebooklm.google.com/notebook/62755d57-4e52-49b4-a38e-5950aca54870",
+    "descripcion": "Conceptos base, errores, fiabilidad y decisiones prácticas desde TCT."
+  },
+  {
+    "id": "confiabilidad",
+    "titulo": "Confiabilidad",
+    "unidad": "tct",
+    "url": "https://notebooklm.google.com/notebook/1e09d56e-6786-496e-ad5f-42a97196a1a1",
+    "descripcion": "Coeficientes, SEM, test–retest e interpretación aplicada."
+  },
+  {
+    "id": "validez",
+    "titulo": "Validez",
+    "unidad": "validez",
+    "url": "https://notebooklm.google.com/notebook/0c3a8c2d-decf-466d-a2a1-a999c5245019",
+    "descripcion": "Evidencias basadas en contenido, estructura y relación con otras variables."
+  },
+  {
+    "id": "af",
+    "titulo": "Análisis Factorial",
+    "unidad": "estructura",
+    "url": "https://notebooklm.google.com/notebook/06d532f0-159b-433b-a8e7-b94081b89cd1",
+    "descripcion": "AFe/ACe, supuestos, cargas, rotaciones y lectura de ítems."
+  },
+  {
+    "id": "baremacion",
+    "titulo": "Baremación",
+    "unidad": "estandares",
+    "url": "https://notebooklm.google.com/notebook/348a7580-4b72-47cf-b322-8740dcab6753",
+    "descripcion": "Normas, percentiles, puntuaciones típicas y decisiones por grupos."
+  },
+  {
+    "id": "tri",
+    "titulo": "Teoría de Respuesta a los Ítems",
+    "unidad": "tri",
+    "url": "https://notebooklm.google.com/notebook/20826e30-d3be-49e8-a4c2-63638ba430e9",
+    "descripcion": "Parámetros a/b/c, curvas características e información del ítem/test."
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "front": "Escalograma de Guttman",
+    "back": "Método de escalamiento unidimensional clasificado como 'método de respuesta'. Permite escalar tanto a los sujetos como a los estímulos (ítems) simultáneamente.",
+    "difficulty": "easy",
+    "icon": "📏",
+    "topic": "Definición",
+    "points": 10
+  },
+  {
+    "front": "Concepto de Escala Perfecta",
+    "back": "Configuración ideal donde, conociendo solo el puntaje total del sujeto, se puede reproducir exactamente su patrón de respuestas (ej. un sujeto con 3 aciertos habrá acertado los 3 ítems más fáciles).",
+    "difficulty": "medium",
+    "icon": "✨",
+    "topic": "Conceptos Básicos",
+    "points": 20
+  },
+  {
+    "front": "Modelo Determinista",
+    "back": "Asume que si un sujeto tiene un rasgo superior a la dificultad del ítem, la probabilidad de acertar es 1; si es inferior, es 0. No contempla el azar ni el error.",
+    "difficulty": "hard",
+    "icon": "🤖",
+    "topic": "Supuestos",
+    "points": 30
+  },
+  {
+    "front": "Coeficiente de Reproductibilidad (CR)",
+    "back": "Indicador de qué tan bien la escala se aproxima a una escala perfecta. Se calcula como 1 menos la proporción de errores. El criterio de aceptación es CR ≥ 0.90.",
+    "difficulty": "medium",
+    "icon": "📊",
+    "topic": "Coeficientes",
+    "points": 20
+  },
+  {
+    "front": "Coeficiente de Escalabilidad (CS)",
+    "back": "Propuesto por Menzel para corregir el efecto de la reproductibilidad marginal (RMM). Se considera aceptable si es igual o superior a 0.60.",
+    "difficulty": "hard",
+    "icon": "📈",
+    "topic": "Coeficientes",
+    "points": 30
+  },
+  {
+    "front": "Escalas tipo posibles",
+    "back": "En una escala de Guttman con K ítems dicotómicos, el número de patrones de respuesta perfectos es K + 1.",
+    "difficulty": "medium",
+    "icon": "🔢",
+    "topic": "Matemática del Modelo",
+    "points": 20
+  },
+  {
+    "front": "Diferencia Likert vs. Guttman",
+    "back": "En Likert los ítems se consideran réplicas (mismo valor). En Guttman, los ítems difieren en dificultad y se ordenan jerárquicamente.",
+    "difficulty": "easy",
+    "icon": "🆚",
+    "topic": "Comparación",
+    "points": 10
+  }
+]
