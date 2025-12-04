@@ -2120,6 +2120,10 @@
             optionsContainer.innerHTML = '';
             
             if (question.type === 'multiple-choice') {
+                if (!question.options || !Array.isArray(question.options)) {
+                    optionsContainer.innerHTML = '<p class="text-red-500">Error: Pregunta sin opciones válidas</p>';
+                    return;
+                }
                 question.options.forEach((option, index) => {
                     const optionDiv = document.createElement('div');
                     optionDiv.className = 'quiz-option p-4 border rounded-lg cursor-pointer';
@@ -2137,6 +2141,12 @@
             } else if (question.type === 'fill-in-the-blank') {
                 optionsContainer.innerHTML = `
                     <div class="p-4 border rounded-lg">
+                        <p class="text-gray-600 mb-3 text-sm">
+                            <svg class="inline w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            Escribe la respuesta que complete el enunciado
+                        </p>
                         <input type="text" id="fill-answer" class="w-full p-3 border rounded-lg fill-input" 
                                placeholder="Escribe tu respuesta aquí..." 
                                onkeyup="checkFillAnswer()">
@@ -2144,7 +2154,26 @@
                     </div>
                 `;
             } else if (question.type === 'association') {
-                createAssociationQuestion(question.pairs);
+                // Convertir formato answer (objeto) a pairs (array) si es necesario
+                let pairs = question.pairs;
+                if (!pairs && question.answer && typeof question.answer === 'object') {
+                    pairs = Object.entries(question.answer).map(([key, value]) => ({
+                        left: key,
+                        right: value
+                    }));
+                }
+                if (pairs && pairs.length > 0) {
+                    createAssociationQuestion(pairs);
+                } else {
+                    optionsContainer.innerHTML = '<p class="text-red-500">Error: Pregunta de asociación sin pares válidos</p>';
+                }
+            } else {
+                // Tipo de pregunta no reconocido - mostrar mensaje
+                optionsContainer.innerHTML = `
+                    <div class="p-4 border rounded-lg bg-yellow-50 text-yellow-800">
+                        <p><strong>Tipo de pregunta no soportado:</strong> ${question.type || 'desconocido'}</p>
+                    </div>
+                `;
             }
             
             const progress = ((currentQuestionIndex + 1) / quiz.length) * 100;
