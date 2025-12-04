@@ -127,16 +127,11 @@ function injectStyles() {
 
 /**
  * Muestra una frase de humor con animación de escritura progresiva
- * @param {string} unitSlug - Identificador de la unidad (ej: 'teoria_medicion', 'tct')
- * @param {string} mountSelector - Selector del contenedor donde montar el overlay
- * @param {Function} onComplete - Callback cuando se completa o salta la animación
- * @returns {Promise<boolean>} - True si se mostró el humor, false si no
  */
 export async function showHumor(unitSlug, mountSelector = '#video-container', onComplete = null) {
   try {
     injectStyles();
 
-    // Intentar cargar el archivo de humor para esta unidad
     const res = await fetch(`/resources/humor/${unitSlug}.json`, { cache: 'no-store' });
     if (!res.ok) {
       if (onComplete) onComplete();
@@ -151,7 +146,6 @@ export async function showHumor(unitSlug, mountSelector = '#video-container', on
       return false;
     }
 
-    // Verificar si ya se mostró en esta sesión
     const sessionKey = `humor_shown_${unitSlug}`;
     if (sessionStorage.getItem(sessionKey)) {
       if (onComplete) onComplete();
@@ -160,23 +154,19 @@ export async function showHumor(unitSlug, mountSelector = '#video-container', on
     
     sessionStorage.setItem(sessionKey, '1');
 
-    // Seleccionar una frase aleatoria
     const frase = frases[Math.floor(Math.random() * frases.length)];
     
-    // Obtener contenedor
     const mount = document.querySelector(mountSelector);
     if (!mount) {
       if (onComplete) onComplete();
       return false;
     }
 
-    // Asegurar posición relativa para el overlay
     const originalPosition = mount.style.position;
     if (getComputedStyle(mount).position === 'static') {
       mount.style.position = 'relative';
     }
 
-    // Crear overlay de humor
     const overlay = document.createElement('div');
     overlay.className = 'humor-overlay';
     overlay.innerHTML = `
@@ -198,8 +188,6 @@ export async function showHumor(unitSlug, mountSelector = '#video-container', on
     const progressBar = overlay.querySelector('.humor-progress-bar');
     const skipButton = overlay.querySelector('.humor-skip');
 
-    // Función para cerrar el overlay
-    let animationComplete = false;
     const closeOverlay = () => {
       if (overlay.classList.contains('fade-out')) return;
       
@@ -211,15 +199,11 @@ export async function showHumor(unitSlug, mountSelector = '#video-container', on
       }, 500);
     };
 
-    // Evento de saltar
     skipButton.addEventListener('click', closeOverlay);
 
-    // Animación de escritura progresiva
     await typeWriter(textElement, frase, progressBar, () => {
-      animationComplete = true;
       textElement.classList.add('finished');
       
-      // Auto-cerrar después de 2 segundos si no se hace clic
       setTimeout(() => {
         if (!overlay.classList.contains('fade-out')) {
           closeOverlay();
@@ -236,19 +220,10 @@ export async function showHumor(unitSlug, mountSelector = '#video-container', on
   }
 }
 
-/**
- * Efecto de máquina de escribir con velocidad variable
- * @param {HTMLElement} element - Elemento donde escribir
- * @param {string} text - Texto a escribir
- * @param {HTMLElement} progressBar - Barra de progreso
- * @param {Function} onComplete - Callback al completar
- */
 function typeWriter(element, text, progressBar, onComplete) {
   return new Promise((resolve) => {
     let index = 0;
     const totalChars = text.length;
-    
-    // Velocidad base: más lento para mejor lectura
     const baseSpeed = 50;
     
     function type() {
@@ -256,13 +231,11 @@ function typeWriter(element, text, progressBar, onComplete) {
         const char = text.charAt(index);
         element.textContent += char;
         
-        // Actualizar progreso
         const progress = ((index + 1) / totalChars) * 100;
         progressBar.style.width = `${progress}%`;
         
         index++;
         
-        // Velocidad variable: pausas más largas en puntuación
         let delay = baseSpeed;
         if (char === '.' || char === '!' || char === '?') {
           delay = 400;
@@ -279,22 +252,14 @@ function typeWriter(element, text, progressBar, onComplete) {
       }
     }
     
-    // Pequeña pausa inicial antes de empezar
     setTimeout(type, 500);
   });
 }
 
-/**
- * Resetear el estado de humor mostrado para una unidad
- * @param {string} unitSlug - Identificador de la unidad
- */
 export function resetHumorState(unitSlug) {
   sessionStorage.removeItem(`humor_shown_${unitSlug}`);
 }
 
-/**
- * Resetear todo el estado de humor
- */
 export function resetAllHumorStates() {
   Object.keys(sessionStorage).forEach(key => {
     if (key.startsWith('humor_shown_')) {
@@ -303,7 +268,6 @@ export function resetAllHumorStates() {
   });
 }
 
-// Exportar para uso global (compatibilidad con scripts no-módulo)
 if (typeof window !== 'undefined') {
   window.PsicometriaHumor = {
     showHumor,
