@@ -144,7 +144,7 @@ const questionBanks = {}; // Se llenará dinámicamente desde archivos JSON
 // ----------- FLASHCARDS (CARGA DINÁMICA) ----------
 const flashcardData = {}; // Se llenará dinámicamente desde archivos JSON
 
-// ----------- DATOS DE NOTEBOOKLM (CARGA DINÁMICA) ----------
+// ----------- NOTEBOOKLM LINKS (CARGA DINÁMICA) ----------
 let notebookLMData = []; // Se llenará desde resources/notebooklm-links.json
 
 // ----------- SISTEMA DE ESTADO DE LA PLATAFORMA ----------
@@ -230,7 +230,7 @@ class PlatformState {
     this.totalStudyTime[unitId] += timeSpent;
 
     const totalTime = Object.values(this.totalStudyTime).reduce((sum, time) => sum + time, 0);
-    if (totalTime >= 3600000) { // 1 hora
+    if (totalTime >= 3600000) {
       this.unlockAchievement('Estudiante Dedicado', 'Has estudiado más de 1 hora en total');
     }
 
@@ -378,25 +378,40 @@ class PlatformRenderer {
     document.getElementById('best-score').textContent = `${progress.bestScore}%`;
   }
 
-  loadNotebookLinks(unitId) {
+  async loadNotebookLinks(unitId) {
     const container = document.getElementById('notebook-links-container');
     if (!container) return;
 
-    const notebook = notebookLMData.find(n => n.id === unitId);
-    
-    if (notebook) {
-      container.innerHTML = `
-        <div class="notebook-link-card">
-          <h3>📚 NotebookLM: ${notebook.titulo}</h3>
-          <p>${notebook.descripcion}</p>
-          <a href="${notebook.url}" target="_blank" class="btn btn-primary">
-            Abrir en NotebookLM
-          </a>
-        </div>
-      `;
-      container.style.display = 'block';
-    } else {
-      container.innerHTML = '<p style="color: #666;">No hay NotebookLM disponible para esta unidad.</p>';
+    try {
+      if (notebookLMData.length === 0) {
+        const response = await fetch('resources/notebooklm-links.json');
+        if (response.ok) {
+          notebookLMData = await response.json();
+        } else {
+          notebookLMData = [];
+        }
+      }
+
+      const notebook = notebookLMData.find(n => n.id === unitId);
+      
+      if (notebook) {
+        container.innerHTML = `
+          <div class="notebook-link-card">
+            <h3>📚 NotebookLM: ${notebook.titulo}</h3>
+            <p>${notebook.descripcion}</p>
+            <a href="${notebook.url}" target="_blank" class="btn btn-primary">
+              Abrir en NotebookLM
+            </a>
+          </div>
+        `;
+        container.style.display = 'block';
+      } else {
+        container.innerHTML = '<p style="color: #666;">No hay NotebookLM disponible para esta unidad.</p>';
+        container.style.display = 'block';
+      }
+    } catch (error) {
+      console.warn(`⚠️ No se pudo cargar NotebookLM para ${unitId}:`, error);
+      container.innerHTML = '<p style="color: #999;">Error al cargar recursos.</p>';
       container.style.display = 'none';
     }
   }
@@ -822,7 +837,7 @@ class PlatformRenderer {
       (question.type === 'multiple-choice' ? answer === question.answer : false);
 
     let correctAnswerText = question.answer;
-    if (typeof question.answer === 'object' && !Array.isArray(question.answer)) {
+    if (question.type === 'association' && typeof question.answer === 'object') {
       correctAnswerText = Object.entries(question.answer)
         .map(([k, v]) => `${k} → ${v}`)
         .join(', ');
@@ -1158,6 +1173,7 @@ class PlatformController {
 
   async loadAllData() {
     try {
+      // 1. Cargar NotebookLM Links
       console.log('📂 Cargando NotebookLM links...');
       const notebookResponse = await fetch('resources/notebooklm-links.json');
       if (notebookResponse.ok) {
@@ -1169,45 +1185,43 @@ class PlatformController {
       }
     } catch (error) {
       console.warn('⚠️ Error cargando NotebookLM:', error);
+      notebookLMData = [];
     }
 
     try {
-      console.log('📂 Cargando mapeo de unidades...');
-      const mapResponse = await fetch('notebooks.json');
-      if (!mapResponse.ok) throw new Error('notebooks.json no encontrado');
+      // 2. Cargar bancos de preguntas y flashcards según mapeo
+      console.log('📂 Cargando bancos de preguntas y flashcards...');
       
-      const unitMap = await mapResponse.json();
-      console.log(`✅ Encontradas ${unitMap.length} unidades en el mapeo`);
-
-      // Cargar flashcards
-      for (const unit of unitMap) {
-        if (unit.flashcards && unit.flashcards.trim() !== '') {
-          try {
-            const response = await fetch(unit.flashcards);
-            if (response.ok) {
-              flashcardData[unit.id] = await response.json();
-              console.log(`  ✅ Flashcards cargadas: ${unit.flashcards} (${flashcardData[unit.id].length} tarjetas)`);
-            }
-          } catch (e) {
-            console.warn(`  ⚠️ No se pudo cargar flashcards: ${unit.flashcards}`);
+      // Para cada unidad, intentar cargar sus archivos
+      for (const unit of platformData.units) {
+        const unitId = unit.id;
+        
+        // Intentar cargar banco de preguntas
+        try {
+          const quizFile = `banco_${unitId}.json`;
+          const quizResponse = await fetch(quizFile);
+          if (quizResponse.ok) {
+            questionBanks[unitId] = await quizResponse.json();
+            console.log(`  ✅ ${quizFile}: ${questionBanks[unitId].length} preguntas`);
+            
+            // Validar tipos de preguntas
+            const tipos = [...new Set(questionBanks[unitId].map(q => q.type))];
+            console.log(`    📊 Tipos: ${tipos.join(', ')}`);
           }
+        } catch (e) {
+          console.warn(`  ⚠️ No se pudo cargar banco para ${unitId}`);
         }
 
-        // Cargar bancos de preguntas
-        if (unit.quiz && unit.quiz.trim() !== '') {
-          try {
-            const response = await fetch(unit.quiz);
-            if (response.ok) {
-              questionBanks[unit.id] = await response.json();
-              console.log(`  ✅ Banco cargado: ${unit.quiz} (${questionBanks[unit.id].length} preguntas)`);
-              
-              // Validar tipos de preguntas
-              const tipos = [...new Set(questionBanks[unit.id].map(q => q.type))];
-              console.log(`    📊 Tipos de preguntas: ${tipos.join(', ')}`);
-            }
-          } catch (e) {
-            console.warn(`  ⚠️ No se pudo cargar banco: ${unit.quiz}`);
+        // Intentar cargar flashcards
+        try {
+          const flashFile = `flashcards_${unitId}.json`;
+          const flashResponse = await fetch(flashFile);
+          if (flashResponse.ok) {
+            flashcardData[unitId] = await flashResponse.json();
+            console.log(`  ✅ ${flashFile}: ${flashcardData[unitId].length} tarjetas`);
           }
+        } catch (e) {
+          console.warn(`  ⚠️ No se pudo cargar flashcards para ${unitId}`);
         }
       }
 
@@ -1215,7 +1229,6 @@ class PlatformController {
 
     } catch (error) {
       console.error('❌ Error crítico cargando datos:', error);
-      alert('Error al cargar los datos de la plataforma. Verifica que el archivo notebooks.json existe.');
     }
   }
 
@@ -1264,7 +1277,9 @@ class PlatformController {
 
     const backBtn = document.getElementById('back-btn');
     if (backBtn) {
-      backBtn.addEventListener('click', () => this.goBack());
+      backBtn.addEventListener('click', () => {
+        this.goBack();
+      });
     }
 
     const practiceBtn = document.getElementById('practice-btn');
